@@ -5,15 +5,19 @@
 /* hide scrollbar */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none; 
-  }
-  
-  *:focus {
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-  }
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}  
+*:focus {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.no-flicker {
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}

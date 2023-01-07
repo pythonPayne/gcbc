@@ -226,7 +226,6 @@ const Sermons = ({data}) => {
                 </div>              
             </div>
             
-
             {/* by speaker */}            
             <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
 
@@ -247,15 +246,17 @@ const Sermons = ({data}) => {
                 </div>
               </button>
               
-                <div className={`grid grid-cols-2 gap-x-4 gap-y-2 ${(filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
-                  {speakers.map((speaker,i) => (
-                    <div key={i} className={`text-xs text-center p-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
-                      dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));                      
-                      }}>
-                      {speaker}
-                    </div>
-                  ))}
-                </div>              
+                <div className={`flex justify-center ${(filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
+                  <div className={`flex flex-col justify-center w-[50%] space-y-5`}>
+                    {speakers.map((speaker,i) => (
+                      <div key={i} className={`text-xs text-center px-4 py-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                        dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));                      
+                        }}>
+                        {speaker}
+                      </div>
+                    ))}
+                  </div>        
+                </div>      
             </div>                  
           </div>
           }

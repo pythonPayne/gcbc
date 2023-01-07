@@ -35,10 +35,11 @@ const Calendar = ({data}) => {
     const d = new Date(node.startDateTime)
     console.log(d)
     return (
-      <>
-      <div>{node.title}</div>      
-      <div>{d.toLocaleTimeString()}</div>      
-      </>
+      <div className={`ring-1 ring-gray-300 p-3`}>
+        <div className={`font-serif text-lg`}>{node.title}</div>          
+        <div className={`text-sm`}>{d.toDateString()}</div>      
+        <div className={`text-sm`}>{d.toLocaleTimeString()}</div>      
+      </div>
     )
   }
 
@@ -48,8 +49,8 @@ const Calendar = ({data}) => {
         <div className={`px-12 py-8 min-h-screen bg-gray-100 transition-all 
           ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
           
-          <div className={`pb-8`}>
-            {events.map(event => calendar_card(event.node))}
+          <div className={`pb-8 flex flex-col space-y-5`}>
+            {events.sort((a,b) => a.d < b.d ? 1 : -1).map(event => calendar_card(event.node))}
           </div>
 
         </div>
