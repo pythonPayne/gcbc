@@ -268,7 +268,7 @@ const Sermons = ({data}) => {
               ${showMenu ? "blur-sm duration-500" : "blur-none duration-[200]"}               
               `}>
               
-              <div className={`py-8 lg:hidden`}>            
+              <div className={`py-8`}>            
 
                   <div className={`shadow-md mb-2`}>
                     <input className={`bg-gray-200 py-1 w-full px-2 text-xl`} 
@@ -306,8 +306,7 @@ const Sermons = ({data}) => {
                     <div className={`text-xs py-2`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
 
                   </div>
-              </div>
-              <div className={`hidden lg:flex justify-end text-sm py-8`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+              </div>              
               
               <div className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}>
                 {filteredSermons.map(sermon => sermon_card(sermon))}

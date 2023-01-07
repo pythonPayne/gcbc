@@ -9,6 +9,7 @@ const About = () => {
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))
+    window.scrollTo(0,0);
   }, [])
 
   return (

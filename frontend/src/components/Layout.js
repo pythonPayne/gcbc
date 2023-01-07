@@ -36,24 +36,23 @@ const Layout = (props) => {
                                 ? "w-[.15rem] h-5 -rotate-45 -translate-y-[.715rem]" 
                                 : "h-[.15rem] w-5"
                             }`}>                    
-                        </div>
+                        </div> 
+                    </div>
 
-                        
+                    <div className={`hidden lg:flex space-x-5 font-sans`}>
+
+                        <Link to={`/`}>Home</Link>
+                        <Link to={`/about`}>About</Link>
+                        <Link to={`/contact`}>Contact</Link>
+                        <Link to={`/sermons`}>Sermons</Link>
+                        <Link to={`/confession`}>1689 BCF</Link>                    
+                        <Link to={`/calendar`}>Calendar</Link>
+
                     </div>
                 </div>
 
-                <div className={`hidden lg:flex space-x-5 font-sans`}>
-
-                    <Link to={`/`}>Home</Link>
-                    <Link to={`/about`}>About</Link>
-                    <Link to={`/contact`}>Contact</Link>
-                    <Link to={`/sermons`}>Sermons</Link>
-                    <Link to={`/confession`}>1689 BCF</Link>                    
-                    <Link to={`/calendar`}>Calendar</Link>
-
-                </div>
                 
-</div>
+            </div>
 
             {/* side menus */}
             <div className={`flex lg:hidden`}>
