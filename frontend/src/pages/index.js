@@ -83,7 +83,7 @@ const Home = ({ data }) => {
       ? "-translate-x-[180vw] duration-[1000ms]"            
       : "-translate-x-[90vw] duration-[0ms]"                            
       }`}>
-      {image ? <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> : <div></div>}
+      {image && <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> }
     </div>
     )} else return
   }

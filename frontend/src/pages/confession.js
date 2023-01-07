@@ -181,7 +181,7 @@ const Confession = ({data}) => {
         {/* showChapterMenu */}
         {showChapterMenu &&
         <div className={`min-h-screen bg-white pb-36 flex justify-center text-gray-700 tracking-wide transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-[0ms]"}`}>
-          <div className={` bg-white h-full z-20 overflow-auto max-w-[1000px] no-scrollbar
+          <div className={`relative bg-white h-full z-20 overflow-auto max-w-[1000px] no-scrollbar
                   w-[100vw] md:w-[50vw] `}>
 
             <button className={`absolute top-5 right-5 text-2xl`} onClick={() => setShowChapterMenu(false)}>
