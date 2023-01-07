@@ -110,7 +110,8 @@ const Home = ({ data }) => {
         <div className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center pt-8 justify-center transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
 
           {/* carousel */}
-          <div className={`flex w-[90vw] h-[300px] md:h-[65vh] xl:h-[75vh] relative overflow-hidden`}>  
+          <div className={`flex w-[90vw] h-[300px] md:h-[65vh] xl:h-[75vh] relative overflow-hidden`}
+          style={{"transform":"translate3d(0px, 0px, 0px);"}}>  
 
             {/* right/left arrow buttons */}
             {carouselLeftArrowButton()}
@@ -130,7 +131,6 @@ const Home = ({ data }) => {
             
           </div>  
       
-
           <div className={`flex justify-center items-center`}>
             <div className={`max-w-[75%] leading-10 tracking-widest py-10 text-center font-light text-md
             lg:text-2xl lg:leading-10`}>

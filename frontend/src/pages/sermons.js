@@ -163,12 +163,12 @@ const Sermons = ({data}) => {
     <Layout>    
       <div page={'sermons'} className={`mt-20`}>        
 
-          {/* showSermonsFilterMenu */}
-          <div className={`fixed top-20 left-0 transition-all duration-500 border-r bg-white shadow-2xl min-h-screen z-20 overflow-auto max-w-[1000px]
-                  ${!showSermonsFilterMenu ? "w-0" : "flex flex-col w-[100vw] md:w-[50vw]"}`}>
+        {showSermonsFilterMenu &&
+
+          <div className={`min-h-screen pb-96 max-w-[1000px] flex flex-col w-[100vw] md:w-[50vw]`}>
 
             {/* close button */}
-            <button className={`flex justify-end px-6 py-6 ${!showSermonsFilterMenu && "invisible"}`} onClick={() => {
+            <button className={`flex justify-end px-6 py-6`} onClick={() => {
               dispatch(toggleShowSermonsFilterMenu(false));
               setFilterBookOpen(false);
               setFilterSpeakerOpen(false);
@@ -181,10 +181,8 @@ const Sermons = ({data}) => {
               </div>
             </button>
 
-
-            {/* by book */}
+            {/* by book */}            
             <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
-
               <button className={`flex justify-between px-8 py-4 bg-gray-100`}
               onClick={() => setFilterBookOpen(!filterBookOpen)}>
                 <div className={`flex text-xl font-serif`}>Book</div>
@@ -202,12 +200,12 @@ const Sermons = ({data}) => {
                 </div>
               </button>
               
-                <div className={`${(showSermonsFilterMenu && filterBookOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
+                <div className={`${(filterBookOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
                   
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2 mb-4`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>Old Testament</div>
                   {booksOT.map((book,i) => (
-                    <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                    <div key={i} className={`text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
                       dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
                       }}>
                       {book}
@@ -218,19 +216,18 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>New Testament</div>
                   {booksNT.map((book,i) => (
-                    <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                    <div key={i} className={`text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
                       dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
                       }}>
                       {book}
                     </div>
                   ))}
                   </div>                
-
-                </div>
-              
+                </div>              
             </div>
+            
 
-            {/* by speaker */}
+            {/* by speaker */}            
             <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
 
               <button className={`flex justify-between px-8 py-4 bg-gray-100`}
@@ -250,25 +247,26 @@ const Sermons = ({data}) => {
                 </div>
               </button>
               
-                <div className={`grid grid-cols-2 gap-x-4 gap-y-2 ${(showSermonsFilterMenu && filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
+                <div className={`grid grid-cols-2 gap-x-4 gap-y-2 ${(filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
                   {speakers.map((speaker,i) => (
-                    <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
-                      dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));
-                      
+                    <div key={i} className={`text-xs text-center p-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                      dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));                      
                       }}>
                       {speaker}
                     </div>
                   ))}
-                </div>
-              
-            </div>          
-
+                </div>              
+            </div>                  
           </div>
+          }
+
 
           {/* search and filter */}          
+          {!showSermonsFilterMenu &&
           <div className={`bg-gray-100 pb-36 px-8 transition-all 
-              ${showMenu ? "blur-sm duration-500" : "blur-none duration-[200]"}                        
+              ${showMenu ? "blur-sm duration-500" : "blur-none duration-[200]"}               
               `}>
+              
               <div className={`py-8 lg:hidden`}>            
 
                   <div className={`shadow-md mb-2`}>
@@ -309,11 +307,12 @@ const Sermons = ({data}) => {
                   </div>
               </div>
               <div className={`hidden lg:flex justify-end text-sm py-8`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
-              {/* Sermon Cards */}
+              
               <div className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}>
                 {filteredSermons.map(sermon => sermon_card(sermon))}
               </div>              
           </div>
+          }
           
           
         </div>
