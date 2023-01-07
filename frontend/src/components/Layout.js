@@ -6,7 +6,8 @@ import {
 } from '../redux/actions/layout'
 import { Link } from 'gatsby'
 
-const Layout = (props) => {
+
+const Layout = (props) => {    
   const page = props.children.props.page
   const dispatch = useDispatch()
   const showMenu = useSelector(state => state.layout.showMenu)  
@@ -14,31 +15,31 @@ const Layout = (props) => {
   
     return (
         <>
-
             {/* Top navigation bar, Links hidden on SM & MD screens */}
-            <div className={`flex sticky top-0 z-50 justify-between items-center pl-1 pr-4 md:px-10 h-20 bg-white shadow`}>
+            <div className={`fixed w-full top-0 z-50 h-20 bg-white shadow`}>
+                
+                <div className={`flex h-full justify-between items-center pl-1 pr-4 md:px-10`}>
+                    <StaticImage backgroundColor="white" class={`bg-white`} height={65} src={"../images/Logo_Blue.png"} alt={`logo`} />
 
-                {/* <div className={`text-xl text-gray-600 font-serif tracking-wide`}>{page !== 'home' ? page.toLocaleUpperCase() : "GCBC"}</div> */}
-                <StaticImage height={70} src="../images/Logo_Blue.png" alt={`logo`} />
+                    <div className={`lg:hidden flex flex-col space-y-2 h-10 w-10 justify-center items-center cursor-pointer border`}
+                        onClick={() => dispatch(toggleShowMenu(!showMenu)) }
+                        >
+                        <div className={`transition-all duration-200 bg-gray-400
+                            ${showMenu 
+                                ? "w-[.15rem] h-5 rotate-45 translate-y-[.715rem]" 
+                                : "h-[.15rem] w-5"                
+                            }`}>                
+                        </div>
+                        
+                        <div className={`transition-all duration-200 bg-gray-400
+                            ${showMenu 
+                                ? "w-[.15rem] h-5 -rotate-45 -translate-y-[.715rem]" 
+                                : "h-[.15rem] w-5"
+                            }`}>                    
+                        </div>
 
-                <div className={`lg:hidden flex flex-col space-y-2 h-10 w-10 justify-center items-center cursor-pointer border`}
-                    onClick={() => dispatch(toggleShowMenu(!showMenu)) }
-                    >
-                    <div className={`transition-all duration-200 bg-gray-400
-                        ${showMenu 
-                            ? "w-[.15rem] h-5 rotate-45 translate-y-[.715rem]" 
-                            : "h-[.15rem] w-5"                
-                        }`}>                
+                        
                     </div>
-                    
-                    <div className={`transition-all duration-200 bg-gray-400
-                        ${showMenu 
-                            ? "w-[.15rem] h-5 -rotate-45 -translate-y-[.715rem]" 
-                            : "h-[.15rem] w-5"
-                        }`}>                    
-                    </div>
-
-                    
                 </div>
 
                 <div className={`hidden lg:flex space-x-5 font-sans`}>
@@ -52,7 +53,7 @@ const Layout = (props) => {
 
                 </div>
                 
-            </div>
+</div>
 
             {/* side menus */}
             <div className={`flex lg:hidden`}>

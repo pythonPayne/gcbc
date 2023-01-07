@@ -161,160 +161,160 @@ const Sermons = ({data}) => {
 
   return (
     <Layout>    
+      <div page={'sermons'} className={`mt-20`}>
+        <div className={`min-h-screen bg-gray-100 pb-36 px-8 transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
 
-      <div page={'sermons'} className={`min-h-screen bg-gray-100 pb-36 px-8 transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
+          {/* showSermonsFilterMenu */}
+          <div className={`transition-all duration-500 fixed top-0 left-0 border-r bg-white shadow-2xl min-h-screen z-20 overflow-auto max-w-[1000px]
+                  ${!showSermonsFilterMenu ? "w-0" : "flex flex-col w-[100vw] md:w-[50vw]"}`}>
 
-        {/* showSermonsFilterMenu */}
-        <div className={`transition-all duration-500 fixed top-0 left-0 border-r bg-white shadow-2xl min-h-screen z-20 overflow-auto max-w-[1000px]
-                ${!showSermonsFilterMenu ? "w-0" : "flex flex-col w-[100vw] md:w-[50vw]"}`}>
-
-          {/* close button */}
-          <button className={`flex justify-end px-6 py-6 ${!showSermonsFilterMenu && "invisible"}`} onClick={() => {
-            dispatch(toggleShowSermonsFilterMenu(false));
-            setFilterBookOpen(false);
-            setFilterSpeakerOpen(false);
-          }}>
-            <div className={``}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </div>
-          </button>
-
-
-          {/* by book */}
-          <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
-
-            <button className={`flex justify-between px-8 py-4 bg-gray-100`}
-            onClick={() => setFilterBookOpen(!filterBookOpen)}>
-              <div className={`flex text-xl font-serif`}>Book</div>
-              <div>
-                {filterBookOpen
-                ?
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
-                  </svg>
-                :
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
-                  </svg>                
-                }
+            {/* close button */}
+            <button className={`flex justify-end px-6 py-6 ${!showSermonsFilterMenu && "invisible"}`} onClick={() => {
+              dispatch(toggleShowSermonsFilterMenu(false));
+              setFilterBookOpen(false);
+              setFilterSpeakerOpen(false);
+            }}>
+              <div className={``}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </div>
             </button>
-            
-              <div className={`${(showSermonsFilterMenu && filterBookOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
-                
-                <div className={`grid grid-cols-2 gap-x-4 gap-y-2 mb-4`}>
-                <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>Old Testament</div>
-                {booksOT.map((book,i) => (
-                  <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
-                    dispatch(setSermonBookFilter(book));                                         
-                    }}>
-                    {book}
-                  </div>
-                ))}
+
+
+            {/* by book */}
+            <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
+
+              <button className={`flex justify-between px-8 py-4 bg-gray-100`}
+              onClick={() => setFilterBookOpen(!filterBookOpen)}>
+                <div className={`flex text-xl font-serif`}>Book</div>
+                <div>
+                  {filterBookOpen
+                  ?
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+                    </svg>
+                  :
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
+                    </svg>                
+                  }
                 </div>
-
-                <div className={`grid grid-cols-2 gap-x-4 gap-y-2`}>
-                <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>New Testament</div>
-                {booksNT.map((book,i) => (
-                  <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
-                    dispatch(setSermonBookFilter(book));                                         
-                    }}>
-                    {book}
+              </button>
+              
+                <div className={`${(showSermonsFilterMenu && filterBookOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
+                  
+                  <div className={`grid grid-cols-2 gap-x-4 gap-y-2 mb-4`}>
+                  <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>Old Testament</div>
+                  {booksOT.map((book,i) => (
+                    <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                      dispatch(setSermonBookFilter(book));                                         
+                      }}>
+                      {book}
+                    </div>
+                  ))}
                   </div>
-                ))}
-                </div>                
 
-              </div>
-            
+                  <div className={`grid grid-cols-2 gap-x-4 gap-y-2`}>
+                  <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>New Testament</div>
+                  {booksNT.map((book,i) => (
+                    <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                      dispatch(setSermonBookFilter(book));                                         
+                      }}>
+                      {book}
+                    </div>
+                  ))}
+                  </div>                
+
+                </div>
+              
+            </div>
+
+            {/* by speaker */}
+            <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
+
+              <button className={`flex justify-between px-8 py-4 bg-gray-100`}
+              onClick={() => setFilterSpeakerOpen(!filterSpeakerOpen)}>
+                <div className={`flex text-xl font-serif`}>Speaker</div>
+                <div>
+                  {filterSpeakerOpen
+                  ?
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+                    </svg>
+                  :
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
+                    </svg>                
+                  }
+                </div>
+              </button>
+              
+                <div className={`grid grid-cols-2 gap-x-4 gap-y-2 ${(showSermonsFilterMenu && filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
+                  {speakers.map((speaker,i) => (
+                    <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                      dispatch(setSermonSpeakerFilter(speaker)); 
+                      
+                      }}>
+                      {speaker}
+                    </div>
+                  ))}
+                </div>
+              
+            </div>          
+
           </div>
 
-          {/* by speaker */}
-          <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
+          {/* search and filter */}
+          <div className={`py-8 lg:hidden`}>            
 
-            <button className={`flex justify-between px-8 py-4 bg-gray-100`}
-            onClick={() => setFilterSpeakerOpen(!filterSpeakerOpen)}>
-              <div className={`flex text-xl font-serif`}>Speaker</div>
-              <div>
-                {filterSpeakerOpen
-                ?
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
-                  </svg>
-                :
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
-                  </svg>                
-                }
+              <div className={`shadow-md mb-2`}>
+                <input className={`bg-gray-200 py-1 w-full px-2 text-xl`} 
+                type='text'
+                value={sermonSearchFilter} placeholder={"Search..."}
+                onChange={(e) => dispatch(setSermonSearchFilter(e.target.value))} />
               </div>
-            </button>
-            
-              <div className={`grid grid-cols-2 gap-x-4 gap-y-2 ${(showSermonsFilterMenu && filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
-                {speakers.map((speaker,i) => (
-                  <div key={i} className={`grid place-content-center text-center text-xs p-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
-                    dispatch(setSermonSpeakerFilter(speaker)); 
-                    
-                    }}>
-                    {speaker}
-                  </div>
-                ))}
-              </div>
-            
-          </div>          
-
-        </div>
-
-        {/* search and filter */}
-        <div className={`py-8 lg:hidden`}>            
-
-            <div className={`shadow-md mb-2`}>
-              <input className={`bg-gray-200 py-1 w-full px-2 text-xl`} 
-              type='text'
-              value={sermonSearchFilter} placeholder={"Search..."}
-              onChange={(e) => dispatch(setSermonSearchFilter(e.target.value))} />
-            </div>
-            
-            <div className={`flex py-2 justify-between items-center text-gray-600`}>
-
-              <div className={`flex space-x-3`}>
-                <div className={`flex space-x-1 text-xs items-center border border-gray-300 px-2 py-1`}
-                onClick={() => dispatch(toggleShowSermonsFilterMenu(true))}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
-                  className={`w-6 h-6 cursor-pointer`}                
-                  >
-                    <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                  </svg>
-                  <div>filter</div>                
-                </div>
-
-                <div className={`flex space-x-1 text-xs items-center border border-gray-300 px-2 py-1`}
-                onClick={() => {setSorting(true); setSortDir(-1*sortDir);}}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-                  </svg>
-                  <div>sort by date</div>                
-                </div>     
-              </div>         
               
+              <div className={`flex py-2 justify-between items-center text-gray-600`}>
 
-              <div className={`text-xs py-2`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+                <div className={`flex space-x-3`}>
+                  <div className={`flex space-x-1 text-xs items-center border border-gray-300 px-2 py-1`}
+                  onClick={() => dispatch(toggleShowSermonsFilterMenu(true))}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+                    className={`w-6 h-6 cursor-pointer`}                
+                    >
+                      <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                    </svg>
+                    <div>filter</div>                
+                  </div>
 
-            </div>
+                  <div className={`flex space-x-1 text-xs items-center border border-gray-300 px-2 py-1`}
+                  onClick={() => {setSorting(true); setSortDir(-1*sortDir);}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                    </svg>
+                    <div>sort by date</div>                
+                  </div>     
+                </div>         
+                
+
+                <div className={`text-xs py-2`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+
+              </div>
+          </div>
+
+          <div className={`hidden lg:flex justify-end text-sm py-8`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+
+          {/* Sermon Cards */}
+          <div className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}>
+            {filteredSermons.map(sermon => sermon_card(sermon))}
+          </div>
+
         </div>
-
-        <div className={`hidden lg:flex justify-end text-sm py-8`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
-
-        {/* Sermon Cards */}
-        <div className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}>
-          {filteredSermons.map(sermon => sermon_card(sermon))}
-        </div>
-
       </div>
-
     </Layout>
   )
 }

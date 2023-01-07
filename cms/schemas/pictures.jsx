@@ -20,6 +20,8 @@ export default {
         options: {
           list: [
             {title: 'Homepage - Carousel', value: 'homepageCarousel'},            
+            {title: 'GCBC - Logo', value: 'gcbcLogo'},
+            {title: 'GCBC - Emblem', value: 'gcbcEmblem'},
           ],         
         }  
       },

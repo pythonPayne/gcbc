@@ -6,10 +6,10 @@ import {schemaTypes} from './schemas'
 import {media} from 'sanity-plugin-media'
 
 export default defineConfig({  
-  name: import.meta.env.SANITY_STUDIO_NAME,
-  title: import.meta.env.SANITY_STUDIO_TITLE,
-  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
-  dataset: import.meta.env.SANITY_STUDIO_DATASET,
+  name: 'default',
+  title: 'cms',
+  projectId: '4ufj1fpw',
+  dataset: 'production',
   plugins: [
     deskTool(), 
     visionTool(), 

@@ -74,14 +74,14 @@ const Confession = ({data}) => {
   const confession_ref_card = (paragraph) => {    
     return (
       <div className={`text-sm pt-10 pb-6 leading-6`}>
-        {paragraph.map(edge => {          
+        {paragraph.map((edge,i) => {          
           if(edge.node.referenceNum !== 99){
           return (
-          <div className={`flex`}>
+          <div key={i} className={`flex`}>
             <div className={`w-4 text-right shrink-0 mr-2`}><sup className={`font-bold`}>{edge.node.referenceNum}</sup></div>
-            <div className={`flex flex-wrap`}>{edge.node.paragraphRef.map((item, i, arr) => (
-              <div className='mr-2'>
-                {item}{arr.length - 1 !== i && ";"}
+            <div className={`flex flex-wrap`}>{edge.node.paragraphRef.map((item, j, arr) => (
+              <div key={j} className='mr-2'>
+                {item}{arr.length - 1 !== j && ";"}
               </div>))}
             </div>
           </div>  
@@ -94,8 +94,8 @@ const Confession = ({data}) => {
   const confession_text_card = (paragraph) => {    
     return (
       <p className={`break-words`}>
-        {paragraph.map(edge => (
-          <span className={``}>
+        {paragraph.map((edge,i) => (
+          <span key={i} className={``}>
             {edge.node.paragraphText.trim()}<sup className={`font-bold`}>{edge.node.referenceNum !== 99 && edge.node.referenceNum}</sup>&nbsp;
           </span>
         ))}
@@ -162,7 +162,11 @@ const Confession = ({data}) => {
         </div>
 
         <div className={`text-sm md:text-md`}>
-          {paragraphNums.map(paragraphNum => confession_paragraph_card(chapter.filter(edge => edge.node.paragraph === paragraphNum)))}
+          {paragraphNums.map((paragraphNum,i) => (
+            <div key={i}>
+              {confession_paragraph_card(chapter.filter(edge => edge.node.paragraph === paragraphNum))}
+            </div>
+          ))}
         </div>
 
       </div>
@@ -172,75 +176,83 @@ const Confession = ({data}) => {
   return (
     <Layout>    
 
-      <div page={'confession'} className={`min-h-screen bg-gray-100 pb-36 pt-8 flex justify-center text-gray-700 tracking-wide transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-[0ms]"}`}> 
+      <div page={'confession'} className={`mt-20`}> 
 
         {/* showChapterMenu */}
-        <div className={`transition-all fixed top-0 left-0 border-r bg-white shadow-2xl h-full z-20 overflow-auto max-w-[1000px] no-scrollbar
-                ${showChapterMenu ? "w-[100vw] md:w-[50vw] duration-[0ms]" : "w-0 duration-[0ms]"}`}>
+        {showChapterMenu &&
+        <div className={`min-h-screen bg-white pb-36 flex justify-center text-gray-700 tracking-wide transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-[0ms]"}`}>
+          <div className={` bg-white h-full z-20 overflow-auto max-w-[1000px] no-scrollbar
+                  w-[100vw] md:w-[50vw] `}>
 
-          <button className={`absolute top-5 right-5 text-2xl`} onClick={() => setShowChapterMenu(false)}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+            <button className={`absolute top-5 right-5 text-2xl`} onClick={() => setShowChapterMenu(false)}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
-          <div className={`px-2 pt-8 transition-all ${showChapterMenu ? "text-gray-700 duration-75" : "text-white duration-75"}`}>
-            
-            <div className={`px-2 pb-36`}>
-              <div className={`font-semibold font-serif text-2xl text-center pt-6 pb-4 leading-10 tracking-wide`}>The 1689 Baptist Confession of Faith</div>
-                       
-                  {chapterNums.map(chapterNum => (                
-                    <div className={`grid grid-cols-12 border shadow mt-4`}>
-                      <div className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}>{chapterNum}</div>
-                      <div className={`col-span-10 cursor-pointer py-4 pr-2`} onClick={() => {
-                        setChapterSelected(chapterNum);
-                        setShowChapterMenu(false);
-                        window.scrollTo(0,0);
-                        }}>
-                        {chapterTitles[parseInt(chapterNum-1)]}
-                      </div>                
-                    </div>
-                  ))}                          
+            <div className={`px-2 pt-8 text-gray-700 `}>
               
+              <div className={`px-2 pb-36`}>
+                <div className={`font-semibold font-serif text-2xl text-center pt-6 pb-4 leading-10 tracking-wide`}>The 1689 Baptist Confession of Faith</div>
+                        
+                    {chapterNums.map((chapterNum,i) => (                
+                      <div key={i} className={`grid grid-cols-12 border shadow mt-4`}>
+                        <div className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}>{chapterNum}</div>
+                        <div className={`col-span-10 cursor-pointer py-4 pr-2`} onClick={() => {
+                          setChapterSelected(chapterNum);
+                          setShowChapterMenu(false);
+                          window.scrollTo(0,0);
+                          }}>
+                          {chapterTitles[parseInt(chapterNum-1)]}
+                        </div>                
+                      </div>
+                    ))}                          
+                
+              </div>
+
             </div>
 
           </div>
-
         </div>
+        }
         
-        <div className={`w-[80vw] max-w-5xl transition-all duration-[200] ${showChapterMenu ? "blur-xl" : "blur-none"}`}>
+        {!showChapterMenu &&
+        <div className={`min-h-screen pt-8 bg-gray-100 pb-36 flex justify-center text-gray-700 tracking-wide transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-[0ms]"}`}>        
+          <div className={`w-[80vw] max-w-5xl transition-all duration-[200] bg-gray-100`}>
+            
+            {confession_chapter_card(confession.filter(edge => edge.node.chapter === chapterSelected))}   
+
+            <div className={`flex justify-between pt-12`}>
           
-          {confession_chapter_card(confession.filter(edge => edge.node.chapter === chapterSelected))}   
+              {chapterSelected > 1 
+              ?
+              <button className={`border text-xl px-3 py-1 cursor-pointer`} 
+                onClick={() => {
+                  setChapterSelected(-1+chapterSelected)
+                  window.scrollTo(0,0)
+                  }}>{`< Ch. ${chapterSelected-1}`}
+              </button>       
+              :
+              <div></div>
+              }
 
-          <div className={`flex justify-between pt-12`}>
-        
-            {chapterSelected > 1 
-            ?
-            <button className={`border text-xl px-3 py-1 cursor-pointer`} 
-              onClick={() => {
-                setChapterSelected(-1+chapterSelected)
-                window.scrollTo(0,0)
-                }}>{`< Ch. ${chapterSelected-1}`}
-            </button>       
-            :
-            <div></div>
-            }
+              {chapterSelected < numberOfChapters
+              ?
+              <button className={`border text-xl px-3 py-1 cursor-pointer`} 
+                onClick={() => {
+                  setChapterSelected(1+chapterSelected)
+                  window.scrollTo(0,0)
+                  }}>{`Ch. ${chapterSelected+1} >`}
+              </button>       
+              :
+              <div></div>
+              }
 
-            {chapterSelected < numberOfChapters
-            ?
-            <button className={`border text-xl px-3 py-1 cursor-pointer`} 
-              onClick={() => {
-                setChapterSelected(1+chapterSelected)
-                window.scrollTo(0,0)
-                }}>{`Ch. ${chapterSelected+1} >`}
-            </button>       
-            :
-            <div></div>
-            }
+            </div>           
 
-          </div>           
-
+          </div>
         </div>
+        }
         
       </div>
 

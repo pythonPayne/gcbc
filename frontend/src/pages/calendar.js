@@ -44,13 +44,15 @@ const Calendar = ({data}) => {
 
   return (
     <Layout>
-     <div page={'calendar'} className={`px-12 py-8 min-h-screen bg-gray-100 transition-all 
-     ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
-        
-        <div className={`pb-8`}>
-          {events.map(event => calendar_card(event.node))}
-        </div>
+      <div page={'calendar'} className={`mt-20`}>
+        <div className={`px-12 py-8 min-h-screen bg-gray-100 transition-all 
+          ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
+          
+          <div className={`pb-8`}>
+            {events.map(event => calendar_card(event.node))}
+          </div>
 
+        </div>
       </div>
     </Layout>
   )
