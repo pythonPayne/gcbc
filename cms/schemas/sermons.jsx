@@ -114,7 +114,13 @@ export default {
       title: 'Audio',
       name: 'audio',
       type: 'file',
-    }
+    },
+    {
+      title: 'Old Audio Link',
+      name: 'oldAudioLink',
+      type: 'url',
+      description: "This is optional. I used this in testing and migrating data. Link to old website audio files."
+    },    
   ],
   preview: {
     select: {

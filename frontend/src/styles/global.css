@@ -17,7 +17,6 @@
   touch-action: manipulation;
 }
 
-.no-flicker {
-  -webkit-perspective: 1000;
-  -webkit-backface-visibility: hidden;
-}
+/* .no-flicker {  
+  -webkit-transform: translate3d(0,0,0);
+} */
