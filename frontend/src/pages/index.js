@@ -27,9 +27,13 @@ query MyQuery{
 const Home = ({ data }) => {
   const dispatch = useDispatch()
   const [carouselImages, setCarouselImages] = useState(null)   
-  const [currentPosition, setCurrentPosition] = useState(1)
-  const [carouselPosition, setCarouselPosition] = useState(null)  
-  const showMenu = useSelector(state => state.layout.showMenu)  
+  const [currentPosition, setCurrentPosition] = useState(1)  
+  const showMenu = useSelector(state => state.layout.showMenu)    
+  const carouselRefs = useRef([])
+  const [x0, setx0] = useState(0)
+  const [x1, setx1] = useState(1)
+  const [x2, setx2] = useState(1)
+  carouselRefs.current = []
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))    
@@ -45,44 +49,44 @@ const Home = ({ data }) => {
   useEffect(() => {
     setCurrentPosition(carouselImages && carouselImages.find(img => img.position === 1).startPosition)
   }, [carouselImages])  
-
   
+  const addToRefs = (el) => {
+    if (el && !carouselRefs.current.includes(el)){
+      carouselRefs.current.push(el)
+    }    
+  }
 
   const carouselImage = (position) => {
     const image = carouselImages && carouselImages.find(img => img.position === position)  
     if (image) {  
     return (
-    <div id={`carouselImage-${position}`} className={`w-full shrink-0 h-full snap-center`}>
+    <div id={`carouselImage-${position}`} ref={addToRefs}
+    className={`w-full shrink-0 h-full snap-center`}>
       {image && <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> }
     </div>
     )} else return
-  }  
+  }        
 
-  const changeBackground = (entries) => {
-      entries.forEach((entry) => {
-          if (              
-              entry.isIntersecting &&
-              entry.intersectionRatio.toFixed(2) == 1.00
-          ) {
-              setCarouselPosition(entry.target.id)
-          }
-      })
+  const updateCarouselRefs = () => {
+    setx0(carouselRefs.current[0] && carouselRefs.current[0].getBoundingClientRect().x)
+    setx1(carouselRefs.current[1] && carouselRefs.current[1].getBoundingClientRect().x)
+    setx2(carouselRefs.current[2] && carouselRefs.current[2].getBoundingClientRect().x)    
   }
-  const observer = new IntersectionObserver(
-      changeBackground,
-      { threshold: 1}
-  )
-
-  document.querySelectorAll('.snap-center').forEach(el => observer.observe(el))
+  
+  const goal = Math.min(Math.abs(x0), Math.abs(x1), Math.abs(x2))
+  const closest = [x0, x1, x2].reduce((prev, curr) => Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
   
   return (
     <Layout>
-      <div page={'home'} className={`mt-20`}> 
+    <div page={'home'} className={`mt-20 flex justify-center bg-gray-100`}>        
+
+      <div className={`max-w-[1200px] `}>
+
         <div className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center pt-8 justify-center transition-all 
         ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
-              
+                        
           {/* carousel */}
-          <div className={`flex w-[90vw] h-[300px] md:h-[65vh] xl:h-[75vh] relative overflow-x-scroll snap-x snap-mandatory`}>  
+          <div onScroll={updateCarouselRefs} className={`flex w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] relative overflow-x-scroll snap-x snap-mandatory`}>  
                         
             {carouselImage(1)}
             {carouselImage(2)}
@@ -91,9 +95,9 @@ const Home = ({ data }) => {
           </div>  
       
           <div className={`flex w-full justify-center items-center py-2 z-10 space-x-4`}>
-            <div className={`h-2 w-8 disabled ${carouselPosition==='carouselImage-1' ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
-            <div className={`h-2 w-8 disabled ${carouselPosition==='carouselImage-2' ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
-            <div className={`h-2 w-8 disabled ${carouselPosition==='carouselImage-3' ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+            <div className={`h-2 w-8 disabled ${closest === x0 ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+            <div className={`h-2 w-8 disabled ${closest === x1 ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+            <div className={`h-2 w-8 disabled ${closest === x2 ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
           </div>
 
           <div className={`flex justify-center items-center`}>
@@ -108,6 +112,7 @@ const Home = ({ data }) => {
 
         </div>
       </div>
+    </div>
     </Layout>
   )
 }

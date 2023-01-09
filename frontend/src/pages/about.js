@@ -11,11 +11,13 @@ const About = () => {
     dispatch(toggleShowMenu(false))
     window.scrollTo(0,0);
   }, [])
-
+  window.scrollTo(0,0);
   return (
     <Layout>
 
-      <div page={'about'} className={`mt-20`}>
+    <div page={'about'} className={`mt-20 flex justify-center bg-gray-100`}>        
+
+      <div className={`max-w-[1200px]`}>
       
         <div className={`px-12 pt-6 pb-36 min-h-screen flex flex-col justify-center bg-gray-100 transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
 
@@ -66,7 +68,7 @@ const About = () => {
           </div>        
         </div>
       </div>
-
+    </div>
     </Layout>
   )
 }

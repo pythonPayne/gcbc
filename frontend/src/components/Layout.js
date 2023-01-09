@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StaticImage } from "gatsby-plugin-image"
 import { useDispatch, useSelector } from 'react-redux'
 import { 
@@ -11,8 +11,7 @@ const Layout = (props) => {
   const page = props.children.props.page
   const dispatch = useDispatch()
   const showMenu = useSelector(state => state.layout.showMenu)  
-  
-  
+    
     return (
         <>
             {/* Top navigation bar, Links hidden on SM & MD screens */}

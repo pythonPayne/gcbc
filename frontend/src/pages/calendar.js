@@ -45,15 +45,19 @@ const Calendar = ({data}) => {
 
   return (
     <Layout>
-      <div page={'calendar'} className={`mt-20`}>
-        <div className={`px-12 py-8 min-h-screen bg-gray-100 transition-all 
-          ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
-          
-          <div className={`pb-8 flex flex-col space-y-5`}>
-            {events.sort((a,b) => a.d < b.d ? 1 : -1).map(event => calendar_card(event.node))}
-          </div>
+      <div page={'calendar'} className={`mt-20 flex justify-center bg-gray-100`}>        
 
+        <div className={`max-w-[1200px]`}>
+          <div className={`px-12 py-8 min-h-screen bg-gray-100 transition-all 
+            ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
+            
+            <div className={`pb-8 flex flex-col space-y-5`}>
+              {events.sort((a,b) => a.d < b.d ? 1 : -1).map(event => calendar_card(event.node))}
+            </div>
+
+          </div>
         </div>
+
       </div>
     </Layout>
   )

@@ -162,7 +162,9 @@ const Sermons = ({data}) => {
 
   return (
     <Layout>    
-      <div page={'sermons'} className={`mt-20`}>        
+      <div page={'sermons'} className={`mt-20 flex justify-center bg-gray-100`}>        
+
+        <div className={`max-w-[1200px]`}>
 
         {showSermonsFilterMenu &&
 
@@ -269,10 +271,10 @@ const Sermons = ({data}) => {
               ${showMenu ? "blur-sm duration-500" : "blur-none duration-[200]"}               
               `}>
               
-              <div className={`py-8`}>            
+              <div className={`pt-8`}>            
 
-                  <div className={`shadow-md mb-2`}>
-                    <input className={`bg-gray-200 py-1 w-full px-2 text-xl`} 
+                  <div className={`shadow-md rounded-md mb-2`}>
+                    <input className={`bg-gray-200 py-2 w-full px-2 text-xl`} 
                     type='text'
                     value={sermonSearchFilter} placeholder={"Search..."}
                     onChange={(e) => dispatch(setSermonSearchFilter(e.target.value))} />
@@ -281,7 +283,8 @@ const Sermons = ({data}) => {
                   <div className={`flex py-2 justify-between items-center text-gray-600`}>
 
                     <div className={`flex space-x-3`}>
-                      <div className={`flex space-x-1 text-xs items-center border border-gray-300 px-2 py-1`}
+
+                      <button className={`flex space-x-1 text-xs items-center shadow-md border border-gray-300 px-2 py-1`}
                       onClick={() => dispatch(toggleShowSermonsFilterMenu(true))}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
                         className={`w-6 h-6 cursor-pointer`}                
@@ -292,30 +295,31 @@ const Sermons = ({data}) => {
                           d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                         </svg>
                         <div>filter</div>                
-                      </div>
+                      </button>
 
-                      <div className={`flex space-x-1 text-xs items-center border border-gray-300 px-2 py-1`}
+                      <button className={`flex space-x-1 text-xs items-center shadow-md border border-gray-300 px-2 py-1`}
                       onClick={() => {setSorting(true); setSortDir(-1*sortDir);}}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
                         </svg>
                         <div>sort by date</div>                
-                      </div>     
+                      </button>
+
                     </div>         
                     
-
-                    <div className={`text-xs py-2`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
-
                   </div>
+                  
               </div>              
-              
+
+              <div className={`text-md flex justify-center bg-[#09314C] bg-opacity-50 text-white py-3 mt-4 mb-8 text-lg`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+
               <div className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}>
                 {filteredSermons.map(sermon => sermon_card(sermon))}
-              </div>              
+              </div>                            
           </div>
           }
           
-          
+          </div>
         </div>
       
     </Layout>

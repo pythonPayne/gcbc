@@ -176,12 +176,14 @@ const Confession = ({data}) => {
   return (
     <Layout>    
 
-      <div page={'confession'} className={`mt-20`}> 
+      <div page={'confession'} className={`mt-20 flex justify-center bg-gray-100`}>        
+
+        <div className={`max-w-[1200px] `}>
 
         {/* showChapterMenu */}
         {showChapterMenu &&
-        <div className={`min-h-screen bg-white pb-36 flex justify-center text-gray-700 tracking-wide transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-[0ms]"}`}>
-          <div className={`relative bg-white h-full z-20 overflow-auto max-w-[1000px] no-scrollbar
+        <div className={`min-h-screen bg-gray-100 pb-36 flex justify-center text-gray-700 tracking-wide transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-[0ms]"}`}>
+          <div className={`relative bg-gray-100 h-full z-20 overflow-auto max-w-[1000px] no-scrollbar
                   w-[100vw] md:w-[50vw] `}>
 
             <button className={`absolute top-5 right-5 text-2xl`} onClick={() => setShowChapterMenu(false)}>
@@ -255,7 +257,7 @@ const Confession = ({data}) => {
         }
         
       </div>
-
+    </div>
     </Layout>
   )
 }
