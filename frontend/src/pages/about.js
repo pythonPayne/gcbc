@@ -11,7 +11,7 @@ const About = () => {
     dispatch(toggleShowMenu(false))
     window.scrollTo(0,0);
   }, [])
-  window.scrollTo(0,0);
+  
   return (
     <Layout>
 
