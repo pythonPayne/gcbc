@@ -5,6 +5,7 @@ import { graphql } from 'gatsby'
 import { GatsbyImage } from "gatsby-plugin-image"
 import { toggleShowMenu } from '../redux/actions/layout'
 
+
 export const query = graphql`
 query MyQuery{
   allSanityPictures{
@@ -26,11 +27,10 @@ query MyQuery{
 const Home = ({ data }) => {
   const dispatch = useDispatch()
   const [carouselImages, setCarouselImages] = useState(null)   
-  const [carouselSlidingRight, setCarouselSlidingRight] = useState(false)
-  const [carouselSlidingLeft, setCarouselSlidingLeft] = useState(false)
   const [currentPosition, setCurrentPosition] = useState(1)
-  const showMenu = useSelector(state => state.layout.showMenu)
-  
+  const [carouselPosition, setCarouselPosition] = useState(null)  
+  const showMenu = useSelector(state => state.layout.showMenu)  
+
   useEffect(() => {
     dispatch(toggleShowMenu(false))    
     setCarouselImages(data.allSanityPictures.edges.filter(edge => edge.node.pageAndFunction === "homepageCarousel").map((edge,i) => {
@@ -46,101 +46,56 @@ const Home = ({ data }) => {
     setCurrentPosition(carouselImages && carouselImages.find(img => img.position === 1).startPosition)
   }, [carouselImages])  
 
-  const onClickCarouselRight = () => {        
-    setCarouselSlidingRight(true)        
-    setTimeout(() => {                   
-      setCarouselImages(carouselImages.map(img => {
-        return {
-          ...img,
-          position: img.position === carouselImages.length ? 1 : img.position + 1,        
-        }
-      }))    
-      setCarouselSlidingRight(false)
-    }, 3000)
-  }
-
-  const onClickCarouselLeft = () => {            
-    setCarouselSlidingLeft(true)
-    setTimeout(() => {       
-      setCarouselImages(carouselImages.map(img => {
-        return {
-          ...img,
-          position: img.position === 1 ? carouselImages.length : img.position - 1,        
-        }
-      }))   
-      setCarouselSlidingLeft(false) 
-    }, 3000)
-  }  
-
-  // const carouselImage = (position) => {
-  //   const image = carouselImages && carouselImages.find(img => img.position === position)  
-  //   if (image) {  
-  //   return (
-  //   <div className={`w-full shrink-0 h-full
-  //   ${carouselSlidingRight 
-  //     ? "translate-x-[0px] duration-[1000ms]" 
-  //     : carouselSlidingLeft 
-  //     ? "-translate-x-[180vw] duration-[1000ms]"            
-  //     : "-translate-x-[90vw] duration-[0ms]"                            
-  //     }`}>
-  //     {image && <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> }
-  //   </div>
-  //   )} else return
-  // }
+  
 
   const carouselImage = (position) => {
     const image = carouselImages && carouselImages.find(img => img.position === position)  
     if (image) {  
     return (
-    <div className={`w-full shrink-0 h-full snap-center`}>
+    <div id={`carouselImage-${position}`} className={`w-full shrink-0 h-full snap-center`}>
       {image && <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> }
     </div>
     )} else return
   }  
 
-  const carouselRightArrowButton = () => (
-    <button className={`flex flex-col items-center justify-center absolute h-full px-1 right-0 top-0 z-10 text-3xl bg-gray-100 text-gray-500 text-opacity-40
-    transition-all duration-300 ease-in bg-opacity-10 hover:bg-opacity-60 hover:text-gray-900`}
-    onClick={() => onClickCarouselLeft()}>
-      <div>&#9654;</div>
-    </button>
+  const changeBackground = (entries) => {
+      entries.forEach((entry) => {
+          if (              
+              entry.isIntersecting &&
+              entry.intersectionRatio.toFixed(2) == 1.00
+          ) {
+              setCarouselPosition(entry.target.id)
+          }
+      })
+  }
+  const observer = new IntersectionObserver(
+      changeBackground,
+      { threshold: 1}
   )
 
-  const carouselLeftArrowButton = () => (
-    <button className={`flex flex-col items-center justify-center absolute h-full px-1 left-0 top-0 z-10 text-3xl bg-gray-100 text-gray-500 text-opacity-40
-    transition-all duration-300 ease-in bg-opacity-10 hover:bg-opacity-60 hover:text-gray-900 `}
-    onClick={() => onClickCarouselRight()}>
-      <div>&#9664;</div>
-    </button>
-  )
-
+  document.querySelectorAll('.snap-center').forEach(el => observer.observe(el))
+  
   return (
     <Layout>
       <div page={'home'} className={`mt-20`}> 
         <div className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center pt-8 justify-center transition-all 
         ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
-
+              
           {/* carousel */}
           <div className={`flex w-[90vw] h-[300px] md:h-[65vh] xl:h-[75vh] relative overflow-x-scroll snap-x snap-mandatory`}>  
-
-            {/* right/left arrow buttons */}
-            {/* {carouselLeftArrowButton()}
-            {carouselRightArrowButton()} */}
-
-            {/* page circles */}
-            {/* <div className={`absolute bottom-0 flex w-full justify-center items-center py-2 z-10 space-x-4`}>
-              <div className={`h-1 w-8 disabled ${currentPosition===3 ? "bg-white" : "bg-gray-200 bg-opacity-40"}`}></div>
-              <div className={`h-1 w-8 disabled ${currentPosition===1 ? "bg-white" : "bg-gray-200 bg-opacity-40"}`}></div>
-              <div className={`h-1 w-8 disabled ${currentPosition===2 ? "bg-white" : "bg-gray-200 bg-opacity-40"}`}></div>
-            </div> */}
-            
-            {/* pics */}
-            {carouselImage(3)}
+                        
             {carouselImage(1)}
             {carouselImage(2)}
+            {carouselImage(3)}
             
           </div>  
       
+          <div className={`flex w-full justify-center items-center py-2 z-10 space-x-4`}>
+            <div className={`h-2 w-8 disabled ${carouselPosition==='carouselImage-1' ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+            <div className={`h-2 w-8 disabled ${carouselPosition==='carouselImage-2' ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+            <div className={`h-2 w-8 disabled ${carouselPosition==='carouselImage-3' ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+          </div>
+
           <div className={`flex justify-center items-center`}>
             <div className={`max-w-[75%] leading-10 tracking-widest py-10 text-center font-light text-md
             lg:text-2xl lg:leading-10`}>
