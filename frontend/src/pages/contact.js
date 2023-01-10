@@ -16,7 +16,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div page={'contact'} className={`mt-20`}>
+      <div page={'contact'} className={`pt-20`}>
         <div className={`px-12 pb-72 pt-4 text-gray-700 min-h-screen flex justify-center bg-gray-100 transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
 
         {!emailSent &&

@@ -32,8 +32,8 @@ const Calendar = ({data}) => {
   }, [])
 
   const calendar_card = (node) => {
-    const d = new Date(node.startDateTime)
-    console.log(d)
+    const d = new Date(node.startDateTime)    
+    if(d > Date.now())
     return (
       <div className={`ring-1 ring-gray-300 p-3`}>
         <div className={`font-serif text-lg`}>{node.title}</div>          
@@ -45,7 +45,7 @@ const Calendar = ({data}) => {
 
   return (
     <Layout>
-      <div page={'calendar'} className={`mt-20 flex justify-center bg-gray-100`}>        
+      <div page={'calendar'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px]`}>
           <div className={`px-12 py-8 min-h-screen bg-gray-100 transition-all 

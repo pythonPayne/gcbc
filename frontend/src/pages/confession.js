@@ -176,7 +176,7 @@ const Confession = ({data}) => {
   return (
     <Layout>    
 
-      <div page={'confession'} className={`mt-20 flex justify-center bg-gray-100`}>        
+      <div page={'confession'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px] `}>
 

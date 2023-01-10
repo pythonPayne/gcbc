@@ -15,7 +15,7 @@ const Layout = (props) => {
     return (
         <>
             {/* Top navigation bar, Links hidden on SM & MD screens */}
-            <div className={`fixed w-full top-0 z-50 h-20 bg-white shadow`}>
+            <div className={`fixed w-full z-50 h-20 bg-white shadow`}>
                 
                 <div className={`flex h-full justify-between items-center pl-1 pr-4 md:px-10`}>
                     <StaticImage backgroundColor="white" class={`bg-white`} height={65} src={"../images/Logo_Blue.png"} alt={`logo`} />

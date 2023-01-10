@@ -78,7 +78,7 @@ const Home = ({ data }) => {
   
   return (
     <Layout>
-    <div page={'home'} className={`mt-20 flex justify-center bg-gray-100`}>        
+    <div page={'home'} className={`flex justify-center pt-20 bg-gray-100`}>        
 
       <div className={`max-w-[1200px] `}>
 
@@ -86,7 +86,9 @@ const Home = ({ data }) => {
         ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
                         
           {/* carousel */}
-          <div onScroll={updateCarouselRefs} className={`flex w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] relative overflow-x-scroll snap-x snap-mandatory`}>  
+          <div onScroll={updateCarouselRefs} 
+          className={`flex w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] 
+          relative overflow-x-scroll snap-x snap-mandatory no-scrollbar`}>  
                         
             {carouselImage(1)}
             {carouselImage(2)}

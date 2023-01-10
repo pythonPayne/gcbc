@@ -162,7 +162,7 @@ const Sermons = ({data}) => {
 
   return (
     <Layout>    
-      <div page={'sermons'} className={`mt-20 flex justify-center bg-gray-100`}>        
+      <div page={'sermons'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px]`}>
 
