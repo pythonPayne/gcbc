@@ -195,10 +195,10 @@ const Confession = ({data}) => {
             <div className={`px-2 pt-8 text-gray-700 `}>
               
               <div className={`px-2 pb-36`}>
-                <div className={`font-semibold font-serif text-2xl text-center pt-6 pb-4 leading-10 tracking-wide`}>The 1689 Baptist Confession of Faith</div>
+                <div className={`font-semibold font-serif text-2xl text-center pt-8 pb-4 leading-10 tracking-wide`}>The 1689 Baptist Confession of Faith</div>
                         
                     {chapterNums.map((chapterNum,i) => (                
-                      <div key={i} className={`grid grid-cols-12 border shadow mt-4`}>
+                      <div key={i} className={`grid grid-cols-12 ring-1 ring-gray-300 shadow-md mt-8`}>
                         <div className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}>{chapterNum}</div>
                         <div className={`col-span-10 cursor-pointer py-4 pr-2`} onClick={() => {
                           setChapterSelected(chapterNum);

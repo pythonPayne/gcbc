@@ -164,11 +164,11 @@ const Sermons = ({data}) => {
     <Layout>    
       <div page={'sermons'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
-        <div className={`max-w-[1200px]`}>
+        <div className={`min-h-screen max-w-[1200px] w-[100vw] md:w-[50vw] pb-96`}>
 
         {showSermonsFilterMenu &&
 
-          <div className={`min-h-screen pb-96 max-w-[1000px] flex flex-col w-[100vw] md:w-[50vw]`}>
+          <div className={`flex flex-col`}>
 
             {/* close button */}
             <button className={`flex justify-end px-6 py-6`} onClick={() => {
@@ -186,7 +186,7 @@ const Sermons = ({data}) => {
 
             {/* by book */}            
             <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
-              <button className={`flex justify-between px-8 py-4 bg-gray-100`}
+              <button className={`flex justify-between px-8 py-4 bg-[#09314C] bg-opacity-50 text-white ring-1 ring-[#09314C]`}
               onClick={() => setFilterBookOpen(!filterBookOpen)}>
                 <div className={`flex text-xl font-serif`}>Book</div>
                 <div>
@@ -208,7 +208,7 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2 mb-4`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>Old Testament</div>
                   {booksOT.map((book,i) => (
-                    <div key={i} className={`text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                    <div key={i} className={`text-center text-sm p-2 border ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
                       dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
                       }}>
                       {book}
@@ -219,7 +219,7 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>New Testament</div>
                   {booksNT.map((book,i) => (
-                    <div key={i} className={`text-center text-xs p-2 border ${sermonBookFilter === book && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                    <div key={i} className={`text-center text-sm p-2 border ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
                       dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
                       }}>
                       {book}
@@ -232,7 +232,7 @@ const Sermons = ({data}) => {
             {/* by speaker */}            
             <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
 
-              <button className={`flex justify-between px-8 py-4 bg-gray-100`}
+              <button className={`flex justify-between px-8 py-4 bg-[#09314C] bg-opacity-50 text-white ring-1 ring-[#09314C]`}
               onClick={() => setFilterSpeakerOpen(!filterSpeakerOpen)}>
                 <div className={`flex text-xl font-serif`}>Speaker</div>
                 <div>
@@ -252,7 +252,7 @@ const Sermons = ({data}) => {
                 <div className={`flex justify-center ${(filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
                   <div className={`flex flex-col justify-center w-[50%] space-y-5`}>
                     {speakers.map((speaker,i) => (
-                      <div key={i} className={`text-xs text-center px-4 py-2 border ${sermonSpeakerFilter === speaker && "bg-gray-100 ring-2 ring-gray-500"}`} onClick={() => {                    
+                      <div key={i} className={`text-sm text-center px-4 py-2 border ${sermonSpeakerFilter === speaker && "bg-gray-300"}`} onClick={() => {                    
                         dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));                      
                         }}>
                         {speaker}
@@ -260,18 +260,39 @@ const Sermons = ({data}) => {
                     ))}
                   </div>        
                 </div>      
-            </div>                  
+            </div>    
+
+            {/* clear filter */}            
+            {/* <div className={`flex flex-col mx-8 border shadow-md mb-4 mt-16`}>
+
+              <button className={`flex justify-between px-8 py-4 bg-red-400 text-gray-50 ring-1 ring-gray-400`}
+              onClick={() => {
+                setSermonSearchFilter('');
+                dispatch(setSermonBookFilter(null));
+                dispatch(setSermonSpeakerFilter(null));
+                dispatch(toggleShowSermonsFilterMenu(false));
+              }}>
+                <div className={`flex text-xl font-serif`}>Clear All Filters</div>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+              </button>
+                  
+            </div>     */}
+
           </div>
           }
 
 
           {/* search and filter */}          
-          {!showSermonsFilterMenu &&
-          <div className={`bg-gray-100 pb-36 px-8 transition-all 
+          {!showSermonsFilterMenu &&          
+          <div className={`pb-36 px-8 transition-all 
               ${showMenu ? "blur-sm duration-500" : "blur-none duration-[200]"}               
               `}>
               
-              <div className={`pt-8`}>            
+              <div className={`py-8`}>            
 
                   <div className={`shadow-md rounded-md mb-2`}>
                     <input className={`bg-gray-200 py-2 w-full px-2 text-xl`} 
@@ -307,11 +328,10 @@ const Sermons = ({data}) => {
 
                     </div>         
                     
+                    <div className={`text-gray-600`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
                   </div>
-                  
-              </div>              
-
-              <div className={`text-md flex justify-center bg-[#09314C] bg-opacity-50 text-white py-3 mt-4 mb-8 text-lg`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+                                  
+              </div>                            
 
               <div className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}>
                 {filteredSermons.map(sermon => sermon_card(sermon))}
