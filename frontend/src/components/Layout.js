@@ -80,7 +80,8 @@ const Layout = (props) => {
             </div>
 
             {/* Main content */}                            
-            <div className={`w-full`}>
+            <div className={`w-full`}
+            onClick={() => {showMenu && dispatch(toggleShowMenu(false))}}>
                 {props.children}
             </div>
             

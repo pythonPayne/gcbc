@@ -87,7 +87,7 @@ const About = ({data}) => {
 
       <div className={`max-w-[1200px]`}>
       
-        <div className={`px-12 pt-16 pb-36 min-h-screen flex flex-col justify-center bg-gray-100 transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
+        <div className={`px-12 pt-12 pb-36 min-h-screen flex flex-col justify-center bg-gray-100 transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
           
           {/* G C B C */}
           <div className={`py-4 mb-12 md:mb-16 flex justify-center text-[#09314C] text-5xl md:text-6xl font-sans font-bold 

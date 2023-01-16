@@ -33,6 +33,8 @@ const Home = ({ data }) => {
   const [x1, setx1] = useState(0)
   const [x2, setx2] = useState(1)
   const [x3, setx3] = useState(1)
+  const [goal, setGoal] = useState(null)
+  const [closest, setClosest] = useState(null)  
   carouselRefs.current = []
 
   useEffect(() => {
@@ -45,11 +47,17 @@ const Home = ({ data }) => {
       }
     }))    
   }, [])
-
+  
   useEffect(() => {
     setCurrentPosition(carouselImages && carouselImages.find(img => img.position === 1).startPosition)
   }, [carouselImages])  
   
+  useEffect(() => {    
+    const temp = Math.min(Math.abs(x1), Math.abs(x2), Math.abs(x3))
+    setGoal(temp)
+    setClosest([x1, x2, x3].reduce((prev, curr) => Math.abs(curr - temp) < Math.abs(prev - temp) ? curr : prev))      
+  }, [x1, x2, x3])  
+    
   const addToRefs = (el) => {
     if (el && !carouselRefs.current.includes(el)){
       carouselRefs.current.push(el)
@@ -67,24 +75,27 @@ const Home = ({ data }) => {
     )} else return
   }       
   
+  const onClickCarouselButton = (position) => {
+    setCurrentPosition(position)
+    document.getElementById(`carouselImage-${position}`).scrollIntoView({behavior: "smooth", block: "end"})
+  }
+
   const carouselButton = (x, position) => (
       <button
-        onClick={() => document.getElementById(`carouselImage-${position}`)
-                               .scrollIntoView({behavior: "smooth", block: "end"})} 
-        className={`h-2 w-8 
-        ${closest === x ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50 hover:bg-[#09314C] hover:bg-opacity-10 duration-300" }`}>
+        onClick={() => onClickCarouselButton(position)} 
+        className={`h-2 w-8 pointer-events-none md:pointer-events-auto duration-500
+        ${closest === x
+          ? "bg-[#09314C]" 
+          : "border border-[#09314C] border-opacity-50" }`}>
       </button>      
     )
   
-  const updateCarouselRefs = () => {
-    setx1(carouselRefs.current[0] && carouselRefs.current[0].getBoundingClientRect().x)
-    setx2(carouselRefs.current[1] && carouselRefs.current[1].getBoundingClientRect().x)
-    setx3(carouselRefs.current[2] && carouselRefs.current[2].getBoundingClientRect().x)    
-  }
-  
-  const goal = Math.min(Math.abs(x1), Math.abs(x2), Math.abs(x3))
-  const closest = [x1, x2, x3].reduce((prev, curr) => Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-  
+  const updateCarouselRefs = () => {    
+      setx1(carouselRefs.current[0] && carouselRefs.current[0].getBoundingClientRect().x)
+      setx2(carouselRefs.current[1] && carouselRefs.current[1].getBoundingClientRect().x)
+      setx3(carouselRefs.current[2] && carouselRefs.current[2].getBoundingClientRect().x)              
+  }  
+
   return (
     <Layout>
     <div page={'home'} className={`flex justify-center pt-20 bg-gray-100`}>        
