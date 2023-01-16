@@ -164,7 +164,7 @@ const Sermons = ({data}) => {
     <Layout>    
       <div page={'sermons'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
-        <div className={`min-h-screen max-w-[1200px] w-[100vw] md:w-[50vw] pb-96`}>
+        <div className={`min-h-screen max-w-[1200px] w-[100vw] md:w-[70vw] pb-96`}>
 
         {showSermonsFilterMenu &&
 
@@ -208,7 +208,7 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2 mb-4`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>Old Testament</div>
                   {booksOT.map((book,i) => (
-                    <div key={i} className={`text-center text-sm p-2 border ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
+                    <div key={i} className={`text-center text-sm p-2 border cursor-pointer ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
                       dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
                       }}>
                       {book}
@@ -219,7 +219,7 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>New Testament</div>
                   {booksNT.map((book,i) => (
-                    <div key={i} className={`text-center text-sm p-2 border ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
+                    <div key={i} className={`text-center text-sm p-2 border cursor-pointer ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
                       dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
                       }}>
                       {book}
@@ -252,7 +252,7 @@ const Sermons = ({data}) => {
                 <div className={`flex justify-center ${(filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
                   <div className={`flex flex-col justify-center w-[50%] space-y-5`}>
                     {speakers.map((speaker,i) => (
-                      <div key={i} className={`text-sm text-center px-4 py-2 border ${sermonSpeakerFilter === speaker && "bg-gray-300"}`} onClick={() => {                    
+                      <div key={i} className={`text-sm text-center px-4 py-2 border cursor-pointer ${sermonSpeakerFilter === speaker && "bg-gray-300"}`} onClick={() => {                    
                         dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));                      
                         }}>
                         {speaker}

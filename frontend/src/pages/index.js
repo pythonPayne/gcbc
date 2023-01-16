@@ -30,9 +30,9 @@ const Home = ({ data }) => {
   const [currentPosition, setCurrentPosition] = useState(1)  
   const showMenu = useSelector(state => state.layout.showMenu)    
   const carouselRefs = useRef([])
-  const [x0, setx0] = useState(0)
-  const [x1, setx1] = useState(1)
+  const [x1, setx1] = useState(0)
   const [x2, setx2] = useState(1)
+  const [x3, setx3] = useState(1)
   carouselRefs.current = []
 
   useEffect(() => {
@@ -65,16 +65,25 @@ const Home = ({ data }) => {
       {image && <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> }
     </div>
     )} else return
-  }        
-
+  }       
+  
+  const carouselButton = (x, position) => (
+      <button
+        onClick={() => document.getElementById(`carouselImage-${position}`)
+                               .scrollIntoView({behavior: "smooth", block: "end"})} 
+        className={`h-2 w-8 
+        ${closest === x ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50 hover:bg-[#09314C] hover:bg-opacity-10 duration-300" }`}>
+      </button>      
+    )
+  
   const updateCarouselRefs = () => {
-    setx0(carouselRefs.current[0] && carouselRefs.current[0].getBoundingClientRect().x)
-    setx1(carouselRefs.current[1] && carouselRefs.current[1].getBoundingClientRect().x)
-    setx2(carouselRefs.current[2] && carouselRefs.current[2].getBoundingClientRect().x)    
+    setx1(carouselRefs.current[0] && carouselRefs.current[0].getBoundingClientRect().x)
+    setx2(carouselRefs.current[1] && carouselRefs.current[1].getBoundingClientRect().x)
+    setx3(carouselRefs.current[2] && carouselRefs.current[2].getBoundingClientRect().x)    
   }
   
-  const goal = Math.min(Math.abs(x0), Math.abs(x1), Math.abs(x2))
-  const closest = [x0, x1, x2].reduce((prev, curr) => Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+  const goal = Math.min(Math.abs(x1), Math.abs(x2), Math.abs(x3))
+  const closest = [x1, x2, x3].reduce((prev, curr) => Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
   
   return (
     <Layout>
@@ -85,21 +94,20 @@ const Home = ({ data }) => {
         <div className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center pt-8 justify-center transition-all 
         ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
                         
-          {/* carousel */}
+          {/* carousel images */}
           <div onScroll={updateCarouselRefs} 
           className={`flex w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] 
-          relative overflow-x-scroll snap-x snap-mandatory no-scrollbar`}>  
-                        
+          relative overflow-x-scroll snap-x snap-mandatory no-scrollbar`}>                          
             {carouselImage(1)}
             {carouselImage(2)}
-            {carouselImage(3)}
-            
+            {carouselImage(3)}            
           </div>  
       
+          {/* carousel buttons */}
           <div className={`flex w-full justify-center items-center py-2 z-10 space-x-4`}>
-            <div className={`h-2 w-8 disabled ${closest === x0 ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
-            <div className={`h-2 w-8 disabled ${closest === x1 ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
-            <div className={`h-2 w-8 disabled ${closest === x2 ? "bg-[#09314C]" : "border border-[#09314C] border-opacity-50"}`}></div>
+            {carouselButton(x1,1)}
+            {carouselButton(x2,2)}
+            {carouselButton(x3,3)}
           </div>
 
           <div className={`flex justify-center items-center`}>

@@ -22,11 +22,12 @@ query MyQuery {
 }
 `
 
-const Calendar = ({data}) => {
-  const events = data.allSanityCalendar.edges
+const Calendar = ({data}) => {  
   const dispatch = useDispatch()
   const showMenu = useSelector(state => state.layout.showMenu)
-  
+  const [events, setEvents] = useState(data.allSanityCalendar.edges.sort(
+    (a,b) => a.startDateTime < b.startDateTime ? 1 : -1))
+
   useEffect(() => {
     dispatch(toggleShowMenu(false))
   }, [])
@@ -52,7 +53,7 @@ const Calendar = ({data}) => {
             ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
             
             <div className={`pb-8 flex flex-col space-y-5`}>
-              {events.sort((a,b) => a.d < b.d ? 1 : -1).map(event => calendar_card(event.node))}
+              {events.map(event => calendar_card(event.node))}
             </div>
 
           </div>
