@@ -42,14 +42,14 @@ const Layout = (props) => {
                     </div>
 
                     <div className={`hidden lg:flex space-x-5 font-sans`}>
-
-                        <Link to={`/`}>Home</Link>
-                        <Link to={`/about`}>About</Link>
-                        <Link to={`/contact`}>Contact</Link>
-                        <Link to={`/sermons`}>Sermons</Link>
-                        <Link to={`/confession`}>1689 BCF</Link>                    
-                        <Link to={`/calendar`}>Calendar</Link>
-
+                        
+                        <Link className={`${page === 'about' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/about`}>About</Link>
+                        <Link className={`${page === 'contact' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/contact`}>Contact</Link>
+                        <Link className={`${page === 'beliefs' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/beliefs`}>Beliefs</Link>                    
+                        <Link className={`${page === 'current' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/current`}>Current</Link>
+                        <Link className={`${page === 'sermons' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sermons`}>Sermons</Link>
+                        <Link className={`${page === 'sunday-school' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sunday-school`}>Sunday-School</Link>
+                        
                     </div>
                 </div>
 
@@ -66,14 +66,14 @@ const Layout = (props) => {
                 >                                
                     <div className={`relative`}>
                         <div className={`absolute pb-[50vh] w-full px-4 pt-8`}>                                
-                            <div className={`flex flex-col space-y-5`}>
-                                <Link className={`border-l-4 pl-4 ${page === 'home' ? "border-gray-600" : " border-white"}`} to={`/`}>Home</Link>
+                            <div className={`flex flex-col space-y-5`}>                                
                                 <Link className={`border-l-4 pl-4 ${page === 'about' ? "border-gray-600" : " border-white"}`} to={`/about`}>About</Link>
                                 <Link className={`border-l-4 pl-4 ${page === 'contact' ? "border-gray-600" : " border-white"}`} to={`/contact`}>Contact</Link>
-                                <Link className={`border-l-4 pl-4 ${page === 'sermons' ? "border-gray-600" : " border-white"}`} to={`/sermons`}>Sermons</Link>
-                                <Link className={`border-l-4 pl-4 ${page === 'calendar' ? "border-gray-600" : " border-white"}`} to={`/calendar`}>Calendar</Link>                  
-                                <Link className={`w-[50vw] whitespace-pre-wrap border-l-4 pl-4 ${page === 'confession' ? "border-gray-600" : " border-white"}`} to={`/confession`}>
-                                    The 1689 Baptist<br/>Confession of Faith</Link>                                                                
+                                <Link className={`border-l-4 pl-4 ${page === 'beliefs' ? "border-gray-600" : " border-white"}`} to={`/beliefs`}>Beliefs</Link>
+                                <Link className={`border-l-4 pl-4 ${page === 'current' ? "border-gray-600" : " border-white"}`} to={`/current`}>Current</Link>                  
+                                <Link className={`border-l-4 pl-4 ${page === 'sermons' ? "border-gray-600" : " border-white"}`} to={`/sermons`}>Sermons</Link>                                
+                                <Link className={`w-[50vw] whitespace-pre-wrap border-l-4 pl-4 ${page === 'sunday-school' ? "border-gray-600" : " border-white"}`} to={`/sunday-school`}>
+                                    Sunday<br/>School</Link>   
                             </div>
                         </div>
                     </div>                        

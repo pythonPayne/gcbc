@@ -22,7 +22,7 @@ query MyQuery {
 }
 `
 
-const Confession = ({data}) => {  
+const Beliefs = ({data}) => {  
   const confession = data.allSanityConfession.edges    
   const dispatch = useDispatch()
   const [chapterSelected, setChapterSelected] = useState(1)  
@@ -176,7 +176,7 @@ const Confession = ({data}) => {
   return (
     <Layout>    
 
-      <div page={'confession'} className={`pt-20 flex justify-center bg-gray-100`}>        
+      <div page={'beliefs'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px] `}>
 
@@ -262,4 +262,4 @@ const Confession = ({data}) => {
   )
 }
 
-export default Confession
+export default Beliefs

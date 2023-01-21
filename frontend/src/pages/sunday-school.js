@@ -3,16 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby'
 import {   
-  setSermonBookFilter,
-  setSermonSpeakerFilter,
-  setSermonSearchFilter,
-  toggleShowSermonsFilterMenu,
-} from '../redux/actions/sermons'
+  setSundayschoolBookFilter,
+  setSundayschoolSpeakerFilter,
+  setSundayschoolSearchFilter,
+  setSundayschoolSeriesFilter,
+  toggleShowSundayschoolFilterMenu,
+} from '../redux/actions/sundayschool'
 import { toggleShowMenu } from '../redux/actions/layout'
 
 export const query = graphql`
 query MyQuery {
-  allSanitySermons{
+  allSanitySundayschool{
     edges{
       node{
         _id
@@ -21,6 +22,7 @@ query MyQuery {
         title
         passage
         book        
+        sundaySchoolSeries
         oldAudioLink
       }
     }
@@ -28,8 +30,8 @@ query MyQuery {
 }
 `
 
-const Sermons = ({data}) => {
-  let sermons = data.allSanitySermons.edges
+const SundaySchool = ({data}) => {
+  let sermons = data.allSanitySundayschool.edges  
   sermons = sermons.map(edge => {
     return {
       ...edge.node,
@@ -45,22 +47,54 @@ const Sermons = ({data}) => {
 
   const dispatch = useDispatch()
   
-  const sermonBookFilter = useSelector(state => state.sermons.sermonBookFilter)
-  const sermonSpeakerFilter = useSelector(state => state.sermons.sermonSpeakerFilter)
+  const sundayschoolBookFilter = useSelector(state => state.sundayschool.sundayschoolBookFilter)
+  const sundayschoolSpeakerFilter = useSelector(state => state.sundayschool.sundayschoolSpeakerFilter)
   const showMenu = useSelector(state => state.layout.showMenu)
-  const showSermonsFilterMenu = useSelector(state => state.sermons.showSermonsFilterMenu)  
-  const sermonSearchFilter = useSelector(state => state.sermons.sermonSearchFilter)  
+  const showSundayschoolFilterMenu = useSelector(state => state.sundayschool.showSundayschoolFilterMenu)  
+  const sundayschoolSearchFilter = useSelector(state => state.sundayschool.sundayschoolSearchFilter)  
+  const sundayschoolSeriesFilter = useSelector(state => state.sundayschool.sundayschoolSeriesFilter)  
   
   const testLink = "https://www.gracecovenantbaptist.org/wp-content/uploads/2022/12/Luke-12.1-12.mp3"
   const booksOT = [
   'Genesis',
+  'Exodus',
+  'Leviticus',
+  'Numbers',
+  'Deuteronomy',
+  'Joshua',
+  'Judges',
   'Ruth',
+  '1 Samuel',
+  '2 Samuel',
+  '1 Kings',
+  '2 Kings',
+  '1 Chronicles',
+  '2 Chronicles',
+  'Ezra',
+  'Nehemiah',
   'Esther',
+  'Job',
   'Psalms',
+  'Proverbs',
   'Ecclesiastes',
+  'Song of Solomon',
   'Isaiah',
+  'Jeremiah',
+  'Lamentations',
+  'Ezekiel',
+  'Daniel',
+  'Hosea',
+  'Joel',
+  'Amos',
+  'Obadiah',
   'Jonah',
+  'Micah',
+  'Nahum',
   'Habakkuk',
+  'Zephaniah',
+  'Haggai',
+  'Zechariah',
+  'Malachi',  
   ]
   const booksNT = [
   'Matthew',
@@ -75,10 +109,14 @@ const Sermons = ({data}) => {
   'Ephesians',
   'Philippians',
   'Colossians',
+  '1 Thessalonians',
+  '2 Thessalonians',
   '1 Timothy', 
   '2 Timothy',
+  'Titus',
   'Philemon',
   'Hebrews',
+  'James',
   '1 Peter',
   '2 Peter',
   '1 John',
@@ -89,12 +127,21 @@ const Sermons = ({data}) => {
   ]
 
   const speakers = 
-  ['Todd Wilson',
-  'Stephen Hyde',
-  'Michael Gaydosh',
-  'Steve Cowan',
+  [
+  'Darrell Cook',
+  'David Wickiser',
   'Dustin Curtis',
-  'Ed Wallen',  
+  'Ed Wallen',
+  'Jayson Faulkner',
+  'Louie Davis',
+  'Matt Carver',
+  'Matt Posey',
+  'Michael Gaydosh',
+  'Richard Hughes',
+  'Stephen Hyde',
+  'Steve Cowan',
+  'Todd Wilson',
+  'Wade Potts',
   ]
 
 
@@ -116,7 +163,13 @@ const Sermons = ({data}) => {
           <div className={`flex flex-col px-4`}>
             <div className={`font-serif text-xl font-semibold text-opacity-80 text-[#09314C]`}>{sermon.title}</div>  
             <div className={`font-sans text-md text-gray-500`}>{sermon.book}</div>
-            <div className={`font-sans text-md text-gray-500`}>{sermon.passage}</div>  
+            <div className={`font-sans text-md text-gray-500`}>{sermon.passage}</div>            
+          </div>
+
+          <div className={`absolute top-0 flex w-full justify-start py-4 px-2`}>
+            <div className={`text-left`}>
+              <div className={`font-sans text-xs text-gray-400`}>{sermon.sundaySchoolSeries}</div>  
+            </div>            
           </div>
 
           <div className={`absolute bottom-0 flex w-full justify-between items-center py-2 px-4`}>
@@ -124,12 +177,18 @@ const Sermons = ({data}) => {
               <div className={`text-xs text-gray-400`}>{sermon.speaker}</div>        
               <div className={`text-xs transition-colors ${sorting ? "bg-[#09314C] text-white" : "bg-white text-gray-400"}`}>{sermon.date}</div>        
             </div>
-            <a className={`text-md text-gray-400`} href={sermon.oldAudioLink} target="_blank">
+            {sermon.oldAudioLink !== ""
+            ?
+            <a className={`text-md text-gray-400`} href={sermon.oldAudioLink} target="_blank" onClick={() => console.log(sermon.oldAudioLink)}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-6 h-6`}>
                 <path strokeLinecap="round" strokeLinejoin="round" 
                 d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
               </svg>
             </a>
+            :
+            <div className={`text-xs text-gray-400`}>No<br />Audio</div>
+            }
+
           </div>
 
 
@@ -139,21 +198,23 @@ const Sermons = ({data}) => {
   }
 
   // FILTER SERMONS
-  let filteredSermons = sermonBookFilter ? sermons.filter(sermon => sermon.book === sermonBookFilter) : sermons
-  filteredSermons = sermonSpeakerFilter ? filteredSermons.filter(sermon => sermon.speaker === sermonSpeakerFilter) : filteredSermons
+  let filteredSermons = sundayschoolBookFilter ? sermons.filter(sermon => sermon.book === sundayschoolBookFilter) : sermons
+  filteredSermons = sundayschoolSpeakerFilter ? filteredSermons.filter(sermon => sermon.speaker === sundayschoolSpeakerFilter) : filteredSermons
   
 
-  filteredSermons = sermonSearchFilter 
+  filteredSermons = sundayschoolSearchFilter 
   ? filteredSermons.filter(sermon => 
-      (sermon.title.toLowerCase().includes(sermonSearchFilter.toLowerCase()))
+      (sermon.title.toLowerCase().includes(sundayschoolSearchFilter.toLowerCase()))
       |
-      (sermon.book.toLowerCase().includes(sermonSearchFilter.toLowerCase()))
+      (sermon.book.toLowerCase().includes(sundayschoolSearchFilter.toLowerCase()))
       |
-      (sermon.bookPassage.toLowerCase().includes(sermonSearchFilter.toLowerCase()))
+      (sermon.bookPassage.toLowerCase().includes(sundayschoolSearchFilter.toLowerCase()))
       |
-      (sermon.date.toLowerCase().includes(sermonSearchFilter.toLowerCase()))
+      (sermon.date.toLowerCase().includes(sundayschoolSearchFilter.toLowerCase()))
       |
-      (sermon.speaker.toLowerCase().includes(sermonSearchFilter.toLowerCase()))
+      (sermon.speaker.toLowerCase().includes(sundayschoolSearchFilter.toLowerCase()))      
+      |
+      (sermon.sundaySchoolSeries.toLowerCase().includes(sundayschoolSearchFilter.toLowerCase()))      
     )
   : filteredSermons
 
@@ -162,17 +223,17 @@ const Sermons = ({data}) => {
 
   return (
     <Layout>    
-      <div page={'sermons'} className={`pt-20 flex justify-center bg-gray-100`}>        
+      <div page={'sunday-school'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`min-h-screen max-w-[1200px] w-[100vw] md:w-[70vw] pb-96`}>
 
-        {showSermonsFilterMenu &&
+        {showSundayschoolFilterMenu &&
 
           <div className={`flex flex-col`}>
 
             {/* close button */}
             <button className={`flex justify-end px-6 py-6`} onClick={() => {
-              dispatch(toggleShowSermonsFilterMenu(false));
+              dispatch(toggleShowSundayschoolFilterMenu(false));
               setFilterBookOpen(false);
               setFilterSpeakerOpen(false);
               window.scrollTo(0,0);
@@ -208,8 +269,8 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2 mb-4`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>Old Testament</div>
                   {booksOT.map((book,i) => (
-                    <div key={i} className={`text-center text-sm p-2 border cursor-pointer ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
-                      dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
+                    <div key={i} className={`text-center text-sm p-2 border cursor-pointer ${sundayschoolBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
+                      dispatch(setSundayschoolBookFilter(book !== sundayschoolBookFilter ? book : null ));
                       }}>
                       {book}
                     </div>
@@ -219,8 +280,8 @@ const Sermons = ({data}) => {
                   <div className={`grid grid-cols-2 gap-x-4 gap-y-2`}>
                   <div className={`col-span-2 pl-2 py-2 font-serif font-semibold`}>New Testament</div>
                   {booksNT.map((book,i) => (
-                    <div key={i} className={`text-center text-sm p-2 border cursor-pointer ${sermonBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
-                      dispatch(setSermonBookFilter(book !== sermonBookFilter ? book : null ));
+                    <div key={i} className={`text-center text-sm p-2 border cursor-pointer ${sundayschoolBookFilter === book && "bg-gray-300"}`} onClick={() => {                    
+                      dispatch(setSundayschoolBookFilter(book !== sundayschoolBookFilter ? book : null ));
                       }}>
                       {book}
                     </div>
@@ -252,8 +313,8 @@ const Sermons = ({data}) => {
                 <div className={`flex justify-center ${(filterSpeakerOpen) ? "h-full p-4 overflow-auto text-gray-900" : "h-0 p-0 overflow-hidden text-white"}`}>
                   <div className={`flex flex-col justify-center w-[50%] space-y-5`}>
                     {speakers.map((speaker,i) => (
-                      <div key={i} className={`text-sm text-center px-4 py-2 border cursor-pointer ${sermonSpeakerFilter === speaker && "bg-gray-300"}`} onClick={() => {                    
-                        dispatch(setSermonSpeakerFilter(speaker !== sermonSpeakerFilter ? speaker : null ));                      
+                      <div key={i} className={`text-sm text-center px-4 py-2 border cursor-pointer ${sundayschoolSpeakerFilter === speaker && "bg-gray-300"}`} onClick={() => {                    
+                        dispatch(setSundayschoolSpeakerFilter(speaker !== sundayschoolSpeakerFilter ? speaker : null ));                      
                         }}>
                         {speaker}
                       </div>
@@ -267,10 +328,10 @@ const Sermons = ({data}) => {
 
               <button className={`flex justify-between px-8 py-4 bg-red-400 text-gray-50 ring-1 ring-gray-400`}
               onClick={() => {
-                setSermonSearchFilter('');
-                dispatch(setSermonBookFilter(null));
-                dispatch(setSermonSpeakerFilter(null));
-                dispatch(toggleShowSermonsFilterMenu(false));
+                setSundayschoolSearchFilter('');
+                dispatch(setSundayschoolBookFilter(null));
+                dispatch(setSundayschoolSpeakerFilter(null));
+                dispatch(toggleShowSundayschoolFilterMenu(false));
               }}>
                 <div className={`flex text-xl font-serif`}>Clear All Filters</div>
                 <div>
@@ -287,7 +348,7 @@ const Sermons = ({data}) => {
 
 
           {/* search and filter */}          
-          {!showSermonsFilterMenu &&          
+          {!showSundayschoolFilterMenu &&          
           <div className={`pb-36 px-6 transition-all 
               ${showMenu ? "blur-sm duration-500" : "blur-none duration-[200]"}               
               `}>
@@ -297,8 +358,8 @@ const Sermons = ({data}) => {
                   <div className={`shadow-md rounded-md mb-2`}>
                     <input className={`bg-gray-200 py-2 w-full px-2 text-xl`} 
                     type='text'
-                    value={sermonSearchFilter} placeholder={"Search sermons..."}
-                    onChange={(e) => dispatch(setSermonSearchFilter(e.target.value))} />
+                    value={sundayschoolSearchFilter} placeholder={"Search lessons..."}
+                    onChange={(e) => dispatch(setSundayschoolSearchFilter(e.target.value))} />
                   </div>
                   
                   <div className={`flex py-2 justify-between items-center text-gray-600`}>
@@ -306,7 +367,7 @@ const Sermons = ({data}) => {
                     <div className={`flex space-x-3`}>
 
                       <button className={`flex space-x-1 text-xs items-center shadow-md border border-gray-300 px-2 py-1`}
-                      onClick={() => dispatch(toggleShowSermonsFilterMenu(true))}>
+                      onClick={() => dispatch(toggleShowSundayschoolFilterMenu(true))}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
                         className={`w-6 h-6 cursor-pointer`}                
                         >
@@ -328,7 +389,7 @@ const Sermons = ({data}) => {
 
                     </div>         
                     
-                    <div className={`text-gray-600`}>{filteredSermons.length} {filteredSermons.length === 1 ? "sermon" : "sermons"}</div>
+                    <div className={`text-gray-600`}>{filteredSermons.length} {filteredSermons.length === 1 ? "lesson" : "lessons"}</div>
                   </div>
                                   
               </div>                            
@@ -346,5 +407,5 @@ const Sermons = ({data}) => {
   )
 }
 
-export default Sermons
+export default SundaySchool
 

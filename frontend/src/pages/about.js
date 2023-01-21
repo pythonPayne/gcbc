@@ -55,7 +55,7 @@ const About = ({data}) => {
     const image = <GatsbyImage className={`shadow-xl h-full rounded md:rounded-lg ${order1} md:order-none`} image={edge.node.pic.asset['gatsbyImageData']} alt={title} />
     const words = <div className={`flex flex-col ${order2} md:order-none pb-28 md:pb-0`}>
                     <div className={`text-3xl md:text-4xl font-semibold py-6 text-gray-600`}>{edge.node.title}</div>
-                    <div className={`leading-[1.8rem]`}>{edge.node.displayText}</div>
+                    <div className={`leading-[1.8rem]`}>{edge.node.displayText}</div>                    
                   </div>
 
     return (
