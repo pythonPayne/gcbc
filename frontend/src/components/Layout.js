@@ -18,7 +18,10 @@ const Layout = (props) => {
             <div className={`fixed w-full z-50 h-20 bg-white shadow`}>
                 
                 <div className={`flex h-full justify-between items-center pl-1 pr-4 md:px-10`}>
-                    <StaticImage backgroundColor="white" class={`bg-white`} height={65} src={"../images/Logo_Blue.png"} alt={`logo`} />
+                    <Link to={`/`}>
+                        <StaticImage backgroundColor="white" class={`bg-white`} height={65} src={"../images/Logo_Blue.png"} alt={`logo`} />
+                    </Link>
+                    
 
                     <div className={`lg:hidden flex flex-col space-y-2 h-10 w-10 justify-center items-center cursor-pointer border`}
                         onClick={() => dispatch(toggleShowMenu(!showMenu)) }
