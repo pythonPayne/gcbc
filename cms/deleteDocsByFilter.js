@@ -4,12 +4,12 @@ const client = sanityClient({
   projectId: '4ufj1fpw',
   dataset: 'production',
   apiVersion: '2022-01-08',
-  token: '',  
+  // token: '',  
   useCdn: false, 
 })
 
 client
-  .delete({query: '*[_type == "sermons"]'})
+  .delete({query: '*[_type == "sundayschool"]'})
   .then(() => {console.log('It was deleted')})
   .catch((err) => {console.error('Delete failed: ', err.message)})
 
