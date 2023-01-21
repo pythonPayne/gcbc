@@ -93,7 +93,7 @@ const About = ({data}) => {
           <div className={`flex flex-col items-center`}>
             <div className={`py-2 flex justify-center text-[#09314C] 
             text-4xl md:text-6xl font-sans font-bold tracking-widest`}>G &nbsp;C &nbsp;B &nbsp;C</div>
-            <div className={`font-serif text-gray-500`}>what's in a name?</div>
+            <div className={`font-serif text-gray-500 text-lg md:text-xl`}>what's in a name?</div>
           </div>
 
           <div className={`border-b-2 my-6 md:my-8`}></div>
@@ -123,7 +123,7 @@ const About = ({data}) => {
           <div className={`border-b-2 my-6 md:my-8`}></div>
   
           <div className={`flex flex-col md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-32`}>
-            {elders.map(elder => elderCard(elder))}
+            {elders.sort((a,b) => a.node.title > b.node.title ? -1 : 1).map(elder => elderCard(elder))}
           </div>
                         
 
