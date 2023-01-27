@@ -126,14 +126,14 @@ const Beliefs = ({data}) => {
 
          <div className={`flex space-x-3`}>
         
-            <button className={`text-gray-400`} 
+            <button className={`text-gray-500 text-xl hover:text-gray-800`} 
               onClick={() => {
                 setChapterSelected(chapterSelected !== 1 ? -1+chapterSelected : numberOfChapters)
                 window.scrollTo(0,0)
-                }}>&#9664;
+                }}>{"<"}
             </button>       
             
-            <button className={`text-gray-400`}
+            <button className={`text-gray-500 hover:text-gray-800`}
             onClick={() => {
               setShowChapterMenu(!showChapterMenu);
               window.scrollTo(0,0);
@@ -145,11 +145,11 @@ const Beliefs = ({data}) => {
               
             </button>
 
-            <button className={`text-gray-400`} 
+            <button className={`text-gray-500 text-xl hover:text-gray-800`} 
               onClick={() => {
                 setChapterSelected(chapterSelected !== numberOfChapters ? 1+chapterSelected : 1)
                 window.scrollTo(0,0)
-                }}>&#9654;
+                }}>{">"}
             </button>       
               
           </div>          

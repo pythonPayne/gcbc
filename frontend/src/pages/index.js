@@ -1,18 +1,19 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../components/Layout'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { GatsbyImage } from "gatsby-plugin-image"
 import { toggleShowMenu } from '../redux/actions/layout'
 
 
 export const query = graphql`
 query MyQuery{
-  allSanityPictures{
+  allSanityCarouselPictures{
     edges{
       node{
         title
-        pageAndFunction
+        page
+        sortOrder
         pic{
           asset{
             gatsbyImageData
@@ -39,8 +40,9 @@ const Home = ({ data }) => {
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))    
-    setCarouselImages(data.allSanityPictures.edges.filter(edge => edge.node.pageAndFunction === "homepageCarousel").map((edge,i) => {
+    setCarouselImages(data.allSanityCarouselPictures.edges.sort((a,b) => a.node.sortOrder < b.node.sortOrder ? -1 : 1).map((edge,i) => {
       return {
+        ...edge,
         startPosition: i+1,
         position: i+1,
         gatsbyImageData: edge.node.pic.asset.gatsbyImageData
@@ -65,12 +67,40 @@ const Home = ({ data }) => {
   }
 
   const carouselImage = (position) => {
-    const image = carouselImages && carouselImages.find(img => img.position === position)  
+    const image = carouselImages && carouselImages.find(img => img.position === position)        
     if (image) {  
     return (
     <div id={`carouselImage-${position}`} ref={addToRefs}
-    className={`w-full shrink-0 h-full snap-center`}>
-      {image && <GatsbyImage className={`h-full`} image={image['gatsbyImageData']} alt={"carouselPic"} /> }
+    className={`w-full shrink-0 h-full snap-center relative`}>
+      {
+      image && ['sermons','studies',].includes(image.node.page)
+      ?
+        <Link to={`/${image.node.page}`}>
+          <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
+          <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
+            <div className={`flex w-full text-center justify-center py-4 bg-gray-500 bg-opacity-20 
+            text-gray-50 tracking-wide font-serif text-2xl md:text-4xl md:py-8`}>{image.node.title}</div>
+          </div>
+        </Link>                
+      : 
+      image && ['livestream',].includes(image.node.page) 
+      ?
+        <a href={`https://www.facebook.com/gcbcbham`} target="_self">
+          <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
+          <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
+            <div className={`flex w-full text-center justify-center py-4 bg-gray-500 bg-opacity-20 
+            text-gray-50 tracking-wide font-serif text-2xl md:text-4xl md:py-8`}>{image.node.title}</div>
+          </div>
+        </a>    
+      :
+      <div>
+        <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
+        <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
+          <div className={`flex w-full text-center justify-center py-4 bg-gray-500 bg-opacity-20 
+          text-gray-50 tracking-wide font-serif text-2xl md:text-4xl md:py-8`}>{image.node.title}</div>
+        </div>
+      </div>    
+      }
     </div>
     )} else return
   }       
@@ -83,10 +113,10 @@ const Home = ({ data }) => {
   const carouselButton = (x, position) => (
       <button
         onClick={() => onClickCarouselButton(position)} 
-        className={`h-2 w-8 pointer-events-none md:pointer-events-auto duration-500
+        className={`h-2 w-8 pointer-events-none md:pointer-events-auto duration-500 border border-[#09314C] border-opacity-50
         ${closest === x
           ? "bg-[#09314C]" 
-          : "border border-[#09314C] border-opacity-50" }`}>
+          : "" }`}>
       </button>      
     )
   
@@ -123,7 +153,7 @@ const Home = ({ data }) => {
 
           <div className={`flex justify-center items-center`}>
             <div className={`max-w-[75%] leading-10 tracking-widest py-10 text-center font-light text-md
-            lg:text-2xl lg:leading-10`}>
+            md:text-2xl md:leading-[4rem] md:py-20`}>
             Grace Covenant Baptist Church exists for its members to 
             <span className={`font-bold text-[#09314C]`}> glorify God</span> in their worship 
             both personally and corporately and to equip its members for gospel life and witness 

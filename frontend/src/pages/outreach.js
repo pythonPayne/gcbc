@@ -22,7 +22,7 @@ query MyQuery {
 }
 `
 
-const Calendar = ({data}) => {  
+const Outreach = ({data}) => {  
   const dispatch = useDispatch()
   const showMenu = useSelector(state => state.layout.showMenu)
   const [events, setEvents] = useState(data.allSanityCalendar.edges.sort(
@@ -32,21 +32,9 @@ const Calendar = ({data}) => {
     dispatch(toggleShowMenu(false))
   }, [])
 
-  const calendar_card = (node) => {
-    const d = new Date(node.startDateTime)    
-    if(d > Date.now())
-    return (
-      <div className={`ring-1 ring-gray-300 p-3`}>
-        <div className={`font-serif text-lg`}>{node.title}</div>          
-        <div className={`text-sm`}>{d.toDateString()}</div>      
-        <div className={`text-sm`}>{d.toLocaleTimeString()}</div>      
-      </div>
-    )
-  }
-
   return (
     <Layout>
-      <div page={'current'} className={`pt-20 flex justify-center bg-gray-100`}>        
+      <div page={'outreach'} className={`pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px]`}>
           
@@ -54,10 +42,7 @@ const Calendar = ({data}) => {
             ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}> 
 
             <div className={`flex justify-center px-8 py-4 bg-orange-200 mt-4`}>Page in progress...</div>
-
-            {/* <div className={`pb-8 flex flex-col space-y-5`}>
-              {events.map(event => calendar_card(event.node))}
-            </div> */}
+          
 
           </div>
           
@@ -68,4 +53,4 @@ const Calendar = ({data}) => {
   )
 }
 
-export default Calendar
+export default Outreach

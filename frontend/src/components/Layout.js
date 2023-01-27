@@ -44,11 +44,15 @@ const Layout = (props) => {
                     <div className={`hidden lg:flex space-x-5 font-sans`}>
                         
                         <Link className={`${page === 'about' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/about`}>About</Link>
-                        <Link className={`${page === 'contact' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/contact`}>Contact</Link>
-                        <Link className={`${page === 'beliefs' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/beliefs`}>Beliefs</Link>                    
-                        <Link className={`${page === 'current' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/current`}>Current</Link>
+                        <Link className={`${page === 'beliefs' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/beliefs`}>Beliefs</Link>
+                        <Link className={`${page === 'contact' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/contact`}>Contact</Link>                        
+                        <Link className={`${page === 'outreach' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/outreach`}>Outreach</Link>                    
+                        <Link className={`${page === 'studies' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/studies`}>Studies</Link>
                         <Link className={`${page === 'sermons' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sermons`}>Sermons</Link>
                         <Link className={`${page === 'sunday-school' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sunday-school`}>Sunday-School</Link>
+                        <a className={``} 
+                        href={`https://www.facebook.com/gcbcbham`} target="_self">Live-Stream</a>
+                        
                         
                     </div>
                 </div>
@@ -65,15 +69,16 @@ const Layout = (props) => {
                 `}
                 >                                
                     <div className={`relative`}>
-                        <div className={`absolute pb-[50vh] w-full px-4 pt-8`}>                                
-                            <div className={`flex flex-col space-y-5`}>                                
-                                <Link className={`border-l-4 pl-4 ${page === 'about' ? "border-gray-600" : " border-white"}`} to={`/about`}>About</Link>
-                                <Link className={`border-l-4 pl-4 ${page === 'contact' ? "border-gray-600" : " border-white"}`} to={`/contact`}>Contact</Link>
-                                <Link className={`border-l-4 pl-4 ${page === 'beliefs' ? "border-gray-600" : " border-white"}`} to={`/beliefs`}>Beliefs</Link>
-                                <Link className={`border-l-4 pl-4 ${page === 'current' ? "border-gray-600" : " border-white"}`} to={`/current`}>Current</Link>                  
-                                <Link className={`border-l-4 pl-4 ${page === 'sermons' ? "border-gray-600" : " border-white"}`} to={`/sermons`}>Sermons</Link>                                
-                                <Link className={`w-[50vw] whitespace-pre-wrap border-l-4 pl-4 ${page === 'sunday-school' ? "border-gray-600" : " border-white"}`} to={`/sunday-school`}>
-                                    Sunday<br/>School</Link>   
+                        <div className={`absolute pb-[50vh] w-full pl-4 pr-4 pt-8`}>                                
+                            <div className={`flex flex-col space-y-2`}>                                
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'about' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/about`}>About</Link>
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'beliefs' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/beliefs`}>Beliefs</Link>
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'contact' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/contact`}>Contact</Link>                                
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/studies`}>Studies</Link>                  
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sermons' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sermons`}>Sermons</Link>                                
+                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>   
+                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.facebook.com/gcbcbham`} target="_self">Live Stream</a>
                             </div>
                         </div>
                     </div>                        
