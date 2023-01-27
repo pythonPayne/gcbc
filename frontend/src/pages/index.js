@@ -78,7 +78,7 @@ const Home = ({ data }) => {
         <Link to={`/${image.node.page}`}>
           <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
           <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
-            <div className={`flex w-full text-center justify-center py-4 bg-gray-500 bg-opacity-20 
+            <div className={`flex w-full text-center justify-center px-5 py-4 bg-gray-500 bg-opacity-20 
             text-gray-50 tracking-wide font-serif text-2xl md:text-4xl md:py-8`}>{image.node.title}</div>
           </div>
         </Link>                
@@ -88,7 +88,7 @@ const Home = ({ data }) => {
         <a href={`https://www.facebook.com/gcbcbham`} target="_self">
           <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
           <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
-            <div className={`flex w-full text-center justify-center py-4 bg-gray-500 bg-opacity-20 
+            <div className={`flex w-full text-center justify-center px-5 py-4 bg-gray-500 bg-opacity-20 
             text-gray-50 tracking-wide font-serif text-2xl md:text-4xl md:py-8`}>{image.node.title}</div>
           </div>
         </a>    
@@ -96,7 +96,7 @@ const Home = ({ data }) => {
       <div>
         <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
         <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
-          <div className={`flex w-full text-center justify-center py-4 bg-gray-500 bg-opacity-20 
+          <div className={`flex w-full text-center justify-center px-5 py-4 bg-gray-500 bg-opacity-20 
           text-gray-50 tracking-wide font-serif text-2xl md:text-4xl md:py-8`}>{image.node.title}</div>
         </div>
       </div>    
