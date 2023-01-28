@@ -23,7 +23,6 @@ const Layout = (props) => {
                         <StaticImage backgroundColor="white" class={`bg-white`} height={65} src={"../images/Logo_Blue.png"} alt={`logo`} />
                     </Link>
                     
-
                     <div className={`lg:hidden flex flex-col space-y-2 h-10 w-10 justify-center items-center cursor-pointer border`}
                         onClick={() => dispatch(toggleShowMenu(!showMenu)) }
                         >
@@ -45,19 +44,20 @@ const Layout = (props) => {
                     <div className={`hidden lg:flex lg:space-x-5 lg:font-sans lg:items-center`}>
 
                         <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('About')}>About</div>
+                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('About')}>About</div>
                             {hoverMenu==='About' && 
-                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
-                                <Link to={`/about`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>About Us</Link>
+                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                                <Link to={`/about`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>About Us</Link>                                
                                 <Link to={`/beliefs`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Beliefs</Link>                                
+                                <Link to={`/church-covenant`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Church Covenant</Link>                                
                             </div>                     
                             }       
                         </div>  
 
                         <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Media')}>Media</div>
+                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Media')}>Media</div>
                             {hoverMenu==='Media' && 
-                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
                                 <Link to={`/sermons`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sermons</Link>
                                 <Link to={`/sunday-school`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sunday School</Link>
                                 <a href={`https://www.facebook.com/gcbcbham`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Livestream</a>
@@ -67,26 +67,27 @@ const Layout = (props) => {
 
 
                         <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Studies')}>Studies</div>
+                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Studies')}>Studies</div>
                             {hoverMenu==='Studies' && 
-                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-60 border border-gray-100`}>
                                 <Link to={`/book-studies`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Studies</Link>
+                                <Link to={`/book-recommendations`} className={`disabled whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Recommendations</Link>
                             </div>                     
                             }       
                         </div>                               
                                        
                         <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Outreach')}>Outreach</div>
+                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Outreach')}>Outreach</div>
                             {hoverMenu==='Outreach' && 
-                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
                                 <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Missions</Link>
-                                <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Serve Opportunities</Link>
+                                <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Ministries</Link>
                             </div>                     
                             }       
                         </div>                                                     
 
                         <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Contact')}>
+                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Contact')}>
                                 <Link to={`/contact`}>Contact</Link>                                                        
                             </div>                                                        
                         </div>                                
@@ -108,14 +109,19 @@ const Layout = (props) => {
                     <div className={`relative`}>
                         <div className={`absolute pb-[50vh] w-full pl-4 pr-4 pt-8`}>                                
                             <div className={`flex flex-col space-y-2`}>                                
+                                
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'about' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/about`}>About</Link>
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'beliefs' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/beliefs`}>Beliefs</Link>
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'contact' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/contact`}>Contact</Link>                                
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>                                
+                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'church-covenant' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/church-covenant`}>Church Covenant</Link> 
+                                <hr/>                                                                                               
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sermons' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sermons`}>Sermons</Link>                                
                                 <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>   
-                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'book-studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/book-studies`}>Book Studies</Link>                  
                                 <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.facebook.com/gcbcbham`} target="_blank">Live Stream</a>
+                                <hr/>
+                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'book-studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/book-studies`}>Book Studies</Link>                                                  
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>                                
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'contact' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/contact`}>Contact</Link>                                
+
                             </div>
                         </div>
                     </div>                        

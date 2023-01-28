@@ -48,7 +48,7 @@ const Contact = () => {
           <div className={`grid place-content-center text-2xl font-serif text-center`}>
             <p>Thank you for your email.</p>
             <br/>
-            <p>We will respond asap.</p>
+            <p>Todd will respond after he finishes memorizing the Old Testament.</p>
           </div>
         }
           
