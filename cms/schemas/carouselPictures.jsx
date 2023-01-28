@@ -16,7 +16,7 @@ export default {
             list: [
               {title: 'Livestream', value: 'livestream'},
               {title: 'Current Sermon Series', value: 'sermons'},
-              {title: "Current Men's and Women's Studies", value: 'studies'},
+              {title: "Current Men's and Women's Studies", value: 'book-studies'},
               {title: "Outreach/Missions Page", value: 'outreach'},              
             ]
         }   

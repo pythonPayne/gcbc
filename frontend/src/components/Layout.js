@@ -46,12 +46,12 @@ const Layout = (props) => {
                         <Link className={`${page === 'about' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/about`}>About</Link>
                         <Link className={`${page === 'beliefs' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/beliefs`}>Beliefs</Link>
                         <Link className={`${page === 'contact' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/contact`}>Contact</Link>                        
-                        <Link className={`${page === 'outreach' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/outreach`}>Outreach</Link>                    
-                        <Link className={`${page === 'studies' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/studies`}>Studies</Link>
+                        <Link className={`${page === 'outreach' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/outreach`}>Outreach</Link>                                            
                         <Link className={`${page === 'sermons' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sermons`}>Sermons</Link>
                         <Link className={`${page === 'sunday-school' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sunday-school`}>Sunday-School</Link>
+                        <Link className={`${page === 'book-studies' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/book-studies`}>Book-Studies</Link>
                         <a className={``} 
-                        href={`https://www.facebook.com/gcbcbham`} target="_self">Live-Stream</a>
+                        href={`https://www.facebook.com/gcbcbham`} target="_blank">Live-Stream</a>
                         
                         
                     </div>
@@ -74,11 +74,11 @@ const Layout = (props) => {
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'about' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/about`}>About</Link>
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'beliefs' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/beliefs`}>Beliefs</Link>
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'contact' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/contact`}>Contact</Link>                                
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/studies`}>Studies</Link>                  
+                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>                                
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sermons' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sermons`}>Sermons</Link>                                
                                 <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>   
-                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.facebook.com/gcbcbham`} target="_self">Live Stream</a>
+                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'book-studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/book-studies`}>Book Studies</Link>                  
+                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.facebook.com/gcbcbham`} target="_blank">Live Stream</a>
                             </div>
                         </div>
                     </div>                        

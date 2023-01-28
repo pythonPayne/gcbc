@@ -5,6 +5,7 @@ import calendar from './calendar'
 import aboutGCBC from './aboutGCBC'
 import aboutElders from './aboutElders'
 import sundaySchool from './sundaySchool'
+import bookStudies from './bookStudies'
 
 export const schemaTypes = [
     sermons, 
@@ -13,5 +14,6 @@ export const schemaTypes = [
     calendar,
     aboutGCBC,    
     aboutElders,
-    sundaySchool
+    sundaySchool,
+    bookStudies
 ]

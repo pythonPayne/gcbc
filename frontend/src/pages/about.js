@@ -73,7 +73,7 @@ const About = ({data}) => {
       <>
         <GatsbyImage className={`shadow-xl h-full rounded-lg`} image={elder.node.pic.asset['gatsbyImageData']} alt={elder.node.title} />
         <div className={`flex flex-col pb-32 md:pb-0`}>
-          <div className={`text-2xl font-semibold py-6 text-gray-600`}>{elder.node.title}</div>
+          <div className={`text-2xl md:text-3xl font-semibold py-6 text-gray-600`}>{elder.node.title}</div>
           <div className={`leading-[1.8rem]`}>{elder.node.displayText}</div>
         </div>        
       </>
@@ -83,7 +83,7 @@ const About = ({data}) => {
   return (
     <Layout>
 
-    <div page={'about'} className={`pt-20 flex justify-center bg-gray-100`}>        
+    <div page={'about'} className={`pt-20 pb-48 md:pb-96 flex justify-center bg-gray-100`}>        
 
       <div className={`max-w-[1200px]`}>
       
@@ -98,7 +98,7 @@ const About = ({data}) => {
 
           <div className={`border-b-2 my-6 md:my-8`}></div>
 
-          <div className={`flex flex-col md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-24`}>
+          <div className={`flex flex-col pt-4 md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-24 md:pt-12`}>
 
             {gcbcs && 
             <>
@@ -122,7 +122,7 @@ const About = ({data}) => {
 
           <div className={`border-b-2 my-6 md:my-8`}></div>
   
-          <div className={`flex flex-col md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-32`}>
+          <div className={`flex flex-col md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-48 md:pt-12`}>
             {elders.sort((a,b) => a.node.title > b.node.title ? -1 : 1).map(elder => elderCard(elder))}
           </div>
                         

@@ -50,6 +50,8 @@ const Home = ({ data }) => {
     }))    
   }, [])
   
+  console.log(carouselImages)
+
   useEffect(() => {
     setCurrentPosition(carouselImages && carouselImages.find(img => img.position === 1).startPosition)
   }, [carouselImages])  
@@ -73,7 +75,7 @@ const Home = ({ data }) => {
     <div id={`carouselImage-${position}`} ref={addToRefs}
     className={`w-full shrink-0 h-full snap-center relative`}>
       {
-      image && ['sermons','studies',].includes(image.node.page)
+      image && ['sermons','book-studies',].includes(image.node.page)
       ?
         <Link to={`/${image.node.page}`}>
           <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
