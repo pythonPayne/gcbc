@@ -11,6 +11,7 @@ const Layout = (props) => {
   const page = props.children.props.page
   const dispatch = useDispatch()
   const showMenu = useSelector(state => state.layout.showMenu)  
+  const [hoverMenu, setHoverMenu] = useState(null)
     
     return (
         <>
@@ -41,19 +42,55 @@ const Layout = (props) => {
                         </div> 
                     </div>
 
-                    <div className={`hidden lg:flex space-x-5 font-sans`}>
-                        
-                        <Link className={`${page === 'about' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/about`}>About</Link>
-                        <Link className={`${page === 'beliefs' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/beliefs`}>Beliefs</Link>
-                        <Link className={`${page === 'contact' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/contact`}>Contact</Link>                        
-                        <Link className={`${page === 'outreach' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/outreach`}>Outreach</Link>                                            
-                        <Link className={`${page === 'sermons' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sermons`}>Sermons</Link>
-                        <Link className={`${page === 'sunday-school' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/sunday-school`}>Sunday-School</Link>
-                        <Link className={`${page === 'book-studies' ? " text-[#09314C] underline underline-offset-4" : ""}`} to={`/book-studies`}>Book-Studies</Link>
-                        <a className={``} 
-                        href={`https://www.facebook.com/gcbcbham`} target="_blank">Live-Stream</a>
-                        
-                        
+                    <div className={`hidden lg:flex lg:space-x-5 lg:font-sans lg:items-center`}>
+
+                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
+                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('About')}>About</div>
+                            {hoverMenu==='About' && 
+                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                                <Link to={`/about`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>About Us</Link>
+                                <Link to={`/beliefs`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Beliefs</Link>                                
+                            </div>                     
+                            }       
+                        </div>  
+
+                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
+                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Media')}>Media</div>
+                            {hoverMenu==='Media' && 
+                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                                <Link to={`/sermons`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sermons</Link>
+                                <Link to={`/sunday-school`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sunday School</Link>
+                                <a href={`https://www.facebook.com/gcbcbham`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Livestream</a>
+                            </div>                     
+                            }       
+                        </div>
+
+
+                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
+                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Studies')}>Studies</div>
+                            {hoverMenu==='Studies' && 
+                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                                <Link to={`/book-studies`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Studies</Link>
+                            </div>                     
+                            }       
+                        </div>                               
+                                       
+                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
+                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Outreach')}>Outreach</div>
+                            {hoverMenu==='Outreach' && 
+                            <div className={`absolute -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
+                                <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Missions</Link>
+                                <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Serve Opportunities</Link>
+                            </div>                     
+                            }       
+                        </div>                                                     
+
+                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
+                            <div className={`select-none px-6 py-1 border border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Contact')}>
+                                <Link to={`/contact`}>Contact</Link>                                                        
+                            </div>                                                        
+                        </div>                                
+
                     </div>
                 </div>
 
@@ -98,16 +135,16 @@ const Layout = (props) => {
             <div className={`bg-[#09314C] text-gray-300 text-opacity-80 grid grid-cols-1 text-center gap-y-[3rem] py-28
             lg:grid-cols-2`}>
 
-                <div className={`py-10 tracking-wide`}>
-                    <div className={`font-bold text-2xl font-serif py-1`}>Contact</div>
-                    <div>2565 Rocky Ridge Road</div>
+                <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
+                    <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider`}>Contact</div>
+                    <div className=''>2565 Rocky Ridge Road</div>
                     <div>Vestavia Hills Alabama 35243</div>
                     <div>pastor@gracecovenantbaptist.org</div>
                     <div>(205) 426-2234</div>
                 </div>               
 
-                <div className={`py-10 tracking-wide`}>
-                    <div className={`font-bold text-2xl font-serif py-1`}>Service Times</div>
+                <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
+                    <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider`}>Service Times</div>
                     <div>Sunday School: 9:30 am</div>
                     <div>Sunday Worship: 11 am</div>
                     <div>Wednesday Prayer: 6:30 pm</div>
