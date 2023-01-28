@@ -49,9 +49,7 @@ const Home = ({ data }) => {
       }
     }))    
   }, [])
-  
-  console.log(carouselImages)
-
+    
   useEffect(() => {
     setCurrentPosition(carouselImages && carouselImages.find(img => img.position === 1).startPosition)
   }, [carouselImages])  
