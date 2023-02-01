@@ -50,6 +50,7 @@ const Layout = (props) => {
                                 <Link to={`/about`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>About Us</Link>                                
                                 <Link to={`/beliefs`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Beliefs</Link>                                
                                 <Link to={`/church-covenant`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Church Covenant</Link>                                
+                                <a href={`https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Members</a>                                          
                             </div>                     
                             }       
                         </div>  
@@ -113,6 +114,7 @@ const Layout = (props) => {
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'about' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/about`}>About</Link>
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'beliefs' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/beliefs`}>Beliefs</Link>
                                 <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'church-covenant' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/church-covenant`}>Church Covenant</Link> 
+                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link`} target="_blank">Members</a>
                                 <hr/>                                                                                               
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sermons' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sermons`}>Sermons</Link>                                
                                 <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>   
