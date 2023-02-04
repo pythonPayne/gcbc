@@ -85,7 +85,7 @@ const Home = ({ data }) => {
       : 
       image && ['livestream',].includes(image.node.page) 
       ?
-        <a href={`https://www.facebook.com/gcbcbham`} target="_self">
+        <a href={`https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/`} target="_blank">
           <GatsbyImage className={`h-full w-full`} image={image['gatsbyImageData']} alt={"carouselPic"} />
           <div className={`absolute top-0 h-full w-full flex flex-col justify-end items-center`}>
             <div className={`flex w-full text-center justify-center px-5 py-4 bg-gray-500 bg-opacity-20 
@@ -128,7 +128,7 @@ const Home = ({ data }) => {
 
   return (
     <Layout>
-    <div page={'home'} className={`flex justify-center pt-20 bg-gray-100`}>        
+    <div page={'home'} className={`${showMenu && "pointer-events-none"} flex justify-center pt-20 bg-gray-100`}>        
 
       <div className={`max-w-[1200px] `}>
 

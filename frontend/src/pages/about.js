@@ -83,7 +83,7 @@ const About = ({data}) => {
   return (
     <Layout>
 
-    <div page={'about'} className={`pt-20 pb-48 md:pb-96 flex justify-center bg-gray-100`}>        
+    <div page={'about'} className={`${showMenu && "pointer-events-none"} pt-20 pb-48 md:pb-96 flex justify-center bg-gray-100`}>        
 
       <div className={`max-w-[1200px]`}>
       

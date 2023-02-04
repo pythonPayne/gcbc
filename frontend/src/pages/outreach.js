@@ -34,7 +34,7 @@ const Outreach = ({data}) => {
 
   return (
     <Layout>
-      <div page={'outreach'} className={`pt-20 flex justify-center bg-gray-100`}>        
+      <div page={'outreach'} className={`${showMenu && "pointer-events-none"} pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px]`}>
           

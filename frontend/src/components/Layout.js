@@ -60,8 +60,8 @@ const Layout = (props) => {
                             {hoverMenu==='Media' && 
                             <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
                                 <Link to={`/sermons`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sermons</Link>
-                                <Link to={`/sunday-school`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sunday School</Link>
-                                <a href={`https://www.facebook.com/gcbcbham`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Livestream</a>
+                                <Link to={`/sunday-school`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sunday School</Link>                                
+                                <a href={`https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Livestream</a>                                                                          
                             </div>                     
                             }       
                         </div>
@@ -71,8 +71,7 @@ const Layout = (props) => {
                             <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Studies')}>Studies</div>
                             {hoverMenu==='Studies' && 
                             <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-60 border border-gray-100`}>
-                                <Link to={`/book-studies`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Studies</Link>
-                                <Link to={`/book-recommendations`} className={`disabled whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Recommendations</Link>
+                                <Link to={`/book-studies`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Studies</Link>                                
                             </div>                     
                             }       
                         </div>                               
@@ -117,8 +116,8 @@ const Layout = (props) => {
                                 <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link`} target="_blank">Members</a>
                                 <hr/>                                                                                               
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sermons' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sermons`}>Sermons</Link>                                
-                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>   
-                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.facebook.com/gcbcbham`} target="_blank">Live Stream</a>
+                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>                                   
+                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/`} target="_blank">Livestream</a>
                                 <hr/>
                                 <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'book-studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/book-studies`}>Book Studies</Link>                                                  
                                 <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>                                
@@ -145,17 +144,29 @@ const Layout = (props) => {
 
                 <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
                     <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider`}>Contact</div>
-                    <div className=''>2565 Rocky Ridge Road</div>
-                    <div>Vestavia Hills Alabama 35243</div>
-                    <div>pastor@gracecovenantbaptist.org</div>
-                    <div>(205) 426-2234</div>
+                    <div className={`pt-2 space-y-1`}>
+                        <div>(205) 426-2234</div>
+                        <div>pastor@gracecovenantbaptist.org</div>                    
+                    </div>
+                    <div className={`pt-2`}>
+                        <a className={`underline`} target="_blank" href="https://www.google.com/maps/dir//Grace+Covenant+Baptist+Church,+2565+Rocky+Ridge+Rd,+Vestavia+Hills,+AL+35243/@33.4295652,-86.8408153,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x888918455c0624b3:0x25d19d79c0c6e263!2m2!1d-86.7707752!2d33.4295849">
+                            2565 Rocky Ridge Road
+                            <br/>
+                            Vestavia Hills Alabama 35243
+                        </a>
+                    </div>
+                    
+                    
+                    
                 </div>               
 
                 <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
                     <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider`}>Service Times</div>
-                    <div>Sunday School: 9:30 am</div>
-                    <div>Sunday Worship: 11 am</div>
-                    <div>Wednesday Prayer: 6:30 pm</div>
+                    <div className={`pt-2 flex flex-col space-y-1`}>
+                        <div>Sunday School: 9:30 am</div>
+                        <div>Sunday Worship: 11 am</div>
+                        <div>Wednesday Prayer: 6:30 pm</div>
+                    </div>
                 </div>
 
             </div>

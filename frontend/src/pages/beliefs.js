@@ -176,7 +176,7 @@ const Beliefs = ({data}) => {
   return (
     <Layout>    
 
-      <div page={'beliefs'} className={`pt-20 flex justify-center bg-gray-100`}>        
+      <div page={'beliefs'} className={`${showMenu && "pointer-events-none"} pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px] `}>
 

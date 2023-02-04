@@ -76,7 +76,7 @@ const BookStudies = ({data}) => {
 
   return (
     <Layout>
-      <div page={'book-studies'} className={`pt-20 flex justify-center bg-gray-100`}>        
+      <div page={'book-studies'} className={`${showMenu && "pointer-events-none"} pt-20 flex justify-center bg-gray-100`}>        
 
         <div className={`max-w-[1200px] pb-96`}>
           
