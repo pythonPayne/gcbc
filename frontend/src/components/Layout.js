@@ -29,7 +29,7 @@ const Layout = (props) => {
   }
 
   const navigation_button_links = (links) => {
-    const linkClass = "text-sm whitespace-nowrap px-2 py-2 text-gray-600 hover:text-blue-800 hover:text-[#09314C]"
+    const linkClass = "text-sm whitespace-nowrap px-2 py-2 text-gray-600 hover:text-blue-700 hover:text-[#09314C]"
     return (
         <div className={`shadow-2xl absolute ring-1 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2`}>
             {links.map(link => {
