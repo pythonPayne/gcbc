@@ -13,6 +13,56 @@ const Layout = (props) => {
   const showMenu = useSelector(state => state.layout.showMenu)  
   const [hoverMenu, setHoverMenu] = useState(null)
     
+  const navigation_button = (text, links) => {
+    return (
+        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
+            <div className={`text-sm select-none px-6 py-1 ring-1 transition-all duration-1000
+            ${hoverMenu !== text && hoverMenu !== null 
+            ? "text-gray-200 ring-gray-100 border-gray-100" 
+            : "text-gray-600 ring-gray-200 border-gray-100"}
+            ${hoverMenu === text && "bg-gray-100"}
+            `} 
+            onMouseOver={() => setHoverMenu(text)}>{text}</div>
+            {hoverMenu===text && navigation_button_links(links)}
+        </div>       
+    )
+  }
+
+  const navigation_button_links = (links) => {
+    const linkClass = "text-sm whitespace-nowrap px-2 py-2 text-gray-600 hover:text-blue-800 hover:text-[#09314C]"
+    return (
+        <div className={`shadow-2xl absolute ring-1 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2`}>
+            {links.map(link => {
+                if(link.tag === "Link")
+                return (
+                    <Link to={link.route} className={linkClass}>{link.text}</Link>
+                )
+                else if(link.tag === "a")
+                return (
+                    <a href={link.route} target="_blank" className={linkClass}>{link.text}</a>                                                                          
+                )
+            })}                        
+        </div>  
+    )
+  }
+
+  const side_menu_link = (link) => {
+    const linkClass = `font-serif border-l-4 pl-4 py-2 hover:text-gray-800 overflow-hidden whitespace-nowrap
+    ${page === link.page
+    ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" 
+    : "text-gray-500 border-white"
+    }`
+    if(link.tag === "Link")
+    return (
+        <Link className={linkClass} to={link.route}>{link.text}</Link>
+    )
+    else if(link.tag === "a")
+    return (
+        <a className={linkClass} href={link.route}>{link.text}</a>
+    )
+  }
+
+
     return (
         <>
             {/* Top navigation bar, Links hidden on SM & MD screens */}
@@ -20,7 +70,12 @@ const Layout = (props) => {
                 
                 <div className={`flex h-full justify-between items-center pl-1 pr-4 md:pl-5 md:pr-10`}>
                     <Link to={`/`}>
-                        <StaticImage backgroundColor="white" class={`bg-white`} height={65} src={"../images/Logo_Blue.png"} alt={`logo`} />
+                        <StaticImage 
+                        backgroundColor="white" 
+                        class={`bg-white h-[75%]`} 
+                        height={70}
+                        src={"../images/Logo_Blue.png"} 
+                        alt={`logo`} />
                     </Link>
                     
                     <div className={`lg:hidden flex flex-col space-y-2 h-10 w-10 justify-center items-center cursor-pointer border`}
@@ -43,54 +98,76 @@ const Layout = (props) => {
 
                     <div className={`hidden lg:flex lg:space-x-5 lg:font-sans lg:items-center`}>
 
-                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('About')}>About</div>
-                            {hoverMenu==='About' && 
-                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
-                                <Link to={`/about`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>About Us</Link>                                
-                                <Link to={`/beliefs`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Beliefs</Link>                                
-                                <Link to={`/church-covenant`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Church Covenant</Link>                                
-                                <a href={`https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Members</a>                                          
-                            </div>                     
-                            }       
-                        </div>  
+                        {navigation_button("About",[
+                            {
+                                tag: "Link",
+                                route: "/about",
+                                text: "About Us"      
+                            },
+                            {
+                                tag: "Link",
+                                route: "/beliefs",
+                                text: "Beliefs"      
+                            },              
+                            {
+                                tag: "Link",
+                                route: "/church-covenant",
+                                text: "Church Covenant"      
+                            },                                                  
+                            {
+                                tag: "a",
+                                route: "https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link",
+                                text: "Members"      
+                            },                                  
+                        ])}
 
-                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Media')}>Media</div>
-                            {hoverMenu==='Media' && 
-                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
-                                <Link to={`/sermons`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sermons</Link>
-                                <Link to={`/sunday-school`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Sunday School</Link>                                
-                                <a href={`https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/`} target="_blank" className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Livestream</a>                                                                          
-                            </div>                     
-                            }       
-                        </div>
+                        {navigation_button("Media",[
+                            {
+                                tag: "Link",
+                                route: "/sermons",
+                                text: "Sermons"      
+                            },
+                            {
+                                tag: "Link",
+                                route: "/sunday-school",
+                                text: "Sunday School"      
+                            },                      
+                            {
+                                tag: "a",
+                                route: "https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/",
+                                text: "Livestream"      
+                            },                                  
+                        ])}
 
+                        {navigation_button("Studies",[
+                            {
+                                tag: "Link",
+                                route: "/book-studies",
+                                text: "Book Studies"      
+                            },                            
+                        ])}                             
+                               
+                        {navigation_button("Outreach",[
+                            {
+                                tag: "Link",
+                                route: "/outreach",
+                                text: "Missions"      
+                            },                 
+                            {
+                                tag: "Link",
+                                route: "/outreach",
+                                text: "Ministries"      
+                            },                                                        
+                        ])}      
 
-                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Studies')}>Studies</div>
-                            {hoverMenu==='Studies' && 
-                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-60 border border-gray-100`}>
-                                <Link to={`/book-studies`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Book Studies</Link>                                
-                            </div>                     
-                            }       
-                        </div>                               
-                                       
-                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Outreach')}>Outreach</div>
-                            {hoverMenu==='Outreach' && 
-                            <div className={`absolute ring-2 ring-gray-200 -mt-[.04rem] z-10 bg-white pl-2 pr-24 pb-2 flex flex-col pt-2 w-48 border border-gray-100`}>
-                                <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Missions</Link>
-                                <Link to={`/outreach`} className={`whitespace-nowrap px-2 py-2 text-gray-600 hover:font-semibold hover:text-[#09314C]`}>Ministries</Link>
-                            </div>                     
-                            }       
-                        </div>                                                     
-
-                        <div onMouseLeave={() => setHoverMenu(null)} className={`relative`}>
-                            <div className={`select-none px-6 py-1 ring-2 ring-gray-200 border-gray-100 shadow font-semibold text-gray-600`} onMouseOver={() => setHoverMenu('Contact')}>
-                                <Link to={`/contact`}>Contact</Link>                                                        
-                            </div>                                                        
-                        </div>                                
+                        {navigation_button("Contact",[
+                            {
+                                tag: "Link",
+                                route: "/contact",
+                                text: "Contact"      
+                            },                            
+                        ])}                                                               
+                                                                                         
 
                     </div>
                 </div>
@@ -110,18 +187,79 @@ const Layout = (props) => {
                         <div className={`absolute pb-[50vh] w-full pl-4 pr-4 pt-8`}>                                
                             <div className={`flex flex-col space-y-2`}>                                
                                 
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'about' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/about`}>About</Link>
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'beliefs' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/beliefs`}>Beliefs</Link>
-                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'church-covenant' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/church-covenant`}>Church Covenant</Link> 
-                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link`} target="_blank">Members</a>
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/about",
+                                    page: "about",
+                                    text: "About Us"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/beliefs",
+                                    page: "beliefs",
+                                    text: "Beliefs"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/church-covenant",
+                                    page: "church-covenant",
+                                    text: "Church Covenant"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "a",
+                                    route: "https://drive.google.com/drive/folders/1My0xUd9s0d3Rn2bGjeoLn_YeONPIpzpD?usp=share_link",
+                                    page: "",
+                                    text: "Members"      
+                                })}
+                                
                                 <hr/>                                                                                               
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sermons' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sermons`}>Sermons</Link>                                
-                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'sunday-school' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/sunday-school`}>Sunday School</Link>                                   
-                                <a className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 text-gray-500 border-white`} href={`https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/`} target="_blank">Livestream</a>
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/sermons",
+                                    page: "sermons",
+                                    text: "Sermons"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/sunday-school",
+                                    page: "sunday-school",
+                                    text: "Sunday School"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "a",
+                                    route: "https://www.sermonaudio.com/player/webcast/gracecovenantbaptist/",
+                                    page: "",
+                                    text: "Livestream"      
+                                })}
+
                                 <hr/>
-                                <Link className={`overflow-hidden whitespace-nowrap font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'book-studies' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/book-studies`}>Book Studies</Link>                                                  
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'outreach' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/outreach`}>Outreach</Link>                                
-                                <Link className={`font-serif border-l-4 pl-4 py-2 hover:text-gray-800 ${page === 'contact' ? "text-gray-800 border-[#09314C] border-opacity-50 bg-gradient-to-l from-white to-[#09314C]/[4%]" : "text-gray-500 border-white"}`} to={`/contact`}>Contact</Link>                                
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/book-studies",
+                                    page: "book-studies",
+                                    text: "Book Studies"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/outreach",
+                                    page: "outreach",
+                                    text: "Outreach"      
+                                })}
+
+                                {side_menu_link({
+                                    tag: "Link",
+                                    route: "/contact",
+                                    page: "contact",
+                                    text: "Contact Us"      
+                                })}                                
 
                             </div>
                         </div>
@@ -143,12 +281,12 @@ const Layout = (props) => {
             lg:grid-cols-2`}>
 
                 <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
-                    <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider`}>Contact</div>
+                    <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider text-gray-100`}>Contact</div>
                     <div className={`pt-2 space-y-1`}>
                         <div>(205) 426-2234</div>
                         <div>pastor@gracecovenantbaptist.org</div>                    
                     </div>
-                    <div className={`pt-2`}>
+                    <div className={`pt-3`}>
                         <a className={`underline`} target="_blank" href="https://www.google.com/maps/dir//Grace+Covenant+Baptist+Church,+2565+Rocky+Ridge+Rd,+Vestavia+Hills,+AL+35243/@33.4295652,-86.8408153,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x888918455c0624b3:0x25d19d79c0c6e263!2m2!1d-86.7707752!2d33.4295849">
                             2565 Rocky Ridge Road
                             <br/>
@@ -161,7 +299,7 @@ const Layout = (props) => {
                 </div>               
 
                 <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
-                    <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider`}>Service Times</div>
+                    <div className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider text-gray-100`}>Service Times</div>
                     <div className={`pt-2 flex flex-col space-y-1`}>
                         <div>Sunday School: 9:30 am</div>
                         <div>Sunday Worship: 11 am</div>
