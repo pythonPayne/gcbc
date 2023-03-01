@@ -27,7 +27,7 @@ const Beliefs = ({ data }) => {
   const dispatch = useDispatch();
   const [chapterSelected, setChapterSelected] = useState(1);
   const [showChapterMenu, setShowChapterMenu] = useState(false);
-  const [edition, setEdition] = useState("paragraphTextModern");
+  const [edition, setEdition] = useState("paragraphTextOriginal");
   const showMenu = useSelector((state) => state.layout.showMenu);
 
   useEffect(() => {
@@ -197,22 +197,22 @@ const Beliefs = ({ data }) => {
               </button>
             </div>
 
-            <div className={`flex`}>
+            <div className={`flex space-x-3`}>
               <button
-                className={`px-3 ${
+                className={`py-2 px-2 tracking-wide text-xs ${
                   edition === "paragraphTextOriginal"
-                    ? "bg-gray-600 text-white bg-opacity-50"
-                    : "bg-gray-100 text-gray-600"
+                    ? "bg-[#09314C] bg-opacity-70 text-white"
+                    : "bg-gray-100 text-gray-700 border-2 border-gray-300"
                 }`}
                 onClick={() => setEdition("paragraphTextOriginal")}
               >
                 Original
               </button>
               <button
-                className={`px-3 ${
+                className={`py-2 px-2 tracking-wide text-xs ${
                   edition === "paragraphTextModern"
-                    ? "bg-gray-600 text-white bg-opacity-50"
-                    : "bg-gray-100 text-gray-600"
+                    ? "bg-[#09314C] bg-opacity-70 text-white"
+                    : "bg-gray-100 text-gray-700 border-2 border-gray-300"
                 }`}
                 onClick={() => setEdition("paragraphTextModern")}
               >
@@ -221,7 +221,7 @@ const Beliefs = ({ data }) => {
             </div>
           </div>
 
-          <div className={``}>
+          <div className={`mt-6`}>
             <div className={`font-semibold text-4xl text-gray-800 py-2`}>
               Chapter {chapterNum}
             </div>
@@ -272,7 +272,7 @@ const Beliefs = ({ data }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth={1.5}
+                    strokeWidth={2.5}
                     stroke="currentColor"
                     className="w-6 h-6"
                   >
@@ -284,7 +284,7 @@ const Beliefs = ({ data }) => {
                   </svg>
                 </button>
 
-                <div className={`px-2 pt-8 text-gray-700 `}>
+                <div className={`px-2 pt-6 text-gray-700 `}>
                   <div className={`px-2 pb-36`}>
                     <div
                       className={`font-semibold font-serif text-2xl text-center pt-8 pb-4 leading-10 tracking-wide`}
@@ -294,22 +294,22 @@ const Beliefs = ({ data }) => {
                       Confession of Faith
                     </div>
 
-                    <div className={`flex max-w-[800px]`}>
+                    <div className={`flex space-x-5 py-3`}>
                       <button
-                        className={`w-[50%] py-2 ${
+                        className={`w-[50%] py-2 tracking-wide ${
                           edition === "paragraphTextOriginal"
-                            ? "bg-gray-600 text-white bg-opacity-50"
-                            : "bg-gray-100 text-gray-600"
+                            ? "bg-[#09314C] bg-opacity-70 text-white"
+                            : "bg-gray-100 text-gray-700 border-2 border-gray-300"
                         }`}
                         onClick={() => setEdition("paragraphTextOriginal")}
                       >
                         Original
                       </button>
                       <button
-                        className={`w-[50%] py-2 ${
+                        className={`w-[50%] py-2 tracking-wide ${
                           edition === "paragraphTextModern"
-                            ? "bg-gray-600 text-white bg-opacity-50"
-                            : "bg-gray-100 text-gray-600"
+                            ? "bg-[#09314C] bg-opacity-70 text-white"
+                            : "bg-gray-100 text-gray-700 border-2 border-gray-300"
                         }`}
                         onClick={() => setEdition("paragraphTextModern")}
                       >
@@ -320,7 +320,7 @@ const Beliefs = ({ data }) => {
                     {chapterNums.map((chapterNum, i) => (
                       <div
                         key={i}
-                        className={`grid grid-cols-12 ring-1 ring-gray-300 shadow-md mt-8`}
+                        className={`grid grid-cols-12 bg-gray-50 border shadow-md mt-8`}
                       >
                         <div
                           className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}
