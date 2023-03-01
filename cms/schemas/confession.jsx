@@ -19,10 +19,15 @@ export default {
       type: 'number' 
     },    
     {
-      title: 'Paragraph Reference Text',
-      name: 'paragraphText',
+      title: 'Paragraph Reference Text Modern',
+      name: 'paragraphTextModern',
       type: 'text' 
     },    
+    {
+      title: 'Paragraph Reference Text Original',
+      name: 'paragraphTextOriginal',
+      type: 'text' 
+    },        
     {
       title: 'Paragraph Ref',
       name: 'paragraphRef',
@@ -36,13 +41,13 @@ export default {
       chapter: 'chapter',
       paragraph: 'paragraph',
       referenceNum: 'referenceNum',
-      paragraphText: 'paragraphText'
+      paragraphTextOriginal: 'paragraphTextOriginal'
     },
     prepare(selection) {
-      const {chapter, paragraph, referenceNum, paragraphText} = selection
+      const {chapter, paragraph, referenceNum, paragraphTextOriginal} = selection
       return {
         title: `${chapter}.${paragraph}.${referenceNum}`,
-        subtitle: `${paragraphText}`,        
+        subtitle: `${paragraphTextOriginal}`,        
         media: <span style={{}}></span>
       }
     }
