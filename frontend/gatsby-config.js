@@ -10,10 +10,13 @@ module.exports = {
   siteMetadata: {
     title: `GCBC`,
     description: `Grace Covenant Baptist Church, Birmingham Alabama`,
-    image: `/GCBC_LOGO.png`,
+    keywords: `grace, covenant, baptist, church, Birmingham, Alabama`,
     siteUrl: `https://gcbcmain.gatsbyjs.io`,
   },
   plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: "gatsby-source-sanity",
       options: {
@@ -30,15 +33,9 @@ module.exports = {
         name: `GCBC`,
         short_name: `GCBC`,
         start_url: `/`,
-        background_color: `#FFF`,
-        theme_color: `#FFF`,
         display: `standalone`,
-        icon: `src/images/Emblem_Blue.png`,
+        icon: `static/favicon.png`,
       },
     },
-    `gatsby-plugin-offline`,
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
   ],
 };

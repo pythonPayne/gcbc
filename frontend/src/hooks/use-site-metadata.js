@@ -7,7 +7,7 @@ export const useSiteMetadata = () => {
         siteMetadata {
           title
           description
-          image
+          keywords
           siteUrl
         }
       }
