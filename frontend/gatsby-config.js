@@ -7,7 +7,12 @@ require("dotenv").config({
 });
 
 module.exports = {
-  siteMetadata: {},
+  siteMetadata: {
+    title: `GCBC`,
+    description: `Grace Covenant Baptist Church, Birmingham Alabama`,
+    image: `/GCBC_LOGO.png`,
+    siteUrl: `https://gcbcmain.gatsbyjs.io`,
+  },
   plugins: [
     {
       resolve: "gatsby-source-sanity",

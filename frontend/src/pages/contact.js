@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { graphql } from "gatsby";
 import { toggleShowMenu } from "../redux/actions/layout";
 import Layout from "../components/Layout";
+import { SEO } from "../components/seo";
 
 export const query = graphql`
   query MyQuery {
@@ -59,3 +60,5 @@ const Contact = ({ data }) => {
 };
 
 export default Contact;
+
+export const Head = () => <SEO title="contact" />;

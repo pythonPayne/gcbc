@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
 import { toggleShowMenu } from "../redux/actions/layout";
+import { SEO } from "../components/seo";
 
 export const query = graphql`
   query MyQuery {
@@ -399,3 +400,5 @@ const Beliefs = ({ data }) => {
 };
 
 export default Beliefs;
+
+export const Head = () => <SEO title="beliefs" />;
