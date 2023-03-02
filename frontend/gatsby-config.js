@@ -28,7 +28,7 @@ module.exports = {
         background_color: `#FFFFFF`,
         theme_color: `#09314C`,
         display: `standalone`,
-        icon: `src/images/Emblem_Blue.png`,
+        icon: `src/images/GCBC_ICON.png`,
       },
     },
     `gatsby-plugin-offline`,
