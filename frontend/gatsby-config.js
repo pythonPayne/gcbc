@@ -22,13 +22,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `GatsbyJS`,
-        short_name: `GatsbyJS`,
+        name: `GCBC`,
+        short_name: `GCBC`,
         start_url: `/`,
-        background_color: `#FFFFFF`,
-        theme_color: `#09314C`,
+        background_color: `#FFF`,
+        theme_color: `#FFF`,
         display: `standalone`,
-        icon: `src/images/GCBC_ICON.png`,
+        icon: `src/images/Emblem_Blue.png`,
       },
     },
     `gatsby-plugin-offline`,
