@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Layout from "../components/Layout";
-import { graphql } from "gatsby";
-import { toggleShowMenu } from "../redux/actions/layout";
-import { SEO } from "../components/seo";
+import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import Layout from "../components/Layout"
+import { graphql } from "gatsby"
+import { toggleShowMenu } from "../redux/actions/layout"
+import { SEO } from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -21,27 +21,27 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const Beliefs = ({ data }) => {
-  const confession = data.allSanityConfession.edges;
-  const dispatch = useDispatch();
-  const [chapterSelected, setChapterSelected] = useState(1);
-  const [showChapterMenu, setShowChapterMenu] = useState(false);
-  const [edition, setEdition] = useState("paragraphTextOriginal");
-  const showMenu = useSelector((state) => state.layout.showMenu);
+  const confession = data.allSanityConfession.edges
+  const dispatch = useDispatch()
+  const [chapterSelected, setChapterSelected] = useState(1)
+  const [showChapterMenu, setShowChapterMenu] = useState(false)
+  const [edition, setEdition] = useState("paragraphTextOriginal")
+  const showMenu = useSelector((state) => state.layout.showMenu)
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
-    setShowChapterMenu(true);
-  }, []);
+    dispatch(toggleShowMenu(false))
+    setShowChapterMenu(true)
+  }, [])
 
   const numberOfChapters = Math.max(
     ...confession.map((edge) => edge.node.chapter)
-  );
+  )
   const chapterNums = Array(numberOfChapters)
     .fill(0)
-    .map((e, i) => i + 1);
+    .map((e, i) => i + 1)
   const chapterTitles = [
     "The Holy Scriptures",
     "God and the Holy Trinity",
@@ -75,7 +75,7 @@ const Beliefs = ({ data }) => {
     "The Lord's Supper",
     "The State of Humanity after Death and the Resurrection of the Dead",
     "The Last Judgment",
-  ];
+  ]
 
   const confession_ref_card = (paragraph) => {
     return (
@@ -96,12 +96,12 @@ const Beliefs = ({ data }) => {
                   ))}
                 </div>
               </div>
-            );
+            )
           }
         })}
       </div>
-    );
-  };
+    )
+  }
 
   const confession_text_card = (paragraph) => {
     return (
@@ -116,11 +116,11 @@ const Beliefs = ({ data }) => {
           </span>
         ))}
       </p>
-    );
-  };
+    )
+  }
 
   const confession_paragraph_card = (paragraph) => {
-    const id = paragraph[0].node;
+    const id = paragraph[0].node
     return (
       <div className={`border-b border-gray-300 py-8 leading-8`}>
         <div className={`text-xl font-bold py-2`}>
@@ -129,17 +129,17 @@ const Beliefs = ({ data }) => {
         {confession_text_card(paragraph)}
         {confession_ref_card(paragraph)}
       </div>
-    );
-  };
+    )
+  }
 
   const confession_chapter_card = (chapter) => {
-    const chapterNum = chapter[0].node.chapter;
+    const chapterNum = chapter[0].node.chapter
     const numberOfParagraphs = Math.max(
       ...chapter.map((edge) => edge.node.paragraph)
-    );
+    )
     const paragraphNums = Array(numberOfParagraphs)
       .fill(0)
-      .map((e, i) => i + 1);
+      .map((e, i) => i + 1)
 
     return (
       <div>
@@ -153,8 +153,8 @@ const Beliefs = ({ data }) => {
                     chapterSelected !== 1
                       ? -1 + chapterSelected
                       : numberOfChapters
-                  );
-                  window.scrollTo(0, 0);
+                  )
+                  window.scrollTo(0, 0)
                 }}
               >
                 {"<"}
@@ -163,8 +163,8 @@ const Beliefs = ({ data }) => {
               <button
                 className={`text-gray-500 hover:text-gray-800`}
                 onClick={() => {
-                  setShowChapterMenu(!showChapterMenu);
-                  window.scrollTo(0, 0);
+                  setShowChapterMenu(!showChapterMenu)
+                  window.scrollTo(0, 0)
                 }}
               >
                 <svg
@@ -190,8 +190,8 @@ const Beliefs = ({ data }) => {
                     chapterSelected !== numberOfChapters
                       ? 1 + chapterSelected
                       : 1
-                  );
-                  window.scrollTo(0, 0);
+                  )
+                  window.scrollTo(0, 0)
                 }}
               >
                 {">"}
@@ -242,8 +242,8 @@ const Beliefs = ({ data }) => {
           ))}
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <Layout>
@@ -285,13 +285,17 @@ const Beliefs = ({ data }) => {
                   </svg>
                 </button>
 
-                <div className={`px-2 pt-6 text-gray-700 `}>
+                <div className={`px-2 pt-6 text-gray-700`}>
                   <div className={`px-2 pb-36`}>
                     <div
-                      className={`font-semibold font-serif text-2xl text-center pt-8 pb-4 leading-10 tracking-wide`}
+                      className={`font-semibold font-serif text-2xl lg:text-3xl text-center pt-8 tracking-wide`}
                     >
                       The 1689 Baptist
-                      <br />
+                    </div>
+                    <div className="py-1"></div>
+                    <div
+                      className={`font-semibold font-serif text-2xl lg:text-3xl text-center pb-4 tracking-wide`}
+                    >
                       Confession of Faith
                     </div>
 
@@ -319,24 +323,26 @@ const Beliefs = ({ data }) => {
                     </div>
 
                     {chapterNums.map((chapterNum, i) => (
-                      <div
-                        key={i}
-                        className={`grid grid-cols-12 bg-gray-50 border shadow-md mt-8`}
-                      >
+                      <div className={`flex justify-center`}>
                         <div
-                          className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}
+                          key={i}
+                          className={`grid grid-cols-12 w-full max-w-[600px] bg-gray-50 ring-1 ring-[#09314C] ring-opacity-20 shadow-md mt-8`}
                         >
-                          {chapterNum}
-                        </div>
-                        <div
-                          className={`col-span-10 cursor-pointer py-4 pr-2`}
-                          onClick={() => {
-                            setChapterSelected(chapterNum);
-                            setShowChapterMenu(false);
-                            window.scrollTo(0, 0);
-                          }}
-                        >
-                          {chapterTitles[parseInt(chapterNum - 1)]}
+                          <div
+                            className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}
+                          >
+                            {chapterNum}
+                          </div>
+                          <div
+                            className={`col-span-10 cursor-pointer py-4 pr-2`}
+                            onClick={() => {
+                              setChapterSelected(chapterNum)
+                              setShowChapterMenu(false)
+                              window.scrollTo(0, 0)
+                            }}
+                          >
+                            {chapterTitles[parseInt(chapterNum - 1)]}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -366,8 +372,8 @@ const Beliefs = ({ data }) => {
                     <button
                       className={`border text-xl px-3 py-1 cursor-pointer`}
                       onClick={() => {
-                        setChapterSelected(-1 + chapterSelected);
-                        window.scrollTo(0, 0);
+                        setChapterSelected(-1 + chapterSelected)
+                        window.scrollTo(0, 0)
                       }}
                     >
                       {`< Ch. ${chapterSelected - 1}`}
@@ -380,8 +386,8 @@ const Beliefs = ({ data }) => {
                     <button
                       className={`border text-xl px-3 py-1 cursor-pointer`}
                       onClick={() => {
-                        setChapterSelected(1 + chapterSelected);
-                        window.scrollTo(0, 0);
+                        setChapterSelected(1 + chapterSelected)
+                        window.scrollTo(0, 0)
                       }}
                     >
                       {`Ch. ${chapterSelected + 1} >`}
@@ -396,9 +402,9 @@ const Beliefs = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Beliefs;
+export default Beliefs
 
-export const Head = () => <SEO title="beliefs" />;
+export const Head = () => <SEO title="beliefs" />

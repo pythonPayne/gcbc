@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleShowMenu } from "../redux/actions/layout";
-import Layout from "../components/Layout";
-import { SEO } from "../components/seo";
+import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleShowMenu } from "../redux/actions/layout"
+import Layout from "../components/Layout"
+import { SEO } from "../components/seo"
 
 const Covenant = () => {
-  const dispatch = useDispatch();
-  const showMenu = useSelector((state) => state.layout.showMenu);
+  const dispatch = useDispatch()
+  const showMenu = useSelector((state) => state.layout.showMenu)
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
-    window.scrollTo(0, 0);
-  }, []);
+    dispatch(toggleShowMenu(false))
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <Layout>
@@ -21,21 +21,27 @@ const Covenant = () => {
           showMenu && "pointer-events-none"
         } pt-20 pb-48 md:pb-96 flex justify-center bg-gray-100`}
       >
-        <div className={`max-w-[1200px]`}>
+        <div className={`max-w-[1000px]`}>
           <div
             className={`px-12 md:px-12 pt-12 pb-36 min-h-screen flex flex-col bg-gray-100 transition-all ${
               showMenu ? "blur-sm duration-500" : "blur-none duration-200"
             }`}
           >
             <div
-              className={`text-3xl lg:text-4xl font-semibold text-[#09314C]`}
+              className={`text-center font-semibold font-serif text-2xl lg:text-3xl text-[#09314C]`}
             >
-              Church Covenant
+              Church
+            </div>
+            <div className="p-1"></div>
+            <div
+              className={`text-center font-semibold font-serif text-2xl lg:text-3xl text-[#09314C]`}
+            >
+              Covenant
             </div>
 
             <div className={`pt-10`}>
               <p
-                className={`pb-6 leading-7 text-lg text-justify text-gray-700`}
+                className={`pb-6 leading-8 text-lg text-justify text-gray-700`}
               >
                 Having been led, as we believe, by the Spirit of God, to receive
                 the Lord Jesus Christ as Savior, and on the profession of our
@@ -46,7 +52,7 @@ const Covenant = () => {
               </p>
 
               <p
-                className={`pb-6 leading-7 text-lg text-justify text-gray-700`}
+                className={`pb-6 leading-8 text-lg text-justify text-gray-700`}
               >
                 We pledge, therefore, by the aid of the Holy Spirit, not to
                 forsake the assembling of ourselves together; to walk together
@@ -60,7 +66,7 @@ const Covenant = () => {
               </p>
 
               <p
-                className={`pb-6 leading-7 text-lg text-justify text-gray-700`}
+                className={`pb-6 leading-8 text-lg text-justify text-gray-700`}
               >
                 We pledge also to maintain family and secret devotions; to
                 religiously educate our children; to seek the salvation of our
@@ -73,7 +79,7 @@ const Covenant = () => {
               </p>
 
               <p
-                className={`pb-6 leading-7 text-lg text-justify text-gray-700`}
+                className={`pb-6 leading-8 text-lg text-justify text-gray-700`}
               >
                 We pledge further to watch over one another in brotherly love;
                 to remember each other in prayer; to aid each other in sickness
@@ -84,7 +90,7 @@ const Covenant = () => {
               </p>
 
               <p
-                className={`pb-6 leading-7 text-lg text-justify text-gray-700`}
+                className={`pb-6 leading-8 text-lg text-justify text-gray-700`}
               >
                 We pledge moreover to unite as soon as possible with some other
                 church where we can carry out the spirit of this covenant and
@@ -95,9 +101,9 @@ const Covenant = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Covenant;
+export default Covenant
 
-export const Head = () => <SEO title="church-covenant" />;
+export const Head = () => <SEO title="church-covenant" />

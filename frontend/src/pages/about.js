@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { graphql } from "gatsby";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleShowMenu } from "../redux/actions/layout";
-import { GatsbyImage } from "gatsby-plugin-image";
-import Layout from "../components/Layout";
-import { SEO } from "../components/seo";
+import React, { useState, useEffect } from "react"
+import { graphql } from "gatsby"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleShowMenu } from "../redux/actions/layout"
+import { GatsbyImage } from "gatsby-plugin-image"
+import Layout from "../components/Layout"
+import { SEO } from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -37,29 +37,29 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const About = ({ data }) => {
-  const gcbcs = data.allSanityAboutGcbc.edges;
-  const elders = data.allSanityAboutElders.edges;
+  const gcbcs = data.allSanityAboutGcbc.edges
+  const elders = data.allSanityAboutElders.edges
 
-  const dispatch = useDispatch();
-  const showMenu = useSelector((state) => state.layout.showMenu);
+  const dispatch = useDispatch()
+  const showMenu = useSelector((state) => state.layout.showMenu)
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
-    window.scrollTo(0, 0);
-  }, []);
+    dispatch(toggleShowMenu(false))
+    window.scrollTo(0, 0)
+  }, [])
 
   const gcbcCard = (title, order1, order2) => {
-    const edge = gcbcs.find((edge) => edge.node.title === title);
+    const edge = gcbcs.find((edge) => edge.node.title === title)
     const image = (
       <GatsbyImage
         className={`shadow-xl h-full rounded md:rounded-lg ${order1} md:order-none`}
         image={edge.node.pic.asset["gatsbyImageData"]}
         alt={title}
       />
-    );
+    )
     const words = (
       <div className={`flex flex-col ${order2} md:order-none pb-28 md:pb-0`}>
         <div
@@ -69,7 +69,7 @@ const About = ({ data }) => {
         </div>
         <div className={`leading-[1.8rem]`}>{edge.node.displayText}</div>
       </div>
-    );
+    )
 
     return (
       <>
@@ -85,8 +85,8 @@ const About = ({ data }) => {
           </>
         )}
       </>
-    );
-  };
+    )
+  }
 
   const elderCard = (elder) => {
     return (
@@ -105,8 +105,8 @@ const About = ({ data }) => {
           <div className={`leading-[1.8rem]`}>{elder.node.displayText}</div>
         </div>
       </>
-    );
-  };
+    )
+  }
 
   return (
     <Layout>
@@ -126,16 +126,18 @@ const About = ({ data }) => {
             <div className={`flex flex-col items-center`}>
               <div
                 className={`py-2 flex justify-center text-[#09314C] 
-            text-4xl md:text-6xl font-sans font-bold tracking-widest`}
+            text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-widest`}
               >
                 G &nbsp;C &nbsp;B &nbsp;C
               </div>
-              <div className={`font-serif text-gray-500 text-lg md:text-xl`}>
+              <div
+                className={`font-serif text-gray-600 text-lg md:text-xl md:pt-4`}
+              >
                 what's in a name?
               </div>
             </div>
 
-            <div className={`border-b-2 my-6 md:my-8`}></div>
+            <div className={`border-b-2 border-gray-300 my-6 md:my-8`}></div>
 
             <div
               className={`flex flex-col pt-4 md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-24 md:pt-12`}
@@ -176,9 +178,9 @@ const About = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default About;
+export default About
 
-export const Head = () => <SEO title="about" />;
+export const Head = () => <SEO title="about" />

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Layout from "../components/Layout";
-import { graphql } from "gatsby";
+import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import Layout from "../components/Layout"
+import { graphql } from "gatsby"
 import {
   setSermonBookFilter,
   setSermonSpeakerFilter,
   setSermonSearchFilter,
   toggleShowSermonsFilterMenu,
-} from "../redux/actions/sermons";
-import { toggleShowMenu } from "../redux/actions/layout";
-import { SEO } from "../components/seo";
+} from "../redux/actions/sermons"
+import { toggleShowMenu } from "../redux/actions/layout"
+import { SEO } from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -27,41 +27,41 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const Sermons = ({ data }) => {
-  let sermons = data.allSanitySermons.edges;
+  let sermons = data.allSanitySermons.edges
   sermons = sermons.map((edge) => {
     return {
       ...edge.node,
       bookPassage: edge.node.book + " " + edge.node.passage,
-    };
-  });
-  const [book, setBook] = useState(null);
-  const [sortVar, setSortVar] = useState("date");
-  const [sortDir, setSortDir] = useState(1);
-  const [sorting, setSorting] = useState(false);
-  const [filterBookOpen, setFilterBookOpen] = useState(false);
-  const [filterSpeakerOpen, setFilterSpeakerOpen] = useState(false);
+    }
+  })
+  const [book, setBook] = useState(null)
+  const [sortVar, setSortVar] = useState("date")
+  const [sortDir, setSortDir] = useState(1)
+  const [sorting, setSorting] = useState(false)
+  const [filterBookOpen, setFilterBookOpen] = useState(false)
+  const [filterSpeakerOpen, setFilterSpeakerOpen] = useState(false)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const sermonBookFilter = useSelector(
     (state) => state.sermons.sermonBookFilter
-  );
+  )
   const sermonSpeakerFilter = useSelector(
     (state) => state.sermons.sermonSpeakerFilter
-  );
-  const showMenu = useSelector((state) => state.layout.showMenu);
+  )
+  const showMenu = useSelector((state) => state.layout.showMenu)
   const showSermonsFilterMenu = useSelector(
     (state) => state.sermons.showSermonsFilterMenu
-  );
+  )
   const sermonSearchFilter = useSelector(
     (state) => state.sermons.sermonSearchFilter
-  );
+  )
 
   const testLink =
-    "https://www.gracecovenantbaptist.org/wp-content/uploads/2022/12/Luke-12.1-12.mp3";
+    "https://www.gracecovenantbaptist.org/wp-content/uploads/2022/12/Luke-12.1-12.mp3"
   const booksOT = [
     "Genesis",
     "Ruth",
@@ -71,7 +71,7 @@ const Sermons = ({ data }) => {
     "Isaiah",
     "Jonah",
     "Habakkuk",
-  ];
+  ]
   const booksNT = [
     "Matthew",
     "Mark",
@@ -96,7 +96,7 @@ const Sermons = ({ data }) => {
     "3 John",
     "Jude",
     "Revelation",
-  ];
+  ]
 
   const speakers = [
     "Todd Wilson",
@@ -105,17 +105,17 @@ const Sermons = ({ data }) => {
     "Steve Cowan",
     "Dustin Curtis",
     "Ed Wallen",
-  ];
+  ]
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
-  }, []);
+    dispatch(toggleShowMenu(false))
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
-      setSorting(false);
-    }, 1500);
-  }, [sortDir]);
+      setSorting(false)
+    }, 1500)
+  }, [sortDir])
 
   const sermon_card = (sermon) => {
     return (
@@ -170,16 +170,16 @@ const Sermons = ({ data }) => {
           </a>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   // FILTER SERMONS
   let filteredSermons = sermonBookFilter
     ? sermons.filter((sermon) => sermon.book === sermonBookFilter)
-    : sermons;
+    : sermons
   filteredSermons = sermonSpeakerFilter
     ? filteredSermons.filter((sermon) => sermon.speaker === sermonSpeakerFilter)
-    : filteredSermons;
+    : filteredSermons
 
   filteredSermons = sermonSearchFilter
     ? filteredSermons.filter(
@@ -196,12 +196,12 @@ const Sermons = ({ data }) => {
             .toLowerCase()
             .includes(sermonSearchFilter.toLowerCase())
       )
-    : filteredSermons;
+    : filteredSermons
 
   sortDir === 1 &&
-    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? -1 : 1));
+    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? -1 : 1))
   sortDir === -1 &&
-    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? 1 : -1));
+    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? 1 : -1))
 
   return (
     <Layout>
@@ -216,33 +216,55 @@ const Sermons = ({ data }) => {
         >
           {showSermonsFilterMenu && (
             <div className={`flex flex-col`}>
-              {/* close button */}
-              <button
-                className={`flex justify-end px-6 py-6`}
-                onClick={() => {
-                  dispatch(toggleShowSermonsFilterMenu(false));
-                  setFilterBookOpen(false);
-                  setFilterSpeakerOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                <div className={``}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
-              </button>
+              <div className={`flex justify-between mx-8 py-8`}>
+                {/* clear filter buttons */}
+                <button
+                  className={`text-xs bg-red-600 bg-opacity-80 ring-1 ring-red-600 py-3 px-4 text-white shadow-lg
+                  ${
+                    sermonBookFilter === null &&
+                    sermonSpeakerFilter === null &&
+                    "invisible"
+                  }`}
+                  onClick={() => {
+                    dispatch(toggleShowSermonsFilterMenu(false))
+                    dispatch(setSermonBookFilter(null))
+                    dispatch(setSermonSpeakerFilter(null))
+                    setFilterBookOpen(false)
+                    setFilterSpeakerOpen(false)
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  Clear Filters
+                </button>
+
+                {/* close button */}
+                <button
+                  className={`flex justify-end shadow-md px-3 items-center ring-1 ring-gray-400`}
+                  onClick={() => {
+                    dispatch(toggleShowSermonsFilterMenu(false))
+                    setFilterBookOpen(false)
+                    setFilterSpeakerOpen(false)
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  <div className={``}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              </div>
 
               {/* by book */}
               <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
@@ -310,7 +332,7 @@ const Sermons = ({ data }) => {
                             setSermonBookFilter(
                               book !== sermonBookFilter ? book : null
                             )
-                          );
+                          )
                         }}
                       >
                         {book}
@@ -335,7 +357,7 @@ const Sermons = ({ data }) => {
                             setSermonBookFilter(
                               book !== sermonBookFilter ? book : null
                             )
-                          );
+                          )
                         }}
                       >
                         {book}
@@ -408,7 +430,7 @@ const Sermons = ({ data }) => {
                             setSermonSpeakerFilter(
                               speaker !== sermonSpeakerFilter ? speaker : null
                             )
-                          );
+                          )
                         }}
                       >
                         {speaker}
@@ -492,8 +514,8 @@ const Sermons = ({ data }) => {
                     <button
                       className={`flex space-x-1 text-xs items-center shadow-md border border-gray-300 px-2 py-1`}
                       onClick={() => {
-                        setSorting(true);
-                        setSortDir(-1 * sortDir);
+                        setSorting(true)
+                        setSortDir(-1 * sortDir)
                       }}
                     >
                       <svg
@@ -531,9 +553,9 @@ const Sermons = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Sermons;
+export default Sermons
 
-export const Head = () => <SEO title="sermons" />;
+export const Head = () => <SEO title="sermons" />

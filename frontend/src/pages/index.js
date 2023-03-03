@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Layout from "../components/Layout";
-import { graphql, Link } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
-import { toggleShowMenu } from "../redux/actions/layout";
-import { SEO } from "../components/seo";
+import React, { useState, useEffect, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import Layout from "../components/Layout"
+import { graphql, Link } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { toggleShowMenu } from "../redux/actions/layout"
+import { SEO } from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -23,23 +23,23 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const Home = ({ data }) => {
-  const dispatch = useDispatch();
-  const [carouselImages, setCarouselImages] = useState(null);
-  const [currentPosition, setCurrentPosition] = useState(1);
-  const showMenu = useSelector((state) => state.layout.showMenu);
-  const carouselRefs = useRef([]);
-  const [x1, setx1] = useState(0);
-  const [x2, setx2] = useState(1);
-  const [x3, setx3] = useState(1);
-  const [goal, setGoal] = useState(null);
-  const [closest, setClosest] = useState(null);
-  carouselRefs.current = [];
+  const dispatch = useDispatch()
+  const [carouselImages, setCarouselImages] = useState(null)
+  const [currentPosition, setCurrentPosition] = useState(1)
+  const showMenu = useSelector((state) => state.layout.showMenu)
+  const carouselRefs = useRef([])
+  const [x1, setx1] = useState(0)
+  const [x2, setx2] = useState(1)
+  const [x3, setx3] = useState(1)
+  const [goal, setGoal] = useState(null)
+  const [closest, setClosest] = useState(null)
+  carouselRefs.current = []
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
+    dispatch(toggleShowMenu(false))
     setCarouselImages(
       data.allSanityCarouselPictures.edges
         .sort((a, b) => (a.node.sortOrder < b.node.sortOrder ? -1 : 1))
@@ -49,37 +49,42 @@ const Home = ({ data }) => {
             startPosition: i + 1,
             position: i + 1,
             gatsbyImageData: edge.node.pic.asset.gatsbyImageData,
-          };
+          }
         })
-    );
-  }, []);
+    )
+  }, [])
 
   useEffect(() => {
+    const temp = Math.min(Math.abs(x1), Math.abs(x2), Math.abs(x3))
+    setGoal(temp)
     setCurrentPosition(
-      carouselImages &&
-        carouselImages.find((img) => img.position === 1).startPosition
-    );
-  }, [carouselImages]);
-
-  useEffect(() => {
-    const temp = Math.min(Math.abs(x1), Math.abs(x2), Math.abs(x3));
-    setGoal(temp);
+      temp === Math.abs(x1) ? 1 : temp === Math.abs(x2) ? 2 : 3
+    )
     setClosest(
       [x1, x2, x3].reduce((prev, curr) =>
         Math.abs(curr - temp) < Math.abs(prev - temp) ? curr : prev
       )
-    );
-  }, [x1, x2, x3]);
+    )
+  }, [x1, x2, x3])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClickCarouselButton(currentPosition === 3 ? 1 : currentPosition + 1)
+    }, 3000)
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [currentPosition])
 
   const addToRefs = (el) => {
     if (el && !carouselRefs.current.includes(el)) {
-      carouselRefs.current.push(el);
+      carouselRefs.current.push(el)
     }
-  };
+  }
 
   const carouselImage = (position) => {
     const image =
-      carouselImages && carouselImages.find((img) => img.position === position);
+      carouselImages && carouselImages.find((img) => img.position === position)
     if (image) {
       return (
         <div
@@ -146,16 +151,16 @@ const Home = ({ data }) => {
             </div>
           )}
         </div>
-      );
-    } else return;
-  };
+      )
+    } else return
+  }
 
   const onClickCarouselButton = (position) => {
-    setCurrentPosition(position);
+    setCurrentPosition(position)
     document
       .getElementById(`carouselImage-${position}`)
-      .scrollIntoView({ behavior: "smooth", block: "end" });
-  };
+      .scrollIntoView({ behavior: "smooth", block: "end" })
+  }
 
   const carouselButton = (x, position) => (
     <button
@@ -163,22 +168,22 @@ const Home = ({ data }) => {
       className={`h-2 w-8 pointer-events-none md:pointer-events-auto duration-500 border border-[#09314C] border-opacity-50
         ${closest === x ? "bg-[#09314C]" : ""}`}
     ></button>
-  );
+  )
 
   const updateCarouselRefs = () => {
     setx1(
       carouselRefs.current[0] &&
         carouselRefs.current[0].getBoundingClientRect().x
-    );
+    )
     setx2(
       carouselRefs.current[1] &&
         carouselRefs.current[1].getBoundingClientRect().x
-    );
+    )
     setx3(
       carouselRefs.current[2] &&
         carouselRefs.current[2].getBoundingClientRect().x
-    );
-  };
+    )
+  }
 
   return (
     <Layout>
@@ -196,7 +201,7 @@ const Home = ({ data }) => {
             {/* carousel images */}
             <div
               onScroll={updateCarouselRefs}
-              className={`flex w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] 
+              className={`flex shadow-lg ring-gray-800 w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] 
           relative overflow-x-scroll snap-x snap-mandatory no-scrollbar`}
             >
               {carouselImage(1)}
@@ -232,9 +237,9 @@ const Home = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
-export const Head = () => <SEO />;
+export const Head = () => <SEO />

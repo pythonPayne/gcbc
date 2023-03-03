@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Layout from "../components/Layout";
-import { graphql } from "gatsby";
+import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import Layout from "../components/Layout"
+import { graphql } from "gatsby"
 import {
   setSundayschoolBookFilter,
   setSundayschoolSpeakerFilter,
   setSundayschoolSearchFilter,
   setSundayschoolSeriesFilter,
   toggleShowSundayschoolFilterMenu,
-} from "../redux/actions/sundayschool";
-import { toggleShowMenu } from "../redux/actions/layout";
-import { SEO } from "../components/seo";
+} from "../redux/actions/sundayschool"
+import { toggleShowMenu } from "../redux/actions/layout"
+import { SEO } from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -30,44 +30,44 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const SundaySchool = ({ data }) => {
-  let sermons = data.allSanitySundayschool.edges;
+  let sermons = data.allSanitySundayschool.edges
   sermons = sermons.map((edge) => {
     return {
       ...edge.node,
       bookPassage: edge.node.book + " " + edge.node.passage,
-    };
-  });
-  const [book, setBook] = useState(null);
-  const [sortVar, setSortVar] = useState("date");
-  const [sortDir, setSortDir] = useState(1);
-  const [sorting, setSorting] = useState(false);
-  const [filterBookOpen, setFilterBookOpen] = useState(false);
-  const [filterSpeakerOpen, setFilterSpeakerOpen] = useState(false);
+    }
+  })
+  const [book, setBook] = useState(null)
+  const [sortVar, setSortVar] = useState("date")
+  const [sortDir, setSortDir] = useState(1)
+  const [sorting, setSorting] = useState(false)
+  const [filterBookOpen, setFilterBookOpen] = useState(false)
+  const [filterSpeakerOpen, setFilterSpeakerOpen] = useState(false)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const sundayschoolBookFilter = useSelector(
     (state) => state.sundayschool.sundayschoolBookFilter
-  );
+  )
   const sundayschoolSpeakerFilter = useSelector(
     (state) => state.sundayschool.sundayschoolSpeakerFilter
-  );
-  const showMenu = useSelector((state) => state.layout.showMenu);
+  )
+  const showMenu = useSelector((state) => state.layout.showMenu)
   const showSundayschoolFilterMenu = useSelector(
     (state) => state.sundayschool.showSundayschoolFilterMenu
-  );
+  )
   const sundayschoolSearchFilter = useSelector(
     (state) => state.sundayschool.sundayschoolSearchFilter
-  );
+  )
   const sundayschoolSeriesFilter = useSelector(
     (state) => state.sundayschool.sundayschoolSeriesFilter
-  );
+  )
 
   const testLink =
-    "https://www.gracecovenantbaptist.org/wp-content/uploads/2022/12/Luke-12.1-12.mp3";
+    "https://www.gracecovenantbaptist.org/wp-content/uploads/2022/12/Luke-12.1-12.mp3"
   const booksOT = [
     "Genesis",
     "Exodus",
@@ -108,7 +108,7 @@ const SundaySchool = ({ data }) => {
     "Haggai",
     "Zechariah",
     "Malachi",
-  ];
+  ]
   const booksNT = [
     "Matthew",
     "Mark",
@@ -137,7 +137,7 @@ const SundaySchool = ({ data }) => {
     "3 John",
     "Jude",
     "Revelation",
-  ];
+  ]
 
   const speakers = [
     "Darrell Cook",
@@ -154,17 +154,17 @@ const SundaySchool = ({ data }) => {
     "Steve Cowan",
     "Todd Wilson",
     "Wade Potts",
-  ];
+  ]
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
-  }, []);
+    dispatch(toggleShowMenu(false))
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
-      setSorting(false);
-    }, 1500);
-  }, [sortDir]);
+      setSorting(false)
+    }, 1500)
+  }, [sortDir])
 
   const sermon_card = (sermon) => {
     return (
@@ -262,18 +262,18 @@ const SundaySchool = ({ data }) => {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   // FILTER SERMONS
   let filteredSermons = sundayschoolBookFilter
     ? sermons.filter((sermon) => sermon.book === sundayschoolBookFilter)
-    : sermons;
+    : sermons
   filteredSermons = sundayschoolSpeakerFilter
     ? filteredSermons.filter(
         (sermon) => sermon.speaker === sundayschoolSpeakerFilter
       )
-    : filteredSermons;
+    : filteredSermons
 
   filteredSermons = sundayschoolSearchFilter
     ? filteredSermons.filter(
@@ -297,12 +297,12 @@ const SundaySchool = ({ data }) => {
             .toLowerCase()
             .includes(sundayschoolSearchFilter.toLowerCase())
       )
-    : filteredSermons;
+    : filteredSermons
 
   sortDir === 1 &&
-    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? -1 : 1));
+    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? -1 : 1))
   sortDir === -1 &&
-    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? 1 : -1));
+    filteredSermons.sort((a, b) => (a[sortVar] > b[sortVar] ? 1 : -1))
 
   return (
     <Layout>
@@ -317,33 +317,55 @@ const SundaySchool = ({ data }) => {
         >
           {showSundayschoolFilterMenu && (
             <div className={`flex flex-col`}>
-              {/* close button */}
-              <button
-                className={`flex justify-end px-6 py-6`}
-                onClick={() => {
-                  dispatch(toggleShowSundayschoolFilterMenu(false));
-                  setFilterBookOpen(false);
-                  setFilterSpeakerOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                <div className={``}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
-              </button>
+              <div className={`flex justify-between mx-8 py-8`}>
+                {/* clear filter buttons */}
+                <button
+                  className={`text-xs bg-red-600 bg-opacity-80 ring-1 ring-red-600 py-3 px-4 text-white shadow-lg
+                  ${
+                    sundayschoolBookFilter === null &&
+                    sundayschoolSpeakerFilter === null &&
+                    "invisible"
+                  }`}
+                  onClick={() => {
+                    dispatch(toggleShowSundayschoolFilterMenu(false))
+                    dispatch(setSundayschoolBookFilter(null))
+                    dispatch(setSundayschoolSpeakerFilter(null))
+                    setFilterBookOpen(false)
+                    setFilterSpeakerOpen(false)
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  Clear Filters
+                </button>
+
+                {/* close button */}
+                <button
+                  className={`flex justify-end shadow-md px-3 items-center ring-1 ring-gray-400`}
+                  onClick={() => {
+                    dispatch(toggleShowSundayschoolFilterMenu(false))
+                    setFilterBookOpen(false)
+                    setFilterSpeakerOpen(false)
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  <div className={``}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              </div>
 
               {/* by book */}
               <div className={`flex flex-col mx-8 border shadow-md mb-4`}>
@@ -411,7 +433,7 @@ const SundaySchool = ({ data }) => {
                             setSundayschoolBookFilter(
                               book !== sundayschoolBookFilter ? book : null
                             )
-                          );
+                          )
                         }}
                       >
                         {book}
@@ -436,7 +458,7 @@ const SundaySchool = ({ data }) => {
                             setSundayschoolBookFilter(
                               book !== sundayschoolBookFilter ? book : null
                             )
-                          );
+                          )
                         }}
                       >
                         {book}
@@ -511,7 +533,7 @@ const SundaySchool = ({ data }) => {
                                 ? speaker
                                 : null
                             )
-                          );
+                          )
                         }}
                       >
                         {speaker}
@@ -595,8 +617,8 @@ const SundaySchool = ({ data }) => {
                     <button
                       className={`flex space-x-1 text-xs items-center shadow-md border border-gray-300 px-2 py-1`}
                       onClick={() => {
-                        setSorting(true);
-                        setSortDir(-1 * sortDir);
+                        setSorting(true)
+                        setSortDir(-1 * sortDir)
                       }}
                     >
                       <svg
@@ -634,9 +656,9 @@ const SundaySchool = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default SundaySchool;
+export default SundaySchool
 
-export const Head = () => <SEO title="sunday-school" />;
+export const Head = () => <SEO title="sunday-school" />
