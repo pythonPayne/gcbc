@@ -71,7 +71,7 @@ const Layout = (props) => {
       )
     else if (link.tag === "a")
       return (
-        <a className={linkClass} href={link.route}>
+        <a className={linkClass} href={link.route} target={"_blank"}>
           {link.text}
         </a>
       )

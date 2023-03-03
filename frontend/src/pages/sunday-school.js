@@ -542,26 +542,6 @@ const SundaySchool = ({ data }) => {
                   </div>
                 </div>
               </div>
-
-              {/* clear filter */}
-              {/* <div className={`flex flex-col mx-8 border shadow-md mb-4 mt-16`}>
-
-              <button className={`flex justify-between px-8 py-4 bg-red-400 text-gray-50 ring-1 ring-gray-400`}
-              onClick={() => {
-                setSundayschoolSearchFilter('');
-                dispatch(setSundayschoolBookFilter(null));
-                dispatch(setSundayschoolSpeakerFilter(null));
-                dispatch(toggleShowSundayschoolFilterMenu(false));
-              }}>
-                <div className={`flex text-xl font-serif`}>Clear All Filters</div>
-                <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-              </button>
-                  
-            </div>     */}
             </div>
           )}
 
