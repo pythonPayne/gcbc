@@ -27,16 +27,19 @@ export const query = graphql`
 
 const Home = ({ data }) => {
   const dispatch = useDispatch()
+  const showMenu = useSelector((state) => state.layout.showMenu)
   const [carouselImages, setCarouselImages] = useState(null)
   const [currentPosition, setCurrentPosition] = useState(1)
-  const showMenu = useSelector((state) => state.layout.showMenu)
   const carouselRefs = useRef([])
   const [x1, setx1] = useState(0)
   const [x2, setx2] = useState(1)
   const [x3, setx3] = useState(1)
-  const [goal, setGoal] = useState(null)
-  const [closest, setClosest] = useState(null)
+
   carouselRefs.current = []
+
+  // calcs for button styles below carousel
+  const whitespace1Percent = 100 * (2 / 3) * (Math.abs(x1) / (x3 - x1))
+  const whitespace2Percent = 100 - whitespace1Percent - 100 / 3
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))
@@ -54,27 +57,15 @@ const Home = ({ data }) => {
     )
   }, [])
 
-  useEffect(() => {
-    const temp = Math.min(Math.abs(x1), Math.abs(x2), Math.abs(x3))
-    setGoal(temp)
-    setCurrentPosition(
-      temp === Math.abs(x1) ? 1 : temp === Math.abs(x2) ? 2 : 3
-    )
-    setClosest(
-      [x1, x2, x3].reduce((prev, curr) =>
-        Math.abs(curr - temp) < Math.abs(prev - temp) ? curr : prev
-      )
-    )
-  }, [x1, x2, x3])
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onClickCarouselButton(currentPosition === 3 ? 1 : currentPosition + 1)
-    }, 3000)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [currentPosition])
+  // to do later
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     onClickCarouselButton(currentPosition === 3 ? 1 : currentPosition + 1)
+  //   }, 5000)
+  //   return () => {
+  //     clearTimeout(timer)
+  //   }
+  // }, [currentPosition])
 
   const addToRefs = (el) => {
     if (el && !carouselRefs.current.includes(el)) {
@@ -157,18 +148,9 @@ const Home = ({ data }) => {
 
   const onClickCarouselButton = (position) => {
     setCurrentPosition(position)
-    document
-      .getElementById(`carouselImage-${position}`)
-      .scrollIntoView({ behavior: "smooth", block: "end" })
+    const element = document.getElementById(`carouselImage-${position}`)
+    element.scrollIntoView({ behavior: "smooth", block: "nearest" })
   }
-
-  const carouselButton = (x, position) => (
-    <button
-      onClick={() => onClickCarouselButton(position)}
-      className={`h-2 w-8 pointer-events-none md:pointer-events-auto duration-500 border border-[#09314C] border-opacity-50
-        ${closest === x ? "bg-[#09314C]" : ""}`}
-    ></button>
-  )
 
   const updateCarouselRefs = () => {
     setx1(
@@ -193,7 +175,7 @@ const Home = ({ data }) => {
           showMenu && "pointer-events-none"
         } flex justify-center pt-20 bg-gray-100`}
       >
-        <div className={`max-w-[1200px] `}>
+        <div className={``}>
           <div
             className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center pt-8 justify-center transition-all 
         ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}
@@ -201,7 +183,7 @@ const Home = ({ data }) => {
             {/* carousel images */}
             <div
               onScroll={updateCarouselRefs}
-              className={`flex shadow-lg ring-gray-800 w-[90vw] xl:w-[1200px] h-[300px] md:h-[65vh] xl:h-[75vh] 
+              className={`flex shadow-lg ring-gray-800 h-[300px] md:h-[70vh] lg:h-[80vh]
           relative overflow-x-scroll snap-x snap-mandatory no-scrollbar`}
             >
               {carouselImage(1)}
@@ -210,12 +192,34 @@ const Home = ({ data }) => {
             </div>
 
             {/* carousel buttons */}
-            <div
-              className={`flex w-full justify-center items-center py-2 z-10 space-x-4`}
-            >
-              {carouselButton(x1, 1)}
-              {carouselButton(x2, 2)}
-              {carouselButton(x3, 3)}
+            <div className={`relative flex mt-4 h-3 w-32 md:w-48 lg:w-64`}>
+              {/* synced slider */}
+              <div
+                className={`bg-white`}
+                style={{ width: `${whitespace1Percent}%` }}
+              ></div>
+              <div className={`w-1/3 bg-[#09314C]`}></div>
+              <div
+                className={`bg-white`}
+                style={{ width: `${whitespace2Percent}%` }}
+              ></div>
+
+              <div
+                className={`absolute z-10 flex w-full h-full ring-1 ring-gray-200`}
+              >
+                <button
+                  className={`w-1/3 border-r border-gray-300`}
+                  onClick={() => onClickCarouselButton(1)}
+                ></button>
+                <button
+                  className={`w-1/3 border-r border-gray-300`}
+                  onClick={() => onClickCarouselButton(2)}
+                ></button>
+                <button
+                  className={`w-1/3`}
+                  onClick={() => onClickCarouselButton(3)}
+                ></button>
+              </div>
             </div>
 
             <div className={`flex justify-center items-center`}>
