@@ -175,11 +175,6 @@ const Layout = (props) => {
               {
                 tag: "Link",
                 route: "/outreach",
-                text: "Missions",
-              },
-              {
-                tag: "Link",
-                route: "/outreach",
                 text: "Ministries",
               },
             ])}
