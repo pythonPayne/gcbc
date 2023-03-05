@@ -128,7 +128,7 @@ const Outreach = ({ data }) => {
             <div className={`flex flex-col items-center`}>
               <div
                 className={`py-2 flex justify-center text-[#09314C] 
-            text-2xl md:text-5xl lg:text-6xl font-sans font-bold tracking-widest`}
+            text-3xl md:text-5xl lg:text-6xl font-sans font-bold tracking-widest`}
               >
                 Outreach
               </div>

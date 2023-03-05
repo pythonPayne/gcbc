@@ -178,6 +178,14 @@ const Layout = (props) => {
               },
             ])}
 
+            {navigation_button("Calendar", [
+              {
+                tag: "Link",
+                route: "/calendar",
+                text: "Calendar",
+              },
+            ])}
+
             {navigation_button("Contact", [
               {
                 tag: "Link",
@@ -270,6 +278,13 @@ const Layout = (props) => {
                   route: "/outreach",
                   page: "outreach",
                   text: "Outreach",
+                })}
+
+                {side_menu_link({
+                  tag: "Link",
+                  route: "/calendar",
+                  page: "calendar",
+                  text: "Calendar",
                 })}
 
                 {side_menu_link({

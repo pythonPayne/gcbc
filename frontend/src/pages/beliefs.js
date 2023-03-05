@@ -334,7 +334,7 @@ const Beliefs = ({ data }) => {
                             {chapterNum}
                           </div>
                           <div
-                            className={`col-span-10 cursor-pointer py-4 pr-2`}
+                            className={`col-span-10 cursor-pointer py-2 pr-2`}
                             onClick={() => {
                               setChapterSelected(chapterNum)
                               setShowChapterMenu(false)
