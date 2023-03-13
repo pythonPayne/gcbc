@@ -52,5 +52,20 @@ export default {
          
 
     ],
+    preview: {
+      select: {
+        startDateTime: 'startDateTime',
+        title: 'title',        
+      },
+      prepare(selection) {
+        const {startDateTime, title} = selection
+        const d = new Date(startDateTime)        
+        return {
+          title: `${d.toISOString().split('T')[0]}`,
+          subtitle: `${title}`,        
+          media: <span style={{}}></span>
+        }
+      }
+    }
     
   }  
