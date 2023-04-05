@@ -157,7 +157,8 @@ const Layout = (props) => {
               },
               {
                 tag: "a",
-                route: "https://www.facebook.com/gcbcbham/live/",
+                route:
+                  "https://www.sermonaudio.com/solo/gracecovenantbaptist/webcast/",
                 text: "Livestream",
               },
             ])}
@@ -259,7 +260,8 @@ const Layout = (props) => {
 
                 {side_menu_link({
                   tag: "a",
-                  route: "https://www.facebook.com/gcbcbham/live/",
+                  route:
+                    "https://www.sermonaudio.com/solo/gracecovenantbaptist/webcast/",
                   page: "",
                   text: "Livestream",
                 })}
