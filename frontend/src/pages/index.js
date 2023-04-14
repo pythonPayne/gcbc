@@ -177,7 +177,7 @@ const Home = ({ data }) => {
       >
         <div className={``}>
           <div
-            className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center pt-8 justify-center transition-all 
+            className={`pb-48 min-h-screen bg-gray-100 flex flex-col items-center justify-center transition-all 
         ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}
           >
             {/* carousel images */}
