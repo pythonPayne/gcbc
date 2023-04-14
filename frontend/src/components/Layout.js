@@ -323,8 +323,14 @@ const Layout = (props) => {
             Contact
           </div>
           <div className={`pt-2 space-y-1`}>
-            <div>(205) 426-2234</div>
-            <div>pastor@gracecovenantbaptist.org</div>
+            <div>
+              <a href={`tel: 205-426-2234`}>205-426-2234</a>
+            </div>
+            <div>
+              <a href={`mailto: pastor@gracecovenantbaptist.org`}>
+                pastor@gracecovenantbaptist.org
+              </a>
+            </div>
           </div>
           <div className={`pt-3`}>
             <a
