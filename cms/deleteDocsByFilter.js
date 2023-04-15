@@ -9,7 +9,7 @@ const client = sanityClient({
 })
 
 client
-  .delete({query: '*[_type == "confession"]'})
+  .delete({query: '*[_type == "sermons"]'})
   .then(() => {
     console.log('It was deleted')
   })

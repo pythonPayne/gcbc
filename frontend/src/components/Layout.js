@@ -150,11 +150,11 @@ const Layout = (props) => {
                 route: "/sermons",
                 text: "Sermons",
               },
-              {
-                tag: "Link",
-                route: "/sunday-school",
-                text: "Sunday School",
-              },
+              // {
+              //   tag: "Link",
+              //   route: "/sunday-school",
+              //   text: "Sunday School",
+              // },
               {
                 tag: "a",
                 route:
@@ -251,12 +251,12 @@ const Layout = (props) => {
                   text: "Sermons",
                 })}
 
-                {side_menu_link({
+                {/* {side_menu_link({
                   tag: "Link",
                   route: "/sunday-school",
                   page: "sunday-school",
                   text: "Sunday School",
-                })}
+                })} */}
 
                 {side_menu_link({
                   tag: "a",

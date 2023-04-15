@@ -101,25 +101,19 @@ export default {
       description: 'Examples: 3:16-23, 1:18-2:9'      
     },
     {
-      title: 'Sermon Series',
-      name: 'sermonSeries',
-      type: 'string',      
-    },    
-    {
       title: 'Title',
       name: 'title',
       type: 'string'      
     },    
     {
-      title: 'Audio',
-      name: 'audio',
-      type: 'file',
-    },
+      title: 'Sermon Series',
+      name: 'sermonSeries',
+      type: 'string',      
+    },    
     {
-      title: 'Old Audio Link',
-      name: 'oldAudioLink',
-      type: 'url',
-      description: "This is optional. I used this in testing and migrating data. Link to old website audio files."
+      title: 'Audio Link',
+      name: 'audioLink',
+      type: 'url',      
     },    
   ],
   preview: {

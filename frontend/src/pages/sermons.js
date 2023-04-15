@@ -22,7 +22,7 @@ export const query = graphql`
           title
           passage
           book
-          oldAudioLink
+          audioLink
         }
       }
     }
@@ -60,8 +60,6 @@ const Sermons = ({ data }) => {
     (state) => state.sermons.sermonSearchFilter
   )
 
-  const testLink =
-    "https://www.gracecovenantbaptist.org/wp-content/uploads/2022/12/Luke-12.1-12.mp3"
   const booksOT = [
     "Genesis",
     "Ruth",
@@ -101,10 +99,10 @@ const Sermons = ({ data }) => {
   const speakers = [
     "Todd Wilson",
     "Stephen Hyde",
-    "Michael Gaydosh",
-    "Steve Cowan",
-    "Dustin Curtis",
-    "Ed Wallen",
+    // "Michael Gaydosh",
+    // "Steve Cowan",
+    // "Dustin Curtis",
+    // "Ed Wallen",
   ]
 
   useEffect(() => {
@@ -150,7 +148,7 @@ const Sermons = ({ data }) => {
           </div>
           <a
             className={`text-md text-gray-400`}
-            href={sermon.oldAudioLink}
+            href={sermon.audioLink}
             target="_blank"
           >
             <svg
