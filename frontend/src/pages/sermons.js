@@ -101,7 +101,7 @@ const Sermons = ({ data }) => {
     "Stephen Hyde",
     "Stephen Payne",
     // "Michael Gaydosh",
-    // "Steve Cowan",
+    "Steve Cowan",
     // "Dustin Curtis",
     // "Ed Wallen",
   ]

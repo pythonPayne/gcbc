@@ -16,7 +16,9 @@ export default {
         list: [
           {title: 'Todd Wilson', value: 'Todd Wilson'},
           {title: 'Stephen Hyde', value: 'Stephen Hyde'},
-          {title: 'Stephen Payne', value: 'Stephen Payne'}
+          {title: 'Stephen Payne', value: 'Stephen Payne'},
+          {title: 'Steve Cowan', value: 'Stephen Cowan'}
+
         ],         
       }
     },
