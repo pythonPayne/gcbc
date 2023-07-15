@@ -99,6 +99,7 @@ const Sermons = ({ data }) => {
   const speakers = [
     "Todd Wilson",
     "Stephen Hyde",
+    "Stephen Payne",
     // "Michael Gaydosh",
     // "Steve Cowan",
     // "Dustin Curtis",
