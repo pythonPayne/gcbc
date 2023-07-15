@@ -186,10 +186,14 @@ const Sermons = ({ data }) => {
           sermon.title
             .toLowerCase()
             .includes(sermonSearchFilter.toLowerCase()) |
-          sermon.book.toLowerCase().includes(sermonSearchFilter.toLowerCase()) |
-          sermon.bookPassage
-            .toLowerCase()
-            .includes(sermonSearchFilter.toLowerCase()) |
+          (sermon.book &&
+            sermon.book
+              .toLowerCase()
+              .includes(sermonSearchFilter.toLowerCase())) |
+          (sermon.bookPassage &&
+            sermon.bookPassage
+              .toLowerCase()
+              .includes(sermonSearchFilter.toLowerCase())) |
           sermon.date.toLowerCase().includes(sermonSearchFilter.toLowerCase()) |
           sermon.speaker
             .toLowerCase()
