@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { graphql } from "gatsby";
-import { toggleShowMenu } from "../redux/actions/layout";
-import { GatsbyImage } from "gatsby-plugin-image";
-import Layout from "../components/Layout";
-import { SEO } from "../components/seo";
+import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { graphql } from "gatsby"
+import { toggleShowMenu } from "../redux/actions/layout"
+import { GatsbyImage } from "gatsby-plugin-image"
+import Layout from "../components/Layout"
+import { SEO } from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -32,20 +32,23 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const BookStudies = ({ data }) => {
-  const dispatch = useDispatch();
-  const showMenu = useSelector((state) => state.layout.showMenu);
+  const dispatch = useDispatch()
+  const showMenu = useSelector((state) => state.layout.showMenu)
 
-  let bookStudies = data.allSanityBookStudies.edges;
+  // temp fix, whlie we update backend to allow for a study to temporarily not be shown
+  let bookStudies = data.allSanityBookStudies.edges.filter(
+    (item) => item.node.menOrWomen === "men"
+  )
 
   useEffect(() => {
-    dispatch(toggleShowMenu(false));
-  }, []);
+    dispatch(toggleShowMenu(false))
+  }, [])
 
   const bookCard = (node) => {
-    const d = new Date(node.startDateTime);
+    const d = new Date(node.startDateTime)
     const weekday = [
       "Sunday",
       "Monday",
@@ -54,8 +57,8 @@ const BookStudies = ({ data }) => {
       "Thursday",
       "Friday",
       "Saturday",
-    ];
-    const day = weekday[d.getDay()];
+    ]
+    const day = weekday[d.getDay()]
     return (
       <div className={`flex flex-col items-center justify-between`}>
         <div className={`flex flex-col items-center`}>
@@ -89,8 +92,8 @@ const BookStudies = ({ data }) => {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <Layout>
@@ -114,9 +117,9 @@ const BookStudies = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default BookStudies;
+export default BookStudies
 
-export const Head = () => <SEO title="book-studies" />;
+export const Head = () => <SEO title="book-studies" />
