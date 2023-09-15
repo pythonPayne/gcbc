@@ -39,9 +39,9 @@ const BookStudies = ({ data }) => {
   const showMenu = useSelector((state) => state.layout.showMenu)
 
   // temp fix, whlie we update backend to allow for a study to temporarily not be shown
-  let bookStudies = data.allSanityBookStudies.edges.filter(
-    (item) => item.node.menOrWomen === "men"
-  )
+  // let bookStudies = data.allSanityBookStudies.edges.filter(
+  //   (item) => item.node.menOrWomen === "men"
+  // )
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))
