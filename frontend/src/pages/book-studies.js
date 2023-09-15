@@ -42,6 +42,7 @@ const BookStudies = ({ data }) => {
   // let bookStudies = data.allSanityBookStudies.edges.filter(
   //   (item) => item.node.menOrWomen === "men"
   // )
+  let bookStudies = data.allSanityBookStudies.edges
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))
