@@ -13,7 +13,7 @@ const NotFoundPage = () => {
     <Layout>
       <div
         page={"notfound"}
-        className={`min-h-screen bg-red-100 flex w-full justify-center items-center`}
+        className={`min-h-screen bg-gray-100 flex w-full justify-center items-center`}
       >
         <div className={`pt-20 text-center text-md md:text-lg`}>
           <p>Page not found.</p>
