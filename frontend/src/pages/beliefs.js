@@ -30,6 +30,10 @@ const Beliefs = ({ data }) => {
   const [showChapterMenu, setShowChapterMenu] = useState(false)
   const [edition, setEdition] = useState("paragraphTextOriginal")
   const showMenu = useSelector((state) => state.layout.showMenu)
+  const [referenceClicked, setReferenceClicked] = useState(false)
+  const [referenceItem, setReferenceItem] = useState(null)
+  const [referenceItemParagraph, setReferenceItemParagraph] = useState(0)
+  const [referenceItemChapter, setReferenceItemChapter] = useState(0)
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))
@@ -77,20 +81,45 @@ const Beliefs = ({ data }) => {
     "The Last Judgment",
   ]
 
+  const reset_reference_clicked = () => {
+    setReferenceClicked(false)
+    setReferenceItem(null)
+    setReferenceItemParagraph(0)
+    setReferenceItemChapter(0)
+  }
+
   const confession_ref_card = (paragraph) => {
+    const paragraphNum = paragraph[0].node.paragraph
+    const on = referenceClicked && referenceItemParagraph === paragraphNum
     return (
-      <div className={`text-sm pt-10 pb-6 leading-6`}>
+      <div className={`text-sm pt-12 leading-6 relative min-h-[200px]`}>
         {paragraph.map((edge, i) => {
           if (edge.node.referenceNum !== 99) {
             return (
-              <div key={i} className={`flex`}>
+              <div
+                key={i}
+                className={`flex ${
+                  referenceClicked &&
+                  referenceItemParagraph === paragraphNum &&
+                  "invisible"
+                }`}
+              >
                 <div className={`w-4 text-right shrink-0 mr-2`}>
                   <sup className={`font-bold`}>{edge.node.referenceNum}</sup>
                 </div>
                 <div className={`flex flex-wrap`}>
                   {edge.node.paragraphRef.map((item, j, arr) => (
-                    <div key={j} className="mr-2">
-                      {item}
+                    <div
+                      key={j}
+                      className="mr-2 hover:cursor-pointer hover:text-blue-800"
+                      onClick={() => {
+                        setReferenceClicked(true)
+                        setReferenceItem(item)
+                        setReferenceItemChapter(edge.node.chapter)
+                        setReferenceItemParagraph(edge.node.paragraph)
+                      }}
+                    >
+                      {item.split("||")[0]}
                       {arr.length - 1 !== j && ";"}
                     </div>
                   ))}
@@ -99,6 +128,38 @@ const Beliefs = ({ data }) => {
             )
           }
         })}
+        {referenceClicked && referenceItemParagraph === paragraphNum && (
+          <div className="absolute top-0 left-0 pt-12 h-full">
+            <div className="flex">
+              <div
+                className="grid place-content-center"
+                onClick={() => setReferenceClicked(false)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                  stroke="currentColor"
+                  className="w-4 h-4 mr-2  hover:text-blue-800 cursor-pointer"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                  />
+                </svg>
+              </div>
+              <div className="font-semibold">
+                {referenceItem.split("||")[0]}
+              </div>
+            </div>
+            <hr className="border-gray-300 my-1" />
+            <div className="text-gray-500 h-full overflow-auto">
+              {referenceItem.split("||")[1]}
+            </div>
+          </div>
+        )}
       </div>
     )
   }
@@ -149,6 +210,7 @@ const Beliefs = ({ data }) => {
               <button
                 className={`text-gray-500 text-xl hover:text-gray-800`}
                 onClick={() => {
+                  reset_reference_clicked()
                   setChapterSelected(
                     chapterSelected !== 1
                       ? -1 + chapterSelected
@@ -163,6 +225,7 @@ const Beliefs = ({ data }) => {
               <button
                 className={`text-gray-500 hover:text-gray-800`}
                 onClick={() => {
+                  reset_reference_clicked()
                   setShowChapterMenu(!showChapterMenu)
                   window.scrollTo(0, 0)
                 }}
@@ -186,6 +249,7 @@ const Beliefs = ({ data }) => {
               <button
                 className={`text-gray-500 text-xl hover:text-gray-800`}
                 onClick={() => {
+                  reset_reference_clicked()
                   setChapterSelected(
                     chapterSelected !== numberOfChapters
                       ? 1 + chapterSelected
@@ -336,6 +400,7 @@ const Beliefs = ({ data }) => {
                           <div
                             className={`col-span-10 cursor-pointer py-2 pr-2`}
                             onClick={() => {
+                              reset_reference_clicked()
                               setChapterSelected(chapterNum)
                               setShowChapterMenu(false)
                               window.scrollTo(0, 0)
@@ -370,8 +435,9 @@ const Beliefs = ({ data }) => {
                 <div className={`flex justify-between pt-12`}>
                   {chapterSelected > 1 ? (
                     <button
-                      className={`border text-xl px-3 py-1 cursor-pointer`}
+                      className={`border border-gray-300 text-xl px-3 py-1 cursor-pointer`}
                       onClick={() => {
+                        reset_reference_clicked()
                         setChapterSelected(-1 + chapterSelected)
                         window.scrollTo(0, 0)
                       }}
@@ -384,8 +450,9 @@ const Beliefs = ({ data }) => {
 
                   {chapterSelected < numberOfChapters ? (
                     <button
-                      className={`border text-xl px-3 py-1 cursor-pointer`}
+                      className={`border border-gray-300 text-xl px-3 py-1 cursor-pointer`}
                       onClick={() => {
+                        reset_reference_clicked()
                         setChapterSelected(1 + chapterSelected)
                         window.scrollTo(0, 0)
                       }}

@@ -11,7 +11,7 @@ module.exports = {
     title: `GCBC`,
     description: `Grace Covenant Baptist Church, Birmingham Alabama`,
     keywords: `grace, covenant, baptist, church, Birmingham, Alabama`,
-    siteUrl: `https://gcbcmain.gatsbyjs.io`,
+    siteUrl: `https://gracecovenantbaptist.org`,
   },
   plugins: [
     `gatsby-plugin-image`,
