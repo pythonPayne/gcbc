@@ -312,49 +312,78 @@ const Layout = (props) => {
       </div>
 
       {/* Footer */}
-      <div
-        className={`bg-[#09314C] text-gray-300 text-opacity-80 grid grid-cols-1 text-center gap-y-[3rem] py-28
+      <div>
+        <div
+          className={`bg-[#09314C] text-gray-300 text-opacity-80 grid grid-cols-1 text-center gap-y-[3rem] py-28
             lg:grid-cols-2`}
-      >
-        <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
-          <div
-            className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider text-gray-100`}
-          >
-            Contact
-          </div>
-          <div className={`pt-2 space-y-1`}>
-            <div>
-              <a href={`tel: 205-426-2234`}>205-426-2234</a>
+        >
+          <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
+            <div
+              className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider text-gray-100`}
+            >
+              Contact
             </div>
-            <div>
-              <a href={`mailto: pastor@gracecovenantbaptist.org`}>
-                pastor@gracecovenantbaptist.org
+            <div className={`pt-2 space-y-1`}>
+              <div>
+                <a href={`tel: 205-426-2234`}>205-426-2234</a>
+              </div>
+              <div>
+                <a href={`mailto: pastor@gracecovenantbaptist.org`}>
+                  pastor@gracecovenantbaptist.org
+                </a>
+              </div>
+            </div>
+            <div className={`pt-3`}>
+              <a
+                className={`underline`}
+                target="_blank"
+                href="https://www.google.com/maps/dir//Grace+Covenant+Baptist+Church,+2565+Rocky+Ridge+Rd,+Vestavia+Hills,+AL+35243/@33.4295652,-86.8408153,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x888918455c0624b3:0x25d19d79c0c6e263!2m2!1d-86.7707752!2d33.4295849"
+              >
+                2565 Rocky Ridge Road
+                <br />
+                Vestavia Hills Alabama 35243
               </a>
             </div>
           </div>
-          <div className={`pt-3`}>
-            <a
-              className={`underline`}
-              target="_blank"
-              href="https://www.google.com/maps/dir//Grace+Covenant+Baptist+Church,+2565+Rocky+Ridge+Rd,+Vestavia+Hills,+AL+35243/@33.4295652,-86.8408153,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x888918455c0624b3:0x25d19d79c0c6e263!2m2!1d-86.7707752!2d33.4295849"
+
+          <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
+            <div
+              className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider text-gray-100`}
             >
-              2565 Rocky Ridge Road
-              <br />
-              Vestavia Hills Alabama 35243
-            </a>
+              Service Times
+            </div>
+            <div className={`pt-2 flex flex-col space-y-1`}>
+              <div>Sunday School: 9:30 am</div>
+              <div>Sunday Worship: 11 am</div>
+              <div>Wednesday Prayer: 6:30 pm</div>
+            </div>
           </div>
         </div>
-
-        <div className={`py-10 tracking-wide text-lg lg:text-xl`}>
-          <div
-            className={`font-bold text-2xl lg:text-4xl font-serif py-1 tracking-wider text-gray-100`}
-          >
-            Service Times
-          </div>
-          <div className={`pt-2 flex flex-col space-y-1`}>
-            <div>Sunday School: 9:30 am</div>
-            <div>Sunday Worship: 11 am</div>
-            <div>Wednesday Prayer: 6:30 pm</div>
+        {/* credits */}
+        <div
+          className={`bg-[#09314C] text-gray-500 flex justify-center text-center py-12 italic`}
+        >
+          <div>
+            <div>
+              Images from:{" "}
+              <a
+                className="cursor-pointer"
+                href="https://unsplash.com"
+                target="_blank"
+              >
+                Unsplash
+              </a>
+            </div>
+            <div>
+              Powered by:{" "}
+              <a
+                className="cursor-pointer"
+                href="https://netlify.com"
+                target="_blank"
+              >
+                Netlify
+              </a>
+            </div>
           </div>
         </div>
       </div>
