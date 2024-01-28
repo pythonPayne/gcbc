@@ -34,11 +34,26 @@ const Beliefs = ({ data }) => {
   const [referenceItem, setReferenceItem] = useState(null)
   const [referenceItemParagraph, setReferenceItemParagraph] = useState(0)
   const [referenceItemChapter, setReferenceItemChapter] = useState(0)
+  const [search, setSearch] = useState("")
+  const [searching, setSearching] = useState(false)
+  const [searchMatches, setSearchMatches] = useState([])
 
   useEffect(() => {
     dispatch(toggleShowMenu(false))
     setShowChapterMenu(true)
   }, [])
+
+  useEffect(() => {
+    setSearchMatches(
+      confession
+        .filter((edge) =>
+          edge.node[edition].toLowerCase().includes(search.toLowerCase())
+        )
+        .map((edge) => edge.node.chapter + "-" + edge.node.paragraph)
+    )
+  }, [confession, search, edition])
+
+  const showParagraphs = !searching || (searching && search.length > 1)
 
   const numberOfChapters = Math.max(
     ...confession.map((edge) => edge.node.chapter)
@@ -194,73 +209,100 @@ const Beliefs = ({ data }) => {
   }
 
   const confession_chapter_card = (chapter) => {
-    const chapterNum = chapter[0].node.chapter
-    const numberOfParagraphs = Math.max(
-      ...chapter.map((edge) => edge.node.paragraph)
-    )
-    const paragraphNums = Array(numberOfParagraphs)
-      .fill(0)
-      .map((e, i) => i + 1)
-
+    const chapterNum = chapter[0] && chapter[0].node.chapter
+    const paragraphNums = [
+      ...new Set(
+        chapter.map((edge) => edge.node.chapter + "-" + edge.node.paragraph)
+      ),
+    ]
     return (
       <div>
         <div className={``}>
           <div className={`flex justify-between`}>
-            <div className={`flex space-x-3`}>
-              <button
-                className={`text-gray-500 text-xl hover:text-gray-800`}
-                onClick={() => {
-                  reset_reference_clicked()
-                  setChapterSelected(
-                    chapterSelected !== 1
-                      ? -1 + chapterSelected
-                      : numberOfChapters
-                  )
-                  window.scrollTo(0, 0)
-                }}
-              >
-                {"<"}
-              </button>
-
-              <button
-                className={`text-gray-500 hover:text-gray-800`}
-                onClick={() => {
-                  reset_reference_clicked()
-                  setShowChapterMenu(!showChapterMenu)
-                  window.scrollTo(0, 0)
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
+            {!searching ? (
+              <div className={`flex space-x-3`}>
+                <button
+                  className={`text-gray-500 text-xl hover:text-gray-800`}
+                  onClick={() => {
+                    reset_reference_clicked()
+                    setChapterSelected(
+                      chapterSelected !== 1
+                        ? -1 + chapterSelected
+                        : numberOfChapters
+                    )
+                    window.scrollTo(0, 0)
+                  }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-              </button>
+                  {"<"}
+                </button>
 
-              <button
-                className={`text-gray-500 text-xl hover:text-gray-800`}
-                onClick={() => {
-                  reset_reference_clicked()
-                  setChapterSelected(
-                    chapterSelected !== numberOfChapters
-                      ? 1 + chapterSelected
-                      : 1
-                  )
-                  window.scrollTo(0, 0)
-                }}
-              >
-                {">"}
-              </button>
-            </div>
+                <button
+                  className={`text-gray-500 hover:text-gray-800`}
+                  onClick={() => {
+                    reset_reference_clicked()
+                    setShowChapterMenu(!showChapterMenu)
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  className={`text-gray-500 text-xl hover:text-gray-800`}
+                  onClick={() => {
+                    reset_reference_clicked()
+                    setChapterSelected(
+                      chapterSelected !== numberOfChapters
+                        ? 1 + chapterSelected
+                        : 1
+                    )
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  {">"}
+                </button>
+              </div>
+            ) : (
+              <div className={`grid place-content-center`}>
+                <button
+                  className={`text-gray-500 hover:text-gray-800`}
+                  onClick={() => {
+                    reset_reference_clicked()
+                    setShowChapterMenu(true)
+                    setSearching(false)
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
 
             <div className={`flex space-x-3`}>
               <button
@@ -287,24 +329,55 @@ const Beliefs = ({ data }) => {
           </div>
 
           <div className={`mt-6`}>
-            <div className={`font-semibold text-4xl text-gray-800 py-2`}>
-              Chapter {chapterNum}
-            </div>
-            <div className={`text-2xl text-gray-600 font-serif`}>
-              {chapterTitles[-1 + chapterNum]}
-            </div>
+            {!searching ? (
+              <>
+                <div className={`font-semibold text-4xl text-gray-800 py-2`}>
+                  {`Chapter ${chapterNum}`}
+                </div>
+                <div className={`text-2xl text-gray-600 font-serif`}>
+                  {chapterTitles[-1 + chapterNum]}
+                </div>
+              </>
+            ) : (
+              <div className="relative">
+                <input
+                  className={`bg-gray-200 py-2 w-full px-2 text-xl`}
+                  type="text"
+                  value={search}
+                  placeholder="search..."
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                {search.length > 1 && (
+                  <div className="absolute top-0 right-0 h-full flex items-center pr-2 text-sm">
+                    {`${searchMatches.length} time${
+                      searchMatches !== 1 && "s"
+                    }`}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
-        <div className={`text-sm md:text-md`}>
-          {paragraphNums.map((paragraphNum, i) => (
-            <div key={i}>
-              {confession_paragraph_card(
-                chapter.filter((edge) => edge.node.paragraph === paragraphNum)
-              )}
+        {paragraphNums.length === 0 ? (
+          <div className="pt-12">No results</div>
+        ) : (
+          showParagraphs && (
+            <div className={`text-sm md:text-md`}>
+              {paragraphNums.map((paragraphNum, i) => (
+                <div key={i}>
+                  {confession_paragraph_card(
+                    chapter.filter(
+                      (edge) =>
+                        edge.node.chapter + "-" + edge.node.paragraph ===
+                        paragraphNum
+                    )
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )
+        )}
       </div>
     )
   }
@@ -331,7 +404,10 @@ const Beliefs = ({ data }) => {
               >
                 <button
                   className={`absolute top-5 right-5 text-2xl`}
-                  onClick={() => setShowChapterMenu(false)}
+                  onClick={() => {
+                    setSearching(true)
+                    setShowChapterMenu(false)
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -344,7 +420,7 @@ const Beliefs = ({ data }) => {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
+                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
                     />
                   </svg>
                 </button>
@@ -386,31 +462,33 @@ const Beliefs = ({ data }) => {
                       </button>
                     </div>
 
-                    {chapterNums.map((chapterNum, i) => (
-                      <div className={`flex justify-center`}>
-                        <div
-                          key={i}
-                          className={`grid grid-cols-12 w-full max-w-[600px] bg-gray-50 ring-1 ring-[#09314C] ring-opacity-20 shadow-md mt-8`}
-                        >
+                    {!searching &&
+                      chapterNums.map((chapterNum, i) => (
+                        <div className={`flex justify-center`}>
                           <div
-                            className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}
+                            key={i}
+                            className={`grid grid-cols-12 w-full max-w-[600px] bg-gray-50 ring-1 ring-[#09314C] ring-opacity-20 shadow-md mt-8`}
                           >
-                            {chapterNum}
-                          </div>
-                          <div
-                            className={`col-span-10 cursor-pointer py-2 pr-2`}
-                            onClick={() => {
-                              reset_reference_clicked()
-                              setChapterSelected(chapterNum)
-                              setShowChapterMenu(false)
-                              window.scrollTo(0, 0)
-                            }}
-                          >
-                            {chapterTitles[parseInt(chapterNum - 1)]}
+                            <div
+                              className={`col-span-2 flex justify-center items-center font-bold text-gray-500`}
+                            >
+                              {chapterNum}
+                            </div>
+                            <div
+                              className={`col-span-10 cursor-pointer py-2 pr-2`}
+                              onClick={() => {
+                                reset_reference_clicked()
+                                setChapterSelected(chapterNum)
+                                setShowChapterMenu(false)
+                                setSearching(false)
+                                window.scrollTo(0, 0)
+                              }}
+                            >
+                              {chapterTitles[parseInt(chapterNum - 1)]}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </div>
@@ -427,12 +505,22 @@ const Beliefs = ({ data }) => {
                 className={`w-[80vw] max-w-5xl transition-all duration-[200] bg-gray-100`}
               >
                 {confession_chapter_card(
-                  confession.filter(
-                    (edge) => edge.node.chapter === chapterSelected
-                  )
+                  !searching
+                    ? confession.filter(
+                        (edge) => edge.node.chapter === chapterSelected
+                      )
+                    : confession.filter((edge) =>
+                        searchMatches.includes(
+                          edge.node.chapter + "-" + edge.node.paragraph
+                        )
+                      )
                 )}
 
-                <div className={`flex justify-between pt-12`}>
+                <div
+                  className={`flex justify-between pt-12 ${
+                    searching && "invisible"
+                  }`}
+                >
                   {chapterSelected > 1 ? (
                     <button
                       className={`border border-gray-300 text-xl px-3 py-1 cursor-pointer`}
