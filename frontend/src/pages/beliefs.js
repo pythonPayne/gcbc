@@ -350,7 +350,7 @@ const Beliefs = ({ data }) => {
                 {search.length > 1 && (
                   <div className="absolute top-0 right-0 h-full flex items-center pr-2 text-sm">
                     {`${searchMatches.length} time${
-                      searchMatches !== 1 && "s"
+                      searchMatches.length !== 1 ? "s" : ""
                     }`}
                   </div>
                 )}
@@ -360,7 +360,7 @@ const Beliefs = ({ data }) => {
         </div>
 
         {paragraphNums.length === 0 ? (
-          <div className="pt-12">No results</div>
+          <div className="pt-12">No matches</div>
         ) : (
           showParagraphs && (
             <div className={`text-sm md:text-md`}>
