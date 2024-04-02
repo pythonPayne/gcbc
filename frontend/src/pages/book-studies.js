@@ -86,7 +86,10 @@ const BookStudies = ({ data }) => {
             {d > Date.now() ? "Starting" : "Started"} {d.toLocaleDateString()}
           </div>
           <div className={`text-lg lg:text-xl text-gray-600`}>
-            {day}s, {d.toLocaleTimeString([], { timeStyle: "short" })}
+            {node.menOrWomen === "men"
+              ? "Wednesdays, 6:00 AM"
+              : "Every other Monday, 6:30 PM"}
+            {/* {day}s, {d.toLocaleTimeString([], { timeStyle: "short" })} */}
           </div>
           <div className={`text-lg lg:text-xl text-gray-600`}>
             at {node.location}
@@ -112,9 +115,9 @@ const BookStudies = ({ data }) => {
             <div
               className={`flex flex-col space-y-28 lg:max-h-[650px] lg:min-h-[650px] lg:flex-row lg:space-y-0 lg:space-x-64`}
             >
-              {/* {bookStudies.map((bookStudy) => bookCard(bookStudy.node))} */}
-              Our book studies just finished on 1/30/24. We will begin new men's
-              and women's studies very soon and will post them here.
+              {bookStudies.map((bookStudy) => bookCard(bookStudy.node))}
+              {/* Our book studies just finished on 1/30/24. We will begin new men's
+              and women's studies very soon and will post them here. */}
             </div>
           </div>
         </div>
