@@ -102,7 +102,27 @@ const About = ({ data }) => {
           >
             {elder.node.title}
           </div>
-          <div className={`leading-[1.8rem]`}>{elder.node.displayText}</div>
+
+          {elder.node.title === "Stephen Payne" ? (
+            <div className={`leading-[1.8rem]`}>
+              {elder.node.displayText.replace(
+                "Greek NT interlinear website, https://greeknt.netlify.app/.",
+                ""
+              )}
+              <span>
+                <a
+                  className="text-blue-500"
+                  target="_blank_"
+                  href="https://greeknt.netlify.app"
+                >
+                  Greek NT interlinear website
+                </a>
+                .
+              </span>
+            </div>
+          ) : (
+            <div className={`leading-[1.8rem]`}>{elder.node.displayText}</div>
+          )}
         </div>
       </>
     )
@@ -170,9 +190,15 @@ const About = ({ data }) => {
             <div
               className={`flex flex-col md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-48 md:pt-12`}
             >
-              {elders
-                .sort((a, b) => (a.node.title > b.node.title ? -1 : 1))
-                .map((elder) => elderCard(elder))}
+              {elderCard(
+                elders.find((elder) => elder.node.title === "Todd Wilson")
+              )}
+              {elderCard(
+                elders.find((elder) => elder.node.title === "Stephen Hyde")
+              )}
+              {elderCard(
+                elders.find((elder) => elder.node.title === "Stephen Payne")
+              )}
             </div>
           </div>
         </div>

@@ -95,6 +95,7 @@ const Outreach = ({ data }) => {
           "Brother Bryan",
           "African Christian University",
           "Alabama Baptist Children's Homes",
+          "Portuguese-Speaking Pastors",
         ].includes(title) ? (
           <>
             {image}
@@ -164,6 +165,11 @@ const Outreach = ({ data }) => {
                     "order-10"
                   )}
                   {ministryCard("Founders Ministries", "order-11", "order-12")}
+                  {ministryCard(
+                    "Portuguese-Speaking Pastors",
+                    "order-[13]",
+                    "order-[14]"
+                  )}
                 </>
               )}
             </div>

@@ -98,7 +98,7 @@ const Contact = () => {
                 onSubmit={(e) => handleSubmit(e)}
                 method="post"
               >
-                <div className={`ring-1 ring-gray-300 shadow-md mb-4`}>
+                <div className={`ring-1 ring-gray-300 mb-4`}>
                   <input
                     className={`w-full bg-white px-2 py-2 text-xl 
                     placeholder-gray-300 text-gray-500`}
@@ -111,7 +111,7 @@ const Contact = () => {
                   />
                 </div>
 
-                <div className={`ring-1 ring-gray-300 shadow-md mb-4`}>
+                <div className={`ring-1 ring-gray-300 mb-4`}>
                   <input
                     className={`w-full bg-white px-2 py-2 text-xl
                 placeholder-gray-300 text-gray-500`}
@@ -125,7 +125,7 @@ const Contact = () => {
                 </div>
 
                 <div
-                  className={`ring-1 ring-gray-300 shadow-md h-[250px] overflow-y-scroll`}
+                  className={`ring-1 ring-gray-300 h-[250px] overflow-y-scroll`}
                 >
                   <textarea
                     className={`bg-white text-xl w-full p-2
@@ -140,7 +140,7 @@ const Contact = () => {
                 </div>
 
                 <button
-                  className={`mt-8 shadow-md ring-1 ring-gray-400 w-full p-2 text-white bg-gray-400 font-semibold tracking-wider hover:bg-gray-500 focus:outline-none hover:-translate-y-[.05rem] active:translate-y-1`}
+                  className={`mt-8 ring-1 ring-gray-400 w-full p-2 text-white bg-gray-400 font-semibold tracking-wider hover:bg-gray-500 focus:outline-none hover:-translate-y-[.05rem] active:translate-y-1`}
                   type="submit"
                 >
                   Send
