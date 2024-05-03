@@ -100,10 +100,7 @@ const Sermons = ({ data }) => {
     "Todd Wilson",
     "Stephen Hyde",
     "Stephen Payne",
-    // "Michael Gaydosh",
     "Steve Cowan",
-    // "Dustin Curtis",
-    // "Ed Wallen",
   ]
 
   useEffect(() => {
@@ -123,11 +120,13 @@ const Sermons = ({ data }) => {
         className={`bg-white relative grid place-content-center text-center h-52 md:h-56 shadow-md bg-payne`}
       >
         <div className={`flex flex-col px-4`}>
-          <div
-            className={`font-serif text-xl font-semibold text-opacity-80 text-[#09314C]`}
+          <a
+            className={`font-serif text-xl font-semibold text-opacity-80 text-[#09314C] hover:text-opacity-60`}
+            href={sermon.audioLink}
+            target="_blank"
           >
             {sermon.title}
-          </div>
+          </a>
           <div className={`font-sans text-md text-gray-500`}>{sermon.book}</div>
           <div className={`font-sans text-md text-gray-500`}>
             {sermon.passage}
