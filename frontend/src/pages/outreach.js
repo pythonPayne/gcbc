@@ -51,11 +51,13 @@ const Outreach = ({ data }) => {
     const words = (
       <div className={`flex flex-col ${order2} md:order-none pb-28 md:pb-0`}>
         <div className={`flex space-x-5 items-center`}>
-          <div
+          <a
+            href={`${edge.node.url}`}
+            target="_blank"
             className={`text-3xl md:text-4xl font-semibold py-6 text-gray-600`}
           >
             {edge.node.title}
-          </div>
+          </a>
           <a href={`${edge.node.url}`} target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +74,18 @@ const Outreach = ({ data }) => {
             </svg>
           </a>
         </div>
+
+        {edge.node.title === "Portuguese-Speaking Pastors" && (
+          <div className="flex pb-6 text-xl space-x-3 items-center text-[#09314C] ">
+            <a
+              href="https://give.tithe.ly/?formId=741dec33-6cf6-4290-ac96-4944d6096e92"
+              target="_blank"
+              className="font-semibold italic underline decoration-[1px] underline-offset-4 text-blue-700 text-opacity-70 hover:text-blue-800"
+            >
+              Give $ here
+            </a>
+          </div>
+        )}
 
         <div className={`leading-[1.8rem]`}>{edge.node.displayText}</div>
 
@@ -92,10 +106,10 @@ const Outreach = ({ data }) => {
     return (
       <>
         {[
-          "Brother Bryan",
+          "Portuguese-Speaking Pastors",
           "African Christian University",
           "Alabama Baptist Children's Homes",
-          "Portuguese-Speaking Pastors",
+          "Sav-A-Life",
         ].includes(title) ? (
           <>
             {image}
@@ -147,8 +161,12 @@ const Outreach = ({ data }) => {
             >
               {ministries && (
                 <>
-                  {ministryCard("Brother Bryan", "order-1", "order-2")}
-                  {ministryCard("Sav-A-Life", "order-3", "order-4")}
+                  {ministryCard(
+                    "Portuguese-Speaking Pastors",
+                    "order-1",
+                    "order-2"
+                  )}
+                  {ministryCard("Brother Bryan", "order-3", "order-4")}
                   {ministryCard(
                     "African Christian University",
                     "order-5",
@@ -165,11 +183,7 @@ const Outreach = ({ data }) => {
                     "order-10"
                   )}
                   {ministryCard("Founders Ministries", "order-11", "order-12")}
-                  {ministryCard(
-                    "Portuguese-Speaking Pastors",
-                    "order-[13]",
-                    "order-[14]"
-                  )}
+                  {ministryCard("Sav-A-Life", "order-[13]", "order-[14]")}
                 </>
               )}
             </div>
