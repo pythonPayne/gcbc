@@ -194,9 +194,6 @@ const About = ({ data }) => {
                 elders.find((elder) => elder.node.title === "Todd Wilson")
               )}
               {elderCard(
-                elders.find((elder) => elder.node.title === "Stephen Hyde")
-              )}
-              {elderCard(
                 elders.find((elder) => elder.node.title === "Stephen Payne")
               )}
             </div>
