@@ -87,8 +87,8 @@ const BookStudies = ({ data }) => {
           </div>
           <div className={`text-lg lg:text-xl text-gray-600`}>
             {node.menOrWomen === "men"
-              ? "Wednesdays, 6:00 AM"
-              : "Every other Monday, 6:30 PM"}
+              ? "Every other Thursday, 6:30 PM"
+              : "Every other Thursday, 6:30 PM"}
             {/* {day}s, {d.toLocaleTimeString([], { timeStyle: "short" })} */}
           </div>
           <div className={`text-lg lg:text-xl text-gray-600`}>
