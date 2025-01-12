@@ -187,13 +187,13 @@ const Layout = (props) => {
               },
             ])}
 
-            {navigation_button("Contact", [
+            {/* {navigation_button("Contact", [
               {
                 tag: "Link",
                 route: "/contact",
                 text: "Contact",
               },
-            ])}
+            ])} */}
           </div>
         </div>
       </div>
@@ -289,12 +289,12 @@ const Layout = (props) => {
                   text: "Calendar",
                 })}
 
-                {side_menu_link({
+                {/* {side_menu_link({
                   tag: "Link",
                   route: "/contact",
                   page: "contact",
                   text: "Contact Us",
-                })}
+                })} */}
               </div>
             </div>
           </div>
