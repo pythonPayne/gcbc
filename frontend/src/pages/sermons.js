@@ -528,7 +528,9 @@ const Sermons = ({ data }) => {
               <div
                 className={`grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 2xl:grid-cols-3`}
               >
-                {filteredSermons.map((sermon) => sermon_card(sermon))}
+                {filteredSermons
+                  .slice(0, 50)
+                  .map((sermon) => sermon_card(sermon))}
               </div>
             </div>
           )}
