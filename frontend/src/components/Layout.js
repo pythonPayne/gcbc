@@ -150,11 +150,6 @@ const Layout = (props) => {
                 route: "/sermons",
                 text: "Sermons",
               },
-              // {
-              //   tag: "Link",
-              //   route: "/sunday-school",
-              //   text: "Sunday School",
-              // },
               {
                 tag: "a",
                 route:
@@ -182,18 +177,10 @@ const Layout = (props) => {
             {navigation_button("Calendar", [
               {
                 tag: "Link",
-                route: "/calendar",
+                route: "/google-calendar",
                 text: "Calendar",
               },
             ])}
-
-            {/* {navigation_button("Contact", [
-              {
-                tag: "Link",
-                route: "/contact",
-                text: "Contact",
-              },
-            ])} */}
           </div>
         </div>
       </div>
@@ -251,13 +238,6 @@ const Layout = (props) => {
                   text: "Sermons",
                 })}
 
-                {/* {side_menu_link({
-                  tag: "Link",
-                  route: "/sunday-school",
-                  page: "sunday-school",
-                  text: "Sunday School",
-                })} */}
-
                 {side_menu_link({
                   tag: "a",
                   route:
@@ -284,17 +264,10 @@ const Layout = (props) => {
 
                 {side_menu_link({
                   tag: "Link",
-                  route: "/calendar",
+                  route: "/google-calendar",
                   page: "calendar",
                   text: "Calendar",
                 })}
-
-                {/* {side_menu_link({
-                  tag: "Link",
-                  route: "/contact",
-                  page: "contact",
-                  text: "Contact Us",
-                })} */}
               </div>
             </div>
           </div>
