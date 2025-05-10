@@ -177,7 +177,7 @@ const Layout = (props) => {
             {navigation_button("Calendar", [
               {
                 tag: "Link",
-                route: "/google-calendar",
+                route: "/calendar",
                 text: "Calendar",
               },
             ])}
@@ -264,7 +264,7 @@ const Layout = (props) => {
 
                 {side_menu_link({
                   tag: "Link",
-                  route: "/google-calendar",
+                  route: "/calendar",
                   page: "calendar",
                   text: "Calendar",
                 })}

@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/Layout"
 import { SEO } from "../components/seo"
 
-const GoogleCalendar = () => {
+const Calendar = () => {
   return (
     <Layout>
       <div page={"calendar"} className={`pt-20 bg-gray-100 min-h-screen`}>
@@ -19,6 +19,6 @@ const GoogleCalendar = () => {
   )
 }
 
-export default GoogleCalendar
+export default Calendar
 
 export const Head = () => <SEO title="calendar" />
