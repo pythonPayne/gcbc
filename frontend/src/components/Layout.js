@@ -326,8 +326,8 @@ const Layout = (props) => {
               Service Times
             </div>
             <div className={`pt-2 flex flex-col space-y-1`}>
-              <div>Sunday School: 9:30 am</div>
-              <div>Sunday Worship: 11 am</div>
+              <div>Sunday School: 9:00 am</div>
+              <div>Sunday Worship: 10:15 am</div>
               <div>Wednesday Prayer: 6:30 pm</div>
             </div>
           </div>
