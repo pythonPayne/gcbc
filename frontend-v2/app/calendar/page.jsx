@@ -19,10 +19,10 @@ export default function Calendar() {
         <div className={`max-w-[1200px] transition-all ${showMenu ? "blur-sm duration-500" : "blur-none duration-200"}`}>
           <iframe
             className={`h-screen w-screen`}
-            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FChicago&showPrint=0&src=czl1bml2am9wNmk5NDVxNDZjdm9zNmQ1bzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23D81B60"
-            frameBorder="0"
+            src="https://calendar.google.com/calendar/embed?src=s9univjop6i945q46cvos6d5o4%40group.calendar.google.com&ctz=America%2FChicago" 
+            frameborder="0"
             scrolling="no"
-          ></iframe>
+          ></iframe>          
         </div>
       </div>
     </Layout>
