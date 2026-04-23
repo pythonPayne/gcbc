@@ -6,6 +6,9 @@ export const metadata = {
   description: 'Grace Covenant Baptist Church, Birmingham Alabama',
   keywords: 'grace, covenant, baptist, church, Birmingham, Alabama',
   metadataBase: new URL('https://gracecovenantbaptist.org'),
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }) {
