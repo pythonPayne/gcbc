@@ -23,13 +23,16 @@ function ReferenceList({ nodes }) {
               <sup className={`font-bold`}>{node.referenceNum}</sup>
             </div>
             <div className={`flex flex-wrap`}>
-              {node.paragraphRef?.map((item, j, arr) => (
-                <div
-                  key={j}
-                  className="mr-2 hover:cursor-pointer hover:text-blue-800"
-                  onClick={() => setOpenReference(item)}
-                >
-                  {citationOf(item)}
+              {node.paragraphRef?.filter(citationOf).map((item, j, arr) => (
+                <div key={j} className="mr-2">
+                  <button
+                    type="button"
+                    className="text-[#09314C] underline decoration-dotted decoration-[#09314C]/40 underline-offset-4 hover:text-blue-800 hover:decoration-solid hover:decoration-blue-800 cursor-pointer"
+                    title="Read this verse"
+                    onClick={() => setOpenReference(item)}
+                  >
+                    {citationOf(item)}
+                  </button>
                   {arr.length - 1 !== j && ";"}
                 </div>
               ))}
