@@ -126,3 +126,31 @@ run with care. `deleteDocsByFilter.js` currently targets `*[_type == "sermons"]`
 - [ ] Home carousel images use `fill` without a `sizes` prop (performance warning)
 - [ ] `public/Logo_Blue.png` sets one of width/height but not the other; it is also the LCP
       element and wants `loading="eager"`
+
+---
+
+## Beliefs — scripture citation follow-ups
+
+Found while building the verse popover (`frontend-v2/components/beliefs/VersePopover.jsx`).
+
+- [ ] **Empty citations in Sanity (optional, cosmetic).** 11 `confession` documents have
+      `paragraphRef: [""]` -- one empty string instead of no list. All 11 are
+      `referenceNum: 99` ("no reference") segments, whose citations the site never renders,
+      so this has never been visible. Cleanup: in the Studio, delete the empty item under
+      "Paragraph Ref" in each (leave the text fields alone). Paragraphs and `_id`s:
+
+      | Paragraph | `_id` |
+      | --- | --- |
+      | 2.2 | `1141c39c-b85f-11ed-a28a-000000013f8d` |
+      | 2.3 | `1141c450-b85f-11ed-8f29-00000000421b` |
+      | 5.3 | `1141ca68-b85f-11ed-9ebb-00000000f9a3` |
+      | 6.1 | `1141ccc0-b85f-11ed-ab15-000000015f3e` |
+      | 10.3 | `1141d92c-b85f-11ed-bc9a-00000000aa7d` |
+      | 15.5 | `1141e30e-b85f-11ed-99d0-000000014dc2` |
+      | 17.2 | `1141e7b4-b85f-11ed-840e-000000002147` |
+      | 20.3 | `1141eee4-b85f-11ed-ac80-00000000c1a9` |
+      | 22.7 | `1141f5d8-b85f-11ed-8c71-00000000b791` |
+      | 30.2 | `114200dc-b85f-11ed-8f95-00000000e8cf` |
+      | 31.1 | `114202d0-b85f-11ed-be0d-000000000500` |
+
+      Find them again with `*[_type == "confession" && "" in paragraphRef]`.
